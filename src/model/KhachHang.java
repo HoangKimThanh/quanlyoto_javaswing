@@ -9,13 +9,14 @@ package model;
  * @author ASUS
  */
 public class KhachHang {
-    private String maKhachHang, hoTen, dienThoai, diaChi;
+    private int maKhachHang;
+    private String hoTen, dienThoai, diaChi;
 
-    public String getMaKhachHang() {
+    public int getMaKhachHang() {
         return maKhachHang;
     }
 
-    public void setMaKhachHang(String maKhachHang) {
+    public void setMaKhachHang(int maKhachHang) {
         this.maKhachHang = maKhachHang;
     }
 
@@ -41,6 +42,11 @@ public class KhachHang {
 
     public void setDiaChi(String diaChi) {
         this.diaChi = diaChi;
+    }
+
+    @Override
+    public String toString() {
+        return "KhachHang{" + "maKhachHang=" + maKhachHang + ", hoTen=" + hoTen + ", dienThoai=" + dienThoai + ", diaChi=" + diaChi + '}';
     }
     
     

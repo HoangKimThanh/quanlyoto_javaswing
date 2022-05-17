@@ -14,5 +14,9 @@ import model.KhachHang;
 public interface KhachHangDAO {
     public List<KhachHang> getList();
     
-    public String createOrUpdate(KhachHang khachHang);
+    public int createKhachHang(KhachHang khachHang);
+    
+    public void updateKhachHang(KhachHang khachHang);
+    
+    public void deleteKhachHang(int makh);
 }

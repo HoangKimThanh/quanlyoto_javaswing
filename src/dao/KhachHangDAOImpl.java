@@ -11,8 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -30,7 +28,7 @@ public class KhachHangDAOImpl implements KhachHangDAO{
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
                 KhachHang khachHang = new KhachHang();
-                khachHang.setMaKhachHang(rs.getString("makh"));
+                khachHang.setMaKhachHang(rs.getInt("makh"));
                 khachHang.setHoTen(rs.getString("hoten"));
                 khachHang.setDienThoai(rs.getString("dienthoai"));
                 khachHang.setDiaChi(rs.getString("diachi"));
@@ -54,47 +52,70 @@ public class KhachHangDAOImpl implements KhachHangDAO{
     }
 
     @Override
-    public String createOrUpdate(KhachHang khachHang) {
+    public int createKhachHang(KhachHang khachHang) {
         try {
             Connection cons = DBConnection.getConnection();
-            String sql = "SELECT MAX(makh) AS makh FROM khachhang";
-            PreparedStatement ps = cons.prepareCall(sql);
-            ResultSet rs = ps.executeQuery();
-            String lastMakh = "";
-            while(rs.next()) {
-                lastMakh = rs.getString("makh");
+            String sql = "INSERT INTO khachhang(hoten, dienthoai, diachi) VALUES(?, ?, ?) ";
+            PreparedStatement ps = cons.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            ps.setString(1, khachHang.getHoTen());
+            ps.setString(2, khachHang.getDienThoai());
+            ps.setString(3, khachHang.getDiaChi());
+            
+            ps.execute();
+            ResultSet rs = ps.getGeneratedKeys();
+            int generatedKey = 0;
+            if (rs.next()) {
+                generatedKey = rs.getInt(1);
             }
-            try {
-                sql = "INSERT INTO khachhang(makh, hoten, dienthoai, diachi) VALUES(?, ?, ?, ?) "
-                        + "ON DUPLICATE KEY "
-                        + "UPDATE hoten = VALUES(hoten), "
-                        + "dienthoai = VALUES(dienthoai), "
-                        + "diachi = VALUES(diachi)";
-                PreparedStatement ps2 = cons.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-                String makh = khachHang.getMaKhachHang();
-                if (makh.equals("")) {
-                    makh = "KH003";
-                }
-                ps2.setString(1, makh);
-                ps2.setString(2, khachHang.getHoTen());
-                ps2.setString(3, khachHang.getDienThoai());
-                ps2.setString(4, khachHang.getDiaChi());
-                ps2.execute();
-                rs = ps2.getGeneratedKeys();
-                String generatedKey = "";
-                if (rs.next()) {
-                    generatedKey = rs.getString(1);
-                }
-                ps.close();
-                cons.close();
-                return generatedKey;
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-            return "";
-        } catch (SQLException ex) {
-            Logger.getLogger(KhachHangDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            ps.close();
+            cons.close();
+            return generatedKey;
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-        return "";
+        return 0;
+    }
+    
+    public void updateKhachHang(KhachHang khachHang) {
+        try {
+            Connection cons = DBConnection.getConnection();
+            String sql = "UPDATE khachhang "
+                    + "SET hoten = ?, "
+                    + "dienthoai = ?, "
+                    + "diachi = ? "
+                    + "WHERE makh = " + khachHang.getMaKhachHang() + "";
+            PreparedStatement ps = cons.prepareStatement(sql);
+            ps.setString(1, khachHang.getHoTen());
+            ps.setString(2, khachHang.getDienThoai());
+            ps.setString(3, khachHang.getDiaChi());
+            
+            ps.execute();
+//            ResultSet rs = ps.getGeneratedKeys();
+//            int generatedKey = 0;
+//            if (rs.next()) {
+//                generatedKey = rs.getInt(1);
+//            }
+            ps.close();
+            cons.close();
+//            return generatedKey;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+//        return 0;
+    }
+    
+    public void deleteKhachHang(int makh) {
+        try {
+            Connection cons = DBConnection.getConnection();
+            String sql = "DELETE FROM khachhang "
+                    + "WHERE makh = " + makh + "";
+            PreparedStatement ps = cons.prepareStatement(sql);
+            
+            ps.execute();
+            ps.close();
+            cons.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }

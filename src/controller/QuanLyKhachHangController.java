@@ -9,6 +9,8 @@ import dao.KhachHangDAOImpl;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -37,6 +39,9 @@ public class QuanLyKhachHangController {
     private JPanel jPnView;
     private JTextField jTfSearch;
     private JButton jBtnAdd;
+    private JButton jBtnUpdate;
+    private JButton jBtnDelete;
+    private JButton jBtnReset;
     
     private JTextField jTfMaKhachHang;
     private JTextField jTfHoTen;
@@ -50,10 +55,14 @@ public class QuanLyKhachHangController {
     
     private TableRowSorter<TableModel> rowSorter = null;
 
-    public QuanLyKhachHangController(JPanel jPnView, JTextField jTfSearch, JButton jBtnAdd, JTextField jTfMaKhachHang, JTextField jTfHoTen, JTextField jTfDienThoai, JTextArea jTaDiaChi) {
+    public QuanLyKhachHangController(JPanel jPnView, JTextField jTfSearch, JButton jBtnAdd, JButton jBtnUpdate, 
+            JButton jBtnDelete, JButton jBtnReset, JTextField jTfMaKhachHang, JTextField jTfHoTen, JTextField jTfDienThoai, JTextArea jTaDiaChi) {
         this.jPnView = jPnView;
         this.jTfSearch = jTfSearch;
         this.jBtnAdd = jBtnAdd;
+        this.jBtnUpdate = jBtnUpdate;
+        this.jBtnDelete = jBtnDelete;
+        this.jBtnReset = jBtnReset;
         this.jTfMaKhachHang = jTfMaKhachHang;
         this.jTfHoTen = jTfHoTen;
         this.jTfDienThoai = jTfDienThoai;
@@ -64,6 +73,10 @@ public class QuanLyKhachHangController {
     }
     
     public void setDataToTable() {
+        jTfMaKhachHang.setVisible(false);
+        jBtnUpdate.setEnabled(false);
+        jBtnDelete.setEnabled(false);
+        jBtnReset.setEnabled(false);
         List<KhachHang> listItem = khachHangDAO.getList();
         
         DefaultTableModel model = new ClassTableModel().setTableKhachHang(listItem, listColumn);
@@ -99,6 +112,10 @@ public class QuanLyKhachHangController {
             }
         });
         
+        table.getColumnModel().getColumn(1).setMaxWidth(0);
+        table.getColumnModel().getColumn(1).setMinWidth(0);
+        table.getColumnModel().getColumn(1).setPreferredWidth(0);
+        
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -108,15 +125,20 @@ public class QuanLyKhachHangController {
                     selectedRowIndex = table.convertColumnIndexToModel(selectedRowIndex);
                     
                     KhachHang khachHang = new KhachHang();
-                    khachHang.setMaKhachHang(model.getValueAt(selectedRowIndex, 1).toString());
+                    khachHang.setMaKhachHang((int) model.getValueAt(selectedRowIndex, 1));
                     khachHang.setHoTen(model.getValueAt(selectedRowIndex, 2).toString());
                     khachHang.setDienThoai(model.getValueAt(selectedRowIndex, 3).toString());
                     khachHang.setDiaChi(model.getValueAt(selectedRowIndex, 4).toString());
                     
-                    jTfMaKhachHang.setText(khachHang.getMaKhachHang());
+                    jTfMaKhachHang.setText(Integer.toString(khachHang.getMaKhachHang()));
                     jTfHoTen.setText(khachHang.getHoTen());
                     jTfDienThoai.setText(khachHang.getDienThoai());
                     jTaDiaChi.setText(khachHang.getDiaChi());
+                    
+                    jBtnAdd.setEnabled(false);
+                    jBtnUpdate.setEnabled(true);
+                    jBtnDelete.setEnabled(true);
+                    jBtnReset.setEnabled(true);
                 }
             }
             
@@ -145,20 +167,16 @@ public class QuanLyKhachHangController {
             public void mouseClicked(MouseEvent e) {
                 try {
                     if (jTfHoTen.getText() == null && !jTfHoTen.getText().equalsIgnoreCase("")) {
-                        System.out.println(jTfHoTen.getText());
-                        JOptionPane.showMessageDialog(null, "Vui long nhap day du thong tin");
+                        JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin");
                     } else {
-                        khachHang.setMaKhachHang(jTfMaKhachHang.getText().trim());
+                        khachHang.setMaKhachHang(Integer.parseInt(jTfMaKhachHang.getText().trim()));
                         khachHang.setHoTen(jTfHoTen.getText().trim());
                         khachHang.setDienThoai(jTfDienThoai.getText().trim());
                         khachHang.setDiaChi(jTaDiaChi.getText().trim());
-                        
-                        System.out.println(khachHang);
                 
-                        String lastId = khachHangDAO.createOrUpdate(khachHang);
-                        if (!lastId.equals("")) {
-                            khachHang.setMaKhachHang(lastId);
-                            JOptionPane.showMessageDialog(null, "Xử lý cập nhật dữ liệu thành công");
+                        int lastId = khachHangDAO.createKhachHang(khachHang);
+                        if (lastId != 0) {
+                            JOptionPane.showMessageDialog(null, "Thêm khách hàng thành công");
                         } else {
                             JOptionPane.showMessageDialog(null, "Có lỗi xảy ra, vui lòng thử lại");
                         }
@@ -182,5 +200,65 @@ public class QuanLyKhachHangController {
             public void mouseExited(MouseEvent e) {}
             
         });
+        jBtnUpdate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    if (jTfHoTen.getText() == null && !jTfHoTen.getText().equalsIgnoreCase("")) {
+                        JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin");
+                    } else {
+                        khachHang.setMaKhachHang(Integer.parseInt(jTfMaKhachHang.getText().trim()));
+                        khachHang.setHoTen(jTfHoTen.getText().trim());
+                        khachHang.setDienThoai(jTfDienThoai.getText().trim());
+                        khachHang.setDiaChi(jTaDiaChi.getText().trim());
+                
+//                        int lastId = khachHangDAO.updateKhachHang(khachHang);                        
+                        khachHangDAO.updateKhachHang(khachHang);
+                        
+                        JOptionPane.showMessageDialog(null, "Xử lý cập nhật dữ liệu thành công");
+//                        if (lastId != 0) {
+//                            JOptionPane.showMessageDialog(null, "Xử lý cập nhật dữ liệu thành công");
+//                        } else {
+//                            JOptionPane.showMessageDialog(null, "Có lỗi xảy ra, vui lòng thử lại");
+//                        }
+                        setDataToTable();
+                    }
+                }
+                catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.toString());
+                }
+            }
+        });
+        jBtnDelete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    if (jTfHoTen.getText() == null && !jTfHoTen.getText().equalsIgnoreCase("")) {
+                        JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin");
+                    } else {
+                        int makh = Integer.parseInt(jTfMaKhachHang.getText().trim());                   
+                        khachHangDAO.deleteKhachHang(makh);
+                        
+                        JOptionPane.showMessageDialog(null, "Xóa dữ liệu thành công");
+                        setDataToTable();
+                    }
+                }
+                catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.toString());
+                }
+            }
+        });
+        
+        jBtnReset.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jTfMaKhachHang.setText("");
+                jTfHoTen.setText("");
+                jTfDienThoai.setText("");
+                jTaDiaChi.setText("");
+                setDataToTable();
+            }
+        });
+        
     }
 }
