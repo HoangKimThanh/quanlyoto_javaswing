@@ -14,6 +14,9 @@ import model.NhaCungCap;
 public interface NhaCungCapDAO {
     
     public List<NhaCungCap> getList();
-    
+    public boolean create(NhaCungCap nhaCungCap);
+    public boolean update(NhaCungCap nhaCungCap);
+    public boolean delete(NhaCungCap nhaCungCap);
+
     
 }

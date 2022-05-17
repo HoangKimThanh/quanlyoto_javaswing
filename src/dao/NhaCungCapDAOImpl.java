@@ -32,7 +32,7 @@ public class NhaCungCapDAOImpl implements NhaCungCapDAO {
                 nhaCungCap.setMancc(rs.getInt("mancc"));                
                 nhaCungCap.setTenncc(rs.getString("tenncc"));
                 nhaCungCap.setDiachi(rs.getString("diachi"));
-                nhaCungCap.setDienthoai(rs.getInt("dienthoai"));
+                nhaCungCap.setDienthoai(rs.getString("dienthoai"));
                 list.add(nhaCungCap);
             }
             rs.close();
@@ -51,6 +51,58 @@ public class NhaCungCapDAOImpl implements NhaCungCapDAO {
         System.out.println(nhaCungCap.getList());
     }
     
+    @Override
+    public boolean create(NhaCungCap nhaCungCap) {
+        try {
+            Connection cons = DBConnection.getConnection();
+            String sql = "INSERT INTO nhacungcap(tenncc, diachi, dienthoai) VALUES(?,?,?)";
+            PreparedStatement prep = cons.prepareCall(sql);
+            prep.setString(1, nhaCungCap.getTenncc());
+            prep.setString(2, nhaCungCap.getDiachi());
+            prep.setString(3, nhaCungCap.getDienthoai());
+            int result = prep.executeUpdate();            
+            if (result == 1) {
+                return true;
+            }
+            return false;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return false;
+        }
+    }
+    
+    @Override
+    public boolean update(NhaCungCap nhaCungCap) {
+        try {
+            Connection cons = DBConnection.getConnection();
+            String sql = "UPDATE nhacungcap SET tenncc = ?, diachi = ?, dienthoai = ? where mancc = ?";
+            PreparedStatement prep = cons.prepareCall(sql);
+            prep.setString(1, nhaCungCap.getTenncc());
+            prep.setString(2, nhaCungCap.getDiachi());
+            prep.setString(3, nhaCungCap.getDienthoai());
+            prep.setInt(4, nhaCungCap.getMancc());
+            prep.executeUpdate();            
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return false;
+        }
+    }
+    
+    @Override
+    public boolean delete(NhaCungCap nhaCungCap) {
+        try {
+            Connection cons = DBConnection.getConnection();
+            String sql = "DELETE FROM nhacungcap where mancc = ?";
+            PreparedStatement prep = cons.prepareCall(sql);
+            prep.setInt(1, nhaCungCap.getMancc());
+            prep.executeUpdate();            
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return false;
+        }
+    }
     
     
 }

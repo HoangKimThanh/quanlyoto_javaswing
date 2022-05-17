@@ -10,8 +10,8 @@ package model;
  */
 public class NhaCungCap {
     
-    private int mancc, dienthoai;
-    private String tenncc, diachi;
+    private int mancc;
+    private String tenncc, diachi, dienthoai;
 
     public int getMancc() {
         return mancc;
@@ -21,11 +21,11 @@ public class NhaCungCap {
         this.mancc = mancc;
     }
 
-    public int getDienthoai() {
+    public String getDienthoai() {
         return dienthoai;
     }
 
-    public void setDienthoai(int dienthoai) {
+    public void setDienthoai(String dienthoai) {
         this.dienthoai = dienthoai;
     }
 
