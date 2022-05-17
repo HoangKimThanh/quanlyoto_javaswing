@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import view.BanHangJPanel;
 import view.KhachHangJPanel;
+import view.NhaCungCapJPanel;
 import view.NhanVienJPanel;
 import view.NhapHangJPanel;
 import view.SanPhamJPanel;
@@ -82,6 +83,9 @@ public class ChuyenManHinhController {
                     break;
                 case "NhapHang":
                     node = new NhapHangJPanel();
+                    break;
+                case "NhaCungCap":
+                    node = new NhaCungCapJPanel();
                     break;
                 case "ThongKe":
                     node = new ThongKeJPanel();
