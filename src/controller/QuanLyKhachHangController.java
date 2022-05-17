@@ -74,6 +74,7 @@ public class QuanLyKhachHangController {
     
     public void setDataToTable() {
         jTfMaKhachHang.setVisible(false);
+        jBtnAdd.setEnabled(true);
         jBtnUpdate.setEnabled(false);
         jBtnDelete.setEnabled(false);
         jBtnReset.setEnabled(false);
@@ -162,14 +163,13 @@ public class QuanLyKhachHangController {
     }
 
     public void setEvent() {
-        jBtnAdd.addMouseListener(new MouseAdapter() {
+        jBtnAdd.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+             public void actionPerformed(ActionEvent e) {
                 try {
                     if (jTfHoTen.getText() == null && !jTfHoTen.getText().equalsIgnoreCase("")) {
                         JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin");
                     } else {
-                        khachHang.setMaKhachHang(Integer.parseInt(jTfMaKhachHang.getText().trim()));
                         khachHang.setHoTen(jTfHoTen.getText().trim());
                         khachHang.setDienThoai(jTfDienThoai.getText().trim());
                         khachHang.setDiaChi(jTaDiaChi.getText().trim());
@@ -181,24 +181,16 @@ public class QuanLyKhachHangController {
                             JOptionPane.showMessageDialog(null, "Có lỗi xảy ra, vui lòng thử lại");
                         }
                     }
+                    jTfMaKhachHang.setText("");
+                    jTfHoTen.setText("");
+                    jTfDienThoai.setText("");
+                    jTaDiaChi.setText("");
+                    setDataToTable();
                 }
                 catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.toString());
                 }
             }
-
-            @Override
-            public void mousePressed(MouseEvent e) {}
-
-            @Override
-            public void mouseReleased(MouseEvent e) {}
-
-            @Override
-            public void mouseEntered(MouseEvent e) {}
-
-            @Override
-            public void mouseExited(MouseEvent e) {}
-            
         });
         jBtnUpdate.addActionListener(new ActionListener() {
             @Override
@@ -221,6 +213,10 @@ public class QuanLyKhachHangController {
 //                        } else {
 //                            JOptionPane.showMessageDialog(null, "Có lỗi xảy ra, vui lòng thử lại");
 //                        }
+                        jTfMaKhachHang.setText("");
+                        jTfHoTen.setText("");
+                        jTfDienThoai.setText("");
+                        jTaDiaChi.setText("");
                         setDataToTable();
                     }
                 }
@@ -240,6 +236,10 @@ public class QuanLyKhachHangController {
                         khachHangDAO.deleteKhachHang(makh);
                         
                         JOptionPane.showMessageDialog(null, "Xóa dữ liệu thành công");
+                        jTfMaKhachHang.setText("");
+                        jTfHoTen.setText("");
+                        jTfDienThoai.setText("");
+                        jTaDiaChi.setText("");
                         setDataToTable();
                     }
                 }

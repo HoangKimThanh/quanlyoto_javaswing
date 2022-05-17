@@ -7,7 +7,7 @@ package utility;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import model.KhachHang;
-
+import model.NhaCungCap;
 /**
  *
  * @author ASUS
@@ -35,6 +35,36 @@ public class ClassTableModel {
                 obj[2] = khachHang.getHoTen();
                 obj[3] = khachHang.getDienThoai();
                 obj[4] = khachHang.getDiaChi();
+                
+                dtm.addRow(obj);
+            }
+        }
+        
+        return dtm;
+    }
+    
+    public DefaultTableModel setTableNhaCungCap(List<NhaCungCap> listItem, String[] listColumn) {
+        DefaultTableModel dtm = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        dtm.setColumnIdentifiers(listColumn);
+        int columns = listColumn.length;
+        Object[] obj = null;
+        
+        int rows = listItem.size();
+        if (rows > 0) {
+            for(int i = 0; i < rows; i++) {
+                NhaCungCap nhaCungCap = listItem.get(i);
+                obj = new Object[columns];
+                
+                obj[0] = (i + 1);
+                obj[1] = nhaCungCap.getMancc();
+                obj[2] = nhaCungCap.getTenncc();
+                obj[3] = nhaCungCap.getDienthoai();
+                obj[4] = nhaCungCap.getDiachi();
                 
                 dtm.addRow(obj);
             }
