@@ -34,7 +34,11 @@ import utility.ClassTableModel;
  */
 public class QuanLyNhaCungCapController {
     private JPanel jPnView;
-    private JButton jBtnAdd;
+    private JButton jBtnAdd;    
+    private JButton jBtnUpdate;    
+    private JButton jBtnDelete;
+
+
     
     private JTextField jTfMaNcc;    
     private JTextField jTfTen;
@@ -49,9 +53,13 @@ public class QuanLyNhaCungCapController {
     
     private TableRowSorter<TableModel> rowSorter = null;
 
-    public QuanLyNhaCungCapController(JPanel jPnView, JButton jBtnAdd, JTextField jTfMaNcc, JTextField jTfTen, JTextField jTfSDT, JTextField jTfDiaChi) {
+    public QuanLyNhaCungCapController(JPanel jPnView, JButton jBtnAdd, JButton jBtnUpdate, 
+            JButton jBtnDelete, JTextField jTfMaNcc, JTextField jTfTen, JTextField jTfSDT, 
+            JTextField jTfDiaChi) {
         this.jPnView = jPnView;
         this.jBtnAdd = jBtnAdd;
+        this.jBtnUpdate = jBtnUpdate;
+        this.jBtnDelete = jBtnDelete;
         this.jTfTen = jTfTen;        
         this.jTfMaNcc = jTfMaNcc;
 
@@ -83,10 +91,9 @@ public class QuanLyNhaCungCapController {
                     
                     NhaCungCap nhaCungCap = new NhaCungCap();
                     int mancc = (int) (model.getValueAt(selectedRowIndex, 1));
-                    int sdt = (int) (model.getValueAt(selectedRowIndex, 3));
                     nhaCungCap.setMancc(mancc);
                     nhaCungCap.setTenncc(model.getValueAt(selectedRowIndex, 2).toString());
-                    nhaCungCap.setDienthoai(sdt);
+                    nhaCungCap.setDienthoai(model.getValueAt(selectedRowIndex, 3).toString());
                     nhaCungCap.setDiachi(model.getValueAt(selectedRowIndex, 4).toString());
                     
 //                    System.out.println(nhaCungCap.getMacc());
@@ -117,49 +124,118 @@ public class QuanLyNhaCungCapController {
         jPnView.repaint();
     }
 
-//    public void setEvent() {
-//        jBtnAdd.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                try {
-//                    if (jTfHoTen.getText() == null && !jTfHoTen.getText().equalsIgnoreCase("")) {
-//                        System.out.println(jTfHoTen.getText());
-//                        JOptionPane.showMessageDialog(null, "Vui long nhap day du thong tin");
-//                    } else {
-//                        khachHang.setMaKhachHang(jTfMaKhachHang.getText().trim());
-//                        khachHang.setHoTen(jTfHoTen.getText().trim());
-//                        khachHang.setDienThoai(jTfDienThoai.getText().trim());
-//                        khachHang.setDiaChi(jTaDiaChi.getText().trim());
-//                        
-//                        System.out.println(khachHang);
-//                
-//                        String lastId = khachHangDAO.createOrUpdate(khachHang);
-//                        if (!lastId.equals("")) {
-//                            khachHang.setMaKhachHang(lastId);
-//                            JOptionPane.showMessageDialog(null, "Xử lý cập nhật dữ liệu thành công");
-//                        } else {
-//                            JOptionPane.showMessageDialog(null, "Có lỗi xảy ra, vui lòng thử lại");
-//                        }
-//                    }
-//                }
-//                catch (Exception ex) {
-//                    JOptionPane.showMessageDialog(null, ex.toString());
-//                }
-//            }
-//
-//            @Override
-//            public void mousePressed(MouseEvent e) {}
-//
-//            @Override
-//            public void mouseReleased(MouseEvent e) {}
-//
-//            @Override
-//            public void mouseEntered(MouseEvent e) {}
-//
-//            @Override
-//            public void mouseExited(MouseEvent e) {}
-//            
-//        });
-//    }
+    public void setEvent() {
+        jBtnAdd.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    String tenncc = jTfTen.getText();
+                    String sdt = jTfSDT.getText();
+                    String diachi = jTfDiaChi.getText();
+                    if (tenncc.equals("") || sdt.equals("") || diachi.equals("")) {
+                        JOptionPane.showMessageDialog(null, "Ten NCC, So dien thoai, Dia chi khong duoc de trong!");
+                    } else {
+                        nhaCungCap.setTenncc(tenncc.trim());
+                        nhaCungCap.setDienthoai(sdt);
+                        nhaCungCap.setDiachi(diachi.trim());
+                        
+//                        System.out.println(nhaCungCap);
+                
+                        boolean result = nhaCungCapDAO.create(nhaCungCap);
+                        if (result) {
+                            JOptionPane.showMessageDialog(null, "Thêm dữ liệu thành công");
+                            setDataToTable();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Có lỗi xảy ra, vui lòng thử lại");
+                        }
+                    }
+                }
+                catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.toString());
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {}
+
+            @Override
+            public void mouseReleased(MouseEvent e) {}
+
+            @Override
+            public void mouseEntered(MouseEvent e) {}
+
+            @Override
+            public void mouseExited(MouseEvent e) {}
+            
+        });
+        
+        jBtnUpdate.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    String mancc = jTfMaNcc.getText();
+                    String tenncc = jTfTen.getText();
+                    String sdt = jTfSDT.getText();
+                    String diachi = jTfDiaChi.getText();
+                    if (mancc.equals("") || tenncc.equals("") || sdt.equals("") || diachi.equals("")) {
+                        JOptionPane.showMessageDialog(null, "Ma NCC, Ten NCC, So dien thoai, Dia chi khong duoc de trong!");
+                    } else {
+                        nhaCungCap.setMancc(Integer.parseInt(mancc));
+                        nhaCungCap.setTenncc(tenncc.trim());
+                        nhaCungCap.setDienthoai(sdt);
+                        nhaCungCap.setDiachi(diachi.trim());
+                        
+//                        System.out.println(nhaCungCap);
+                
+                        boolean result = nhaCungCapDAO.update(nhaCungCap);
+                        if (result) {
+                            JOptionPane.showMessageDialog(null, "Cập nhật dữ liệu thành công");
+                            setDataToTable();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Có lỗi xảy ra, vui lòng thử lại");
+                        }
+                    }
+                }
+                catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.toString());
+                }
+            }
+
+        });
+        
+        jBtnDelete.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    String mancc = jTfMaNcc.getText();
+                    String tenncc = jTfTen.getText();
+                    String sdt = jTfSDT.getText();
+                    String diachi = jTfDiaChi.getText();
+                    if (mancc.equals("")) {
+                        JOptionPane.showMessageDialog(null, "Vui long chon NCC!");
+                    } else {
+                        nhaCungCap.setMancc(Integer.parseInt(mancc));
+                        nhaCungCap.setTenncc(tenncc.trim());
+                        nhaCungCap.setDienthoai(sdt);
+                        nhaCungCap.setDiachi(diachi.trim());
+                        
+//                        System.out.println(nhaCungCap);
+                
+                        boolean result = nhaCungCapDAO.delete(nhaCungCap);
+                        if (result) {
+                            JOptionPane.showMessageDialog(null, "Xóa dữ liệu thành công");
+                            setDataToTable();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Có lỗi xảy ra, vui lòng thử lại");
+                        }
+                    }
+                }
+                catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.toString());
+                }
+            }
+
+        });
+    }
 }
 
