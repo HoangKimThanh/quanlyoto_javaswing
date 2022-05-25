@@ -123,7 +123,7 @@ public class QuanLyKhachHangController {
                 if (table.getSelectedRow() != -1) {
                     DefaultTableModel model = (DefaultTableModel) table.getModel();
                     int selectedRowIndex = table.getSelectedRow();
-                    selectedRowIndex = table.convertColumnIndexToModel(selectedRowIndex);
+//                    selectedRowIndex = table.convertColumnIndexToModel(selectedRowIndex);
                     
                     KhachHang khachHang = new KhachHang();
                     khachHang.setMaKhachHang((int) model.getValueAt(selectedRowIndex, 1));

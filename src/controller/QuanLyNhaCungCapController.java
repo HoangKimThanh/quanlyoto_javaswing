@@ -38,8 +38,8 @@ public class QuanLyNhaCungCapController {
     private JButton jBtnUpdate;    
     private JButton jBtnDelete;
 
-
     
+    private JTextField jTfSearch;
     private JTextField jTfMaNcc;    
     private JTextField jTfTen;
 
@@ -55,7 +55,7 @@ public class QuanLyNhaCungCapController {
 
     public QuanLyNhaCungCapController(JPanel jPnView, JButton jBtnAdd, JButton jBtnUpdate, 
             JButton jBtnDelete, JTextField jTfMaNcc, JTextField jTfTen, JTextField jTfSDT, 
-            JTextField jTfDiaChi) {
+            JTextField jTfDiaChi, JTextField jTfSearch) {
         this.jPnView = jPnView;
         this.jBtnAdd = jBtnAdd;
         this.jBtnUpdate = jBtnUpdate;
@@ -65,6 +65,7 @@ public class QuanLyNhaCungCapController {
 
         this.jTfSDT = jTfSDT;
         this.jTfDiaChi = jTfDiaChi;
+        this.jTfSearch = jTfSearch;
         
         this.nhaCungCapDAO = new NhaCungCapDAOImpl();
         this.nhaCungCap = new NhaCungCap();
@@ -80,6 +81,32 @@ public class QuanLyNhaCungCapController {
         
         table.setRowSorter(rowSorter);
         
+        jTfSearch.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                String text = jTfSearch.getText();
+                if (text.trim().length() == 0) {
+                    rowSorter.setRowFilter(null);
+                } else {
+                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                String text = jTfSearch.getText();
+                if (text.trim().length() == 0) {
+                    rowSorter.setRowFilter(null);
+                } else {
+                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            }
+        });
+        
         
         table.addMouseListener(new MouseAdapter() {
             @Override
@@ -87,7 +114,6 @@ public class QuanLyNhaCungCapController {
                 if (table.getSelectedRow() != -1) {
                     DefaultTableModel model = (DefaultTableModel) table.getModel();
                     int selectedRowIndex = table.getSelectedRow();
-                    selectedRowIndex = table.convertColumnIndexToModel(selectedRowIndex);
                     
                     NhaCungCap nhaCungCap = new NhaCungCap();
                     int mancc = (int) (model.getValueAt(selectedRowIndex, 1));
@@ -112,10 +138,11 @@ public class QuanLyNhaCungCapController {
         table.setRowHeight(30);
         table.validate();
         table.repaint();
-        
-        JScrollPane scrollPane = new JScrollPane();
+//        JScrollPane scrollPane = new JScrollPane();
+        JScrollPane scrollPane = new JScrollPane(null, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.getViewport().add(table);
-        scrollPane.setPreferredSize(new Dimension(1300, 400));
+        scrollPane.setPreferredSize(new Dimension(1300, 280));
         
         jPnView.removeAll();
         jPnView.setLayout(new BorderLayout());
@@ -144,6 +171,7 @@ public class QuanLyNhaCungCapController {
                         boolean result = nhaCungCapDAO.create(nhaCungCap);
                         if (result) {
                             JOptionPane.showMessageDialog(null, "Thêm dữ liệu thành công");
+                            
                             setDataToTable();
                         } else {
                             JOptionPane.showMessageDialog(null, "Có lỗi xảy ra, vui lòng thử lại");
@@ -185,8 +213,6 @@ public class QuanLyNhaCungCapController {
                         nhaCungCap.setDienthoai(sdt);
                         nhaCungCap.setDiachi(diachi.trim());
                         
-//                        System.out.println(nhaCungCap);
-                
                         boolean result = nhaCungCapDAO.update(nhaCungCap);
                         if (result) {
                             JOptionPane.showMessageDialog(null, "Cập nhật dữ liệu thành công");
