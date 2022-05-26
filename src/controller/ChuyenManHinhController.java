@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import view.BanHangJPanel;
 import view.KhachHangJPanel;
+import view.LoaiSanPhamJPanel;
 import view.NhaCungCapJPanel;
 import view.NhanVienJPanel;
 import view.NhapHangJPanel;
@@ -87,6 +88,9 @@ public class ChuyenManHinhController {
                 case "NhaCungCap":
                     node = new NhaCungCapJPanel();
                     break;
+                case "LoaiSanPham":
+                    node = new LoaiSanPhamJPanel();
+                    break;
                 case "ThongKe":
                     node = new ThongKeJPanel();
                     break;
@@ -132,8 +136,8 @@ public class ChuyenManHinhController {
     private void setChangeBackground(String kind) {
         for(DanhMucBean item: listItem) {
             if(item.getKind().equalsIgnoreCase(kind)) {
-                item.getjPn().setBackground(new Color(96, 100, 191));
-                item.getjLb().setBackground(new Color(96, 100, 191));
+                item.getjPn().setBackground(new Color(80, 99, 126));
+                item.getjLb().setBackground(new Color(80, 99, 126));
             } else {
                 item.getjPn().setBackground(new Color(76, 175, 80));            
                 item.getjLb().setBackground(new Color(76, 175, 80));

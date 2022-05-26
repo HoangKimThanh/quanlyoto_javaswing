@@ -4,11 +4,13 @@
  */
 package controller;
 
-import dao.NhaCungCapDAO;
-import dao.NhaCungCapDAOImpl;
+import dao.LoaiSanPhamDAO;
+import dao.LoaiSanPhamDAOImpl;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -17,7 +19,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.event.DocumentEvent;
@@ -25,102 +26,61 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import model.NhaCungCap;
+import model.LoaiSanPham;
 import utility.ClassTableModel;
 
 /**
  *
  * @author Home
  */
-public class QuanLyNhaCungCapController {
+public class QuanLyLoaiSanPhamController {
     private JPanel jPnView;
     private JButton jBtnAdd;    
     private JButton jBtnUpdate;    
-    private JButton jBtnDelete;    
-    
+    private JButton jBtnDelete;
     private JButton jBtnReset;
+    
+//    private JTextField jTfSearch;
+    private JTextField jTfMaLoaiSP;    
+    private JTextField jTfTenLoaiSP;
 
-
     
-    private JTextField jTfSearch;
-    private JTextField jTfMaNcc;    
-    private JTextField jTfTen;
-
-    private JTextField jTfSDT;
-    private JTextField jTfDiaChi;
+    private LoaiSanPham loaiSanPham = null;
+    private LoaiSanPhamDAO loaiSanPhamDAO = null;
     
-    private NhaCungCap nhaCungCap = null;
-    private NhaCungCapDAO nhaCungCapDAO = null;
-    
-    private String[] listColumn = {"STT", "Mã NCC", "Tên NCC", "Số điện thoại", "Địa chỉ"};
-    
+    private String[] listColumn = {"STT", "Mã LOAISP", "Tên LOAISP"};
     private TableRowSorter<TableModel> rowSorter = null;
 
-    public QuanLyNhaCungCapController(JPanel jPnView, JButton jBtnAdd, JButton jBtnUpdate, 
-            JButton jBtnDelete, JButton jBtnReset, JTextField jTfMaNcc, JTextField jTfTen, JTextField jTfSDT, 
-            JTextField jTfDiaChi, JTextField jTfSearch) {
+    public QuanLyLoaiSanPhamController(JPanel jPnView, JButton jBtnAdd, JButton jBtnUpdate, 
+            JButton jBtnDelete, JButton jBtnReset, JTextField jTfMaLoaiSP, JTextField jTfTenLoaiSP) {
         this.jPnView = jPnView;
         this.jBtnAdd = jBtnAdd;
         this.jBtnUpdate = jBtnUpdate;
         this.jBtnDelete = jBtnDelete;
         this.jBtnReset = jBtnReset;
-        this.jTfTen = jTfTen;        
-        this.jTfMaNcc = jTfMaNcc;
-
-        this.jTfSDT = jTfSDT;
-        this.jTfDiaChi = jTfDiaChi;
-        this.jTfSearch = jTfSearch;
-        
-        this.nhaCungCapDAO = new NhaCungCapDAOImpl();
-        this.nhaCungCap = new NhaCungCap();
+     
+        this.jTfMaLoaiSP = jTfMaLoaiSP;
+        this.jTfTenLoaiSP = jTfTenLoaiSP;
+        this.loaiSanPhamDAO = new LoaiSanPhamDAOImpl();
+        this.loaiSanPham = new LoaiSanPham();
     }
     
     public void setDataToTable() {
-        
-        jTfMaNcc.setText("");
-        jTfTen.setText("");        
-        jTfDiaChi.setText("");
-        jTfSDT.setText("");
+        jTfMaLoaiSP.setText("");
+        jTfTenLoaiSP.setText("");
         
         jBtnAdd.setEnabled(true);
         jBtnUpdate.setEnabled(false);
         jBtnDelete.setEnabled(false);
         jBtnReset.setEnabled(false);
-        
-        List<NhaCungCap> listItem = nhaCungCapDAO.getList();
-        
-        DefaultTableModel model = new ClassTableModel().setTableNhaCungCap(listItem, listColumn);
+       
+        List<LoaiSanPham> listItem = loaiSanPhamDAO.getList();
+        DefaultTableModel model = new ClassTableModel().setTableLoaiSanPham(listItem, listColumn);
         JTable table = new JTable(model);
         
         rowSorter = new TableRowSorter<>(table.getModel());
         
         table.setRowSorter(rowSorter);
-        
-        jTfSearch.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                String text = jTfSearch.getText();
-                if (text.trim().length() == 0) {
-                    rowSorter.setRowFilter(null);
-                } else {
-                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
-                }
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                String text = jTfSearch.getText();
-                if (text.trim().length() == 0) {
-                    rowSorter.setRowFilter(null);
-                } else {
-                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
-                }
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-            }
-        });
         
         
         table.addMouseListener(new MouseAdapter() {
@@ -130,19 +90,15 @@ public class QuanLyNhaCungCapController {
                     DefaultTableModel model = (DefaultTableModel) table.getModel();
                     int selectedRowIndex = table.getSelectedRow();
                     
-                    NhaCungCap nhaCungCap = new NhaCungCap();
+                    LoaiSanPham loaiSanPham = new LoaiSanPham();
                     int mancc = (int) (model.getValueAt(selectedRowIndex, 1));
-                    nhaCungCap.setMancc(mancc);
-                    nhaCungCap.setTenncc(model.getValueAt(selectedRowIndex, 2).toString());
-                    nhaCungCap.setDienthoai(model.getValueAt(selectedRowIndex, 3).toString());
-                    nhaCungCap.setDiachi(model.getValueAt(selectedRowIndex, 4).toString());
+                    loaiSanPham.setMaloaisp(mancc);
+                    loaiSanPham.setTenloaisp(model.getValueAt(selectedRowIndex, 2).toString());
                     
 //                    System.out.println(nhaCungCap.getMacc());
                     
-                    jTfMaNcc.setText((nhaCungCap.getMancc()) + "");
-                    jTfTen.setText(nhaCungCap.getTenncc());
-                    jTfSDT.setText(nhaCungCap.getDienthoai() + "");
-                    jTfDiaChi.setText(nhaCungCap.getDiachi());
+                    jTfMaLoaiSP.setText((loaiSanPham.getMaloaisp()) + "");
+                    jTfTenLoaiSP.setText(loaiSanPham.getTenloaisp());
                     
                     jBtnAdd.setEnabled(false);
                     jBtnUpdate.setEnabled(true);
@@ -170,25 +126,19 @@ public class QuanLyNhaCungCapController {
         jPnView.validate();
         jPnView.repaint();
     }
-
-    public void setEvent() {
+   
+   public void setEvent() {
         jBtnAdd.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 try {
-                    String tenncc = jTfTen.getText();
-                    String sdt = jTfSDT.getText();
-                    String diachi = jTfDiaChi.getText();
-                    if (tenncc.equals("") || sdt.equals("") || diachi.equals("")) {
-                        JOptionPane.showMessageDialog(null, "Ten NCC, So dien thoai, Dia chi khong duoc de trong!");
+                    String tenloaisp = jTfTenLoaiSP.getText();
+                    if (tenloaisp.equals("")) {
+                        JOptionPane.showMessageDialog(null, "Ten loai san pham khong duoc de trong!");
                     } else {
-                        nhaCungCap.setTenncc(tenncc.trim());
-                        nhaCungCap.setDienthoai(sdt);
-                        nhaCungCap.setDiachi(diachi.trim());
+                        loaiSanPham.setTenloaisp(tenloaisp.trim());
                         
-//                        System.out.println(nhaCungCap);
-                
-                        boolean result = nhaCungCapDAO.create(nhaCungCap);
+                        boolean result = loaiSanPhamDAO.create(loaiSanPham);
                         if (result) {
                             JOptionPane.showMessageDialog(null, "Thêm dữ liệu thành công");
                             
@@ -221,19 +171,15 @@ public class QuanLyNhaCungCapController {
             @Override
             public void mouseClicked(MouseEvent e) {
                 try {
-                    String mancc = jTfMaNcc.getText();
-                    String tenncc = jTfTen.getText();
-                    String sdt = jTfSDT.getText();
-                    String diachi = jTfDiaChi.getText();
-                    if (mancc.equals("") || tenncc.equals("") || sdt.equals("") || diachi.equals("")) {
-                        JOptionPane.showMessageDialog(null, "Ma NCC, Ten NCC, So dien thoai, Dia chi khong duoc de trong!");
+                    String maloaisp = jTfMaLoaiSP.getText();
+                    String tenloaisp = jTfTenLoaiSP.getText();
+                    if (maloaisp.equals("") || tenloaisp.equals("")) {
+                        JOptionPane.showMessageDialog(null, "Ma LoaiSP, Ten LoaiSP khong duoc de trong!");
                     } else {
-                        nhaCungCap.setMancc(Integer.parseInt(mancc));
-                        nhaCungCap.setTenncc(tenncc.trim());
-                        nhaCungCap.setDienthoai(sdt);
-                        nhaCungCap.setDiachi(diachi.trim());
+                        loaiSanPham.setMaloaisp(Integer.parseInt(maloaisp));
+                        loaiSanPham.setTenloaisp(tenloaisp.trim());
                         
-                        boolean result = nhaCungCapDAO.update(nhaCungCap);
+                        boolean result = loaiSanPhamDAO.update(loaiSanPham);
                         if (result) {
                             JOptionPane.showMessageDialog(null, "Cập nhật dữ liệu thành công");
                             setDataToTable();
@@ -253,21 +199,17 @@ public class QuanLyNhaCungCapController {
             @Override
             public void mouseClicked(MouseEvent e) {
                 try {
-                    String mancc = jTfMaNcc.getText();
-                    String tenncc = jTfTen.getText();
-                    String sdt = jTfSDT.getText();
-                    String diachi = jTfDiaChi.getText();
-                    if (mancc.equals("")) {
-                        JOptionPane.showMessageDialog(null, "Vui long chon NCC!");
+                    String maloaisp = jTfMaLoaiSP.getText();
+                    String tenloaisp = jTfTenLoaiSP.getText();
+                    if (maloaisp.equals("")) {
+                        JOptionPane.showMessageDialog(null, "Vui long chon Loai san pham!");
                     } else {
-                        nhaCungCap.setMancc(Integer.parseInt(mancc));
-                        nhaCungCap.setTenncc(tenncc.trim());
-                        nhaCungCap.setDienthoai(sdt);
-                        nhaCungCap.setDiachi(diachi.trim());
+                        loaiSanPham.setMaloaisp(Integer.parseInt(maloaisp));
+                        loaiSanPham.setTenloaisp(tenloaisp.trim());
                         
 //                        System.out.println(nhaCungCap);
                 
-                        boolean result = nhaCungCapDAO.delete(nhaCungCap);
+                        boolean result = loaiSanPhamDAO.delete(loaiSanPham);
                         if (result) {
                             JOptionPane.showMessageDialog(null, "Xóa dữ liệu thành công");
                             setDataToTable();
@@ -283,13 +225,12 @@ public class QuanLyNhaCungCapController {
 
         });
         
-        jBtnReset.addMouseListener(new MouseAdapter() {
+        jBtnReset.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 setDataToTable();
             }
-
         });
     }
+    
 }
-

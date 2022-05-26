@@ -4,36 +4,32 @@
  */
 package dao;
 
-import model.NhaCungCap;
-
-import java.util.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+import model.LoaiSanPham;
 
 /**
  *
  * @author Home
  */
-public class NhaCungCapDAOImpl implements NhaCungCapDAO {
-
+public class LoaiSanPhamDAOImpl implements LoaiSanPhamDAO {
     @Override
-    public List<NhaCungCap> getList() {
+    public List<LoaiSanPham> getList() {
         try {
             Connection cons = DBConnection.getConnection();
-            String sql = "SELECT * FROM nhacungcap";
-            List<NhaCungCap> list = new ArrayList<>();
+            String sql = "SELECT * FROM loaisp";
+            List<LoaiSanPham> list = new ArrayList<>();
             PreparedStatement ps = cons.prepareCall(sql);
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
-                NhaCungCap nhaCungCap = new NhaCungCap();
-                nhaCungCap.setMancc(rs.getInt("mancc"));                
-                nhaCungCap.setTenncc(rs.getString("tenncc"));
-                nhaCungCap.setDiachi(rs.getString("diachi"));
-                nhaCungCap.setDienthoai(rs.getString("dienthoai"));
-                list.add(nhaCungCap);
+                LoaiSanPham loaiSanPham = new LoaiSanPham();
+                loaiSanPham.setMaloaisp(rs.getInt("maloaisp"));                
+                loaiSanPham.setTenloaisp(rs.getString("tenloaisp"));
+                list.add(loaiSanPham);
             }
             rs.close();
             ps.close();
@@ -46,20 +42,13 @@ public class NhaCungCapDAOImpl implements NhaCungCapDAO {
         return null;
     }
     
-    public static void main(String[] args) {
-        NhaCungCapDAO nhaCungCap = new NhaCungCapDAOImpl();
-        System.out.println(nhaCungCap.getList());
-    }
-    
     @Override
-    public boolean create(NhaCungCap nhaCungCap) {
+    public boolean create(LoaiSanPham loaiSanPham) {
         try {
             Connection cons = DBConnection.getConnection();
-            String sql = "INSERT INTO nhacungcap(tenncc, diachi, dienthoai) VALUES(?,?,?)";
+            String sql = "INSERT INTO loaisp(tenloaisp) VALUES(?)";
             PreparedStatement prep = cons.prepareCall(sql);
-            prep.setString(1, nhaCungCap.getTenncc());
-            prep.setString(2, nhaCungCap.getDiachi());
-            prep.setString(3, nhaCungCap.getDienthoai());
+            prep.setString(1, loaiSanPham.getTenloaisp());
             int result = prep.executeUpdate();            
             if (result == 1) {
                 return true;
@@ -72,15 +61,13 @@ public class NhaCungCapDAOImpl implements NhaCungCapDAO {
     }
     
     @Override
-    public boolean update(NhaCungCap nhaCungCap) {
+    public boolean update(LoaiSanPham loaiSanPham) {
         try {
             Connection cons = DBConnection.getConnection();
-            String sql = "UPDATE nhacungcap SET tenncc = ?, diachi = ?, dienthoai = ? where mancc = ?";
+            String sql = "UPDATE loaisp SET tenloaisp = ? where maloaisp = ?";
             PreparedStatement prep = cons.prepareCall(sql);
-            prep.setString(1, nhaCungCap.getTenncc());
-            prep.setString(2, nhaCungCap.getDiachi());
-            prep.setString(3, nhaCungCap.getDienthoai());
-            prep.setInt(4, nhaCungCap.getMancc());
+            prep.setString(1, loaiSanPham.getTenloaisp());
+            prep.setInt(2, loaiSanPham.getMaloaisp());
             int result = prep.executeUpdate();    
             if (result == 1) return true;
             return false;
@@ -91,20 +78,18 @@ public class NhaCungCapDAOImpl implements NhaCungCapDAO {
     }
     
     @Override
-    public boolean delete(NhaCungCap nhaCungCap) {
+    public boolean delete(LoaiSanPham loaiSanPham) {
         try {
             Connection cons = DBConnection.getConnection();
-            String sql = "DELETE FROM nhacungcap where mancc = ?";
+            String sql = "DELETE FROM loaisp where maloaisp = ?";
             PreparedStatement prep = cons.prepareCall(sql);
-            prep.setInt(1, nhaCungCap.getMancc());
+            prep.setInt(1, loaiSanPham.getMaloaisp());
             int result = prep.executeUpdate();    
             if (result == 1) return true;
             return false;
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println(ex);
             return false;
         }
     }
-    
-    
 }
