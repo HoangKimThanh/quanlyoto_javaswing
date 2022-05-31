@@ -36,10 +36,13 @@ public class QuanLyNhaCungCapController {
     private JPanel jPnView;
     private JButton jBtnAdd;    
     private JButton jBtnUpdate;    
-    private JButton jBtnDelete;
+    private JButton jBtnDelete;    
+    
+    private JButton jBtnReset;
 
 
     
+    private JTextField jTfSearch;
     private JTextField jTfMaNcc;    
     private JTextField jTfTen;
 
@@ -54,23 +57,36 @@ public class QuanLyNhaCungCapController {
     private TableRowSorter<TableModel> rowSorter = null;
 
     public QuanLyNhaCungCapController(JPanel jPnView, JButton jBtnAdd, JButton jBtnUpdate, 
-            JButton jBtnDelete, JTextField jTfMaNcc, JTextField jTfTen, JTextField jTfSDT, 
-            JTextField jTfDiaChi) {
+            JButton jBtnDelete, JButton jBtnReset, JTextField jTfMaNcc, JTextField jTfTen, JTextField jTfSDT, 
+            JTextField jTfDiaChi, JTextField jTfSearch) {
         this.jPnView = jPnView;
         this.jBtnAdd = jBtnAdd;
         this.jBtnUpdate = jBtnUpdate;
         this.jBtnDelete = jBtnDelete;
+        this.jBtnReset = jBtnReset;
         this.jTfTen = jTfTen;        
         this.jTfMaNcc = jTfMaNcc;
 
         this.jTfSDT = jTfSDT;
         this.jTfDiaChi = jTfDiaChi;
+        this.jTfSearch = jTfSearch;
         
         this.nhaCungCapDAO = new NhaCungCapDAOImpl();
         this.nhaCungCap = new NhaCungCap();
     }
     
     public void setDataToTable() {
+        
+        jTfMaNcc.setText("");
+        jTfTen.setText("");        
+        jTfDiaChi.setText("");
+        jTfSDT.setText("");
+        
+        jBtnAdd.setEnabled(true);
+        jBtnUpdate.setEnabled(false);
+        jBtnDelete.setEnabled(false);
+        jBtnReset.setEnabled(false);
+        
         List<NhaCungCap> listItem = nhaCungCapDAO.getList();
         
         DefaultTableModel model = new ClassTableModel().setTableNhaCungCap(listItem, listColumn);
@@ -80,6 +96,32 @@ public class QuanLyNhaCungCapController {
         
         table.setRowSorter(rowSorter);
         
+        jTfSearch.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                String text = jTfSearch.getText();
+                if (text.trim().length() == 0) {
+                    rowSorter.setRowFilter(null);
+                } else {
+                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                String text = jTfSearch.getText();
+                if (text.trim().length() == 0) {
+                    rowSorter.setRowFilter(null);
+                } else {
+                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            }
+        });
+        
         
         table.addMouseListener(new MouseAdapter() {
             @Override
@@ -87,7 +129,6 @@ public class QuanLyNhaCungCapController {
                 if (table.getSelectedRow() != -1) {
                     DefaultTableModel model = (DefaultTableModel) table.getModel();
                     int selectedRowIndex = table.getSelectedRow();
-                    selectedRowIndex = table.convertColumnIndexToModel(selectedRowIndex);
                     
                     NhaCungCap nhaCungCap = new NhaCungCap();
                     int mancc = (int) (model.getValueAt(selectedRowIndex, 1));
@@ -102,6 +143,11 @@ public class QuanLyNhaCungCapController {
                     jTfTen.setText(nhaCungCap.getTenncc());
                     jTfSDT.setText(nhaCungCap.getDienthoai() + "");
                     jTfDiaChi.setText(nhaCungCap.getDiachi());
+                    
+                    jBtnAdd.setEnabled(false);
+                    jBtnUpdate.setEnabled(true);
+                    jBtnDelete.setEnabled(true);
+                    jBtnReset.setEnabled(true);
                 }
             }
             
@@ -112,10 +158,11 @@ public class QuanLyNhaCungCapController {
         table.setRowHeight(30);
         table.validate();
         table.repaint();
-        
-        JScrollPane scrollPane = new JScrollPane();
+//        JScrollPane scrollPane = new JScrollPane();
+        JScrollPane scrollPane = new JScrollPane(null, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.getViewport().add(table);
-        scrollPane.setPreferredSize(new Dimension(1300, 400));
+        scrollPane.setPreferredSize(new Dimension(1300, 280));
         
         jPnView.removeAll();
         jPnView.setLayout(new BorderLayout());
@@ -144,6 +191,7 @@ public class QuanLyNhaCungCapController {
                         boolean result = nhaCungCapDAO.create(nhaCungCap);
                         if (result) {
                             JOptionPane.showMessageDialog(null, "Thêm dữ liệu thành công");
+                            
                             setDataToTable();
                         } else {
                             JOptionPane.showMessageDialog(null, "Có lỗi xảy ra, vui lòng thử lại");
@@ -185,8 +233,6 @@ public class QuanLyNhaCungCapController {
                         nhaCungCap.setDienthoai(sdt);
                         nhaCungCap.setDiachi(diachi.trim());
                         
-//                        System.out.println(nhaCungCap);
-                
                         boolean result = nhaCungCapDAO.update(nhaCungCap);
                         if (result) {
                             JOptionPane.showMessageDialog(null, "Cập nhật dữ liệu thành công");
@@ -233,6 +279,14 @@ public class QuanLyNhaCungCapController {
                 catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.toString());
                 }
+            }
+
+        });
+        
+        jBtnReset.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                setDataToTable();
             }
 
         });

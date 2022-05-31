@@ -81,8 +81,9 @@ public class NhaCungCapDAOImpl implements NhaCungCapDAO {
             prep.setString(2, nhaCungCap.getDiachi());
             prep.setString(3, nhaCungCap.getDienthoai());
             prep.setInt(4, nhaCungCap.getMancc());
-            prep.executeUpdate();            
-            return true;
+            int result = prep.executeUpdate();    
+            if (result == 1) return true;
+            return false;
         } catch (SQLException ex) {
             System.out.println(ex);
             return false;
@@ -96,10 +97,11 @@ public class NhaCungCapDAOImpl implements NhaCungCapDAO {
             String sql = "DELETE FROM nhacungcap where mancc = ?";
             PreparedStatement prep = cons.prepareCall(sql);
             prep.setInt(1, nhaCungCap.getMancc());
-            prep.executeUpdate();            
-            return true;
+            int result = prep.executeUpdate();    
+            if (result == 1) return true;
+            return false;
         } catch (SQLException ex) {
-            System.out.println(ex);
+            System.out.println(ex.getMessage());
             return false;
         }
     }
