@@ -10,12 +10,12 @@ package model;
  */
 public class SanPham {
     private int maSanPham;
-    private String tenSanPham;
-    private String Loai;
+    private String loai;
+    private String ten;
     private int soLuong;
     private int gia;
-    private String anh;
     private int hanBaoHanh;
+    private String anh;
 
     public int getMaSanPham() {
         return maSanPham;
@@ -25,20 +25,20 @@ public class SanPham {
         this.maSanPham = maSanPham;
     }
 
-    public String getTenSanPham() {
-        return tenSanPham;
-    }
-
-    public void setTenSanPham(String tenSanPham) {
-        this.tenSanPham = tenSanPham;
-    }
-
     public String getLoai() {
-        return Loai;
+        return loai;
     }
 
-    public void setLoai(String Loai) {
-        this.Loai = Loai;
+    public void setLoai(String loai) {
+        this.loai = loai;
+    }
+
+    public String getTen() {
+        return ten;
+    }
+
+    public void setTen(String ten) {
+        this.ten = ten;
     }
 
     public int getSoLuong() {
@@ -71,11 +71,6 @@ public class SanPham {
 
     public void setHanBaoHanh(int hanBaoHanh) {
         this.hanBaoHanh = hanBaoHanh;
-    }
-
-    @Override
-    public String toString() {
-        return "SanPham{" + "maSanPham=" + maSanPham + ", tenSanPham=" + tenSanPham + ", Loai=" + Loai + ", soLuong=" + soLuong + ", gia=" + gia + ", anh=" + anh + ", hanBaoHanh=" + hanBaoHanh + '}';
     }
 
     

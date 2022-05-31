@@ -5,18 +5,18 @@
 package dao;
 
 import java.util.List;
-import model.KhachHang;
+import model.SanPham;
 
 /**
  *
  * @author ASUS
  */
-public interface KhachHangDAO {
-    public List<KhachHang> getList();
+public interface SanPhamDAO {
+    public List<SanPham> getList();
     
-    public int createKhachHang(KhachHang khachHang);
+    public int createSanPham(SanPham sanPham);
     
-    public void updateKhachHang(KhachHang khachHang);
+    public int updateSanPham(SanPham sanPham);
     
-    public void deleteKhachHang(int makh);
+    public int deleteSanPham(int makh);
 }

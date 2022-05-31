@@ -104,11 +104,11 @@ public class KhachHangDAOImpl implements KhachHangDAO{
 //        return 0;
     }
     
-    public void deleteKhachHang(int makh) {
+    public void deleteKhachHang(int maKH) {
         try {
             Connection cons = DBConnection.getConnection();
             String sql = "DELETE FROM khachhang "
-                    + "WHERE makh = " + makh + "";
+                    + "WHERE makh = " + maKH + "";
             PreparedStatement ps = cons.prepareStatement(sql);
             
             ps.execute();
