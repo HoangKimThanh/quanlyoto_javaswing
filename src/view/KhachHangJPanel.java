@@ -19,10 +19,6 @@ public class KhachHangJPanel extends javax.swing.JPanel {
         initComponents();
         QuanLyKhachHangController controller = new QuanLyKhachHangController(jPnView, jTfSearch, jBtnAdd, jBtnUpdate, jBtnDelete, jBtnReset,
                 jTfMaKhachHang, jTfHoTen, jTfDienThoai, jTaDiachi);
-//        jTfMaKhachHang.setVisible(false);
-//        jBtnUpdate.setEnabled(false);
-//        jBtnDelete.setEnabled(false);
-//        jBtnReset.setEnabled(false);
         controller.setDataToTable();
         controller.setEvent();
     }
