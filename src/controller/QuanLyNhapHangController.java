@@ -17,22 +17,27 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -47,11 +52,19 @@ import utility.ClassTableModel;
  * @author Home
  */
 public class QuanLyNhapHangController {
+    
+    private JPanel jPnTabNhapHang;
+    private JPanel jPnTabPhieuNhap;
+
     private JScrollPane jScrollPaneKhoHang;
     private JScrollPane jScrollPaneHangChoNhap;
+    private JScrollPane jScrollPaneDSPhieuNhap;
+    private JScrollPane jScrollPaneChiTietPN;
 
     private JTable jTableKhoHang;
     private JTable jTableHangChoNhap;
+    private JTable jTableDSPhieuNhap;
+    private JTable jTableChiTietPN;
 
     private JTextField jTfSearch;
     
@@ -62,30 +75,65 @@ public class QuanLyNhapHangController {
     
     private JTextField jTfNhanVien;
     
+    private JTextField jTfPNMaPN;
+    private JTextField jTfPNMaNhaCC;
+    private JTextField jTfPNNhanVien;
+    private JTextField jTfPNNgayLap;
+    private JTextField jTfPNTongTien;
+    
+    private JTextField jTfPriceFrom;
+    private JTextField jTfPriceTo;
+    
+    
     private JButton jBtnNhapHang;
     private JButton jBtnXoaHang;
     private JButton jBtnXacNhan;
     private JButton jBtnThayDoiSoLuong;
+    private JButton jBtnFilter;
 
     private JComboBox jComboBoxNhaCC;
+    
+    private JTabbedPane jTabbedPane;
 
     
     private List<ChiTietPhieuNhap> danhSachSanPhamNhap;
+    private List<PhieuNhap> danhSachPhieuNhap;
+    
+    private boolean isFiltering = false;
     
     
 //    private TableRowSorter<TableModel> rowSorter = null;
+    
+    DecimalFormat dcf = new DecimalFormat("###,###");
 
-    public QuanLyNhapHangController(JScrollPane jScrollPaneKhoHang, JScrollPane jScrollPaneHangChoNhap,
-            JTable jTableKhoHang, JTable jTableHangChoNhap,
+    public QuanLyNhapHangController(JTabbedPane jTabbedPane,
+            JPanel jPnTabNhapHang, JPanel jPnTabPhieuNhap,
+            JScrollPane jScrollPaneKhoHang, JScrollPane jScrollPaneHangChoNhap, 
+            JScrollPane jScrollPaneDSPhieuNhap, JScrollPane jScrollPaneChiTietPN,
+            JTable jTableKhoHang, JTable jTableHangChoNhap, JTable jTableDSPhieuNhap, JTable jTableChiTietPN,
             JTextField jTfSearch, JTextField jTfMaSP, JTextField jTfTenSP, JTextField jTfDonGia,
             JTextField jTfSLNhap, JTextField jTfNhanVien,
-            JButton jBtnNhapHang, JButton jBtnXoaHang, JButton jBtnXacNhan, JButton jBtnThayDoiSoLuong,
+            JTextField jTfPNMaPN, JTextField jTfPNMaNhaCC, JTextField jTfPNNhanVien,
+            JTextField jTfPNNgayLap, JTextField jTfPNTongTien,
+            JTextField jTfPriceFrom, JTextField jTfPriceTo,
+            JButton jBtnNhapHang, JButton jBtnXoaHang, JButton jBtnXacNhan, JButton jBtnThayDoiSoLuong, JButton jBtnFilter,
             JComboBox jComboBoxNhaCC) {
+        
+        this.jTabbedPane = jTabbedPane;
+        
+        this.jPnTabNhapHang = jPnTabNhapHang;
+        this.jPnTabPhieuNhap = jPnTabPhieuNhap;
+        
         this.jScrollPaneKhoHang = jScrollPaneKhoHang;
         this.jScrollPaneHangChoNhap = jScrollPaneHangChoNhap;
+        this.jScrollPaneDSPhieuNhap = jScrollPaneDSPhieuNhap;
+        this.jScrollPaneChiTietPN = jScrollPaneChiTietPN;
 
         this.jTableKhoHang = jTableKhoHang;
         this.jTableHangChoNhap = jTableHangChoNhap;
+        this.jTableDSPhieuNhap = jTableDSPhieuNhap;
+        this.jTableChiTietPN = jTableChiTietPN;
+        
         this.jTfSearch = jTfSearch;
         
         this.jTfMaSP = jTfMaSP;
@@ -94,21 +142,50 @@ public class QuanLyNhapHangController {
         this.jTfSLNhap = jTfSLNhap;
         this.jTfNhanVien = jTfNhanVien;
         
+        this.jTfPNMaPN = jTfPNMaPN;
+        this.jTfPNMaNhaCC = jTfPNMaNhaCC;
+        this.jTfPNNhanVien = jTfPNNhanVien;
+        this.jTfPNNgayLap = jTfPNNgayLap;
+        this.jTfPNTongTien = jTfPNTongTien;
+        
+        this.jTfPriceFrom = jTfPriceFrom;
+        this.jTfPriceTo = jTfPriceTo;
+        
         this.jBtnNhapHang = jBtnNhapHang;
         this.jBtnXoaHang = jBtnXoaHang;
         this.jBtnXacNhan = jBtnXacNhan;
         this.jBtnThayDoiSoLuong = jBtnThayDoiSoLuong;
+        this.jBtnFilter = jBtnFilter;
 
         this.jComboBoxNhaCC = jComboBoxNhaCC;
         
         this.danhSachSanPhamNhap = new ArrayList<>();
+        this.danhSachPhieuNhap = new ArrayList<>();
         
         loadSanPhamToTable();
         loadNhaCungCapToComboBox();
-        
+
         resetUI();
+               
+         
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         
-       
+        for (int i = 0; i < jTableKhoHang.getColumnCount(); i++) {
+            jTableKhoHang.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+        
+        for (int i = 0; i < jTableChiTietPN.getColumnCount(); i++) {
+            jTableChiTietPN.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+        
+        for (int i = 0; i < jTableDSPhieuNhap.getColumnCount(); i++) {
+            jTableDSPhieuNhap.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+        
+        for (int i = 0; i < jTableHangChoNhap.getColumnCount(); i++) {
+            jTableHangChoNhap.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
        
     }
     
@@ -136,31 +213,25 @@ public class QuanLyNhapHangController {
         
         jScrollPaneKhoHang.getViewport().add(jTableKhoHang);
         
-        
         jTableKhoHang.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (jTableKhoHang.getSelectedRow() != -1) {
                     DefaultTableModel model = (DefaultTableModel) jTableKhoHang.getModel();
                     int selectedRowIndex = jTableKhoHang.getSelectedRow();
-                    
                    
                     SanPham sanPham = new SanPham();
                     sanPham.setMaSanPham((int) model.getValueAt(selectedRowIndex, 0));
                     sanPham.setTen(model.getValueAt(selectedRowIndex, 1).toString());
                     sanPham.setSoLuong((int) model.getValueAt(selectedRowIndex, 2));
                     
-                    
                     jTfMaSP.setText((sanPham.getMaSanPham()) + "");
                     jTfTenSP.setText(sanPham.getTen());
                     
                     jBtnNhapHang.setEnabled(true);
-                  
                 }
             }
-            
         });
-    
     }
     
     
@@ -172,6 +243,102 @@ public class QuanLyNhapHangController {
             jComboBoxNhaCC.addItem(listNhaCC.get(i));
         }
     }
+    
+    public void loadPhieuNhapToTable() {
+        
+        if (!isFiltering) {
+            PhieuNhapDAO phieuNhapDAO = new PhieuNhapDAOImpl();
+            danhSachPhieuNhap = phieuNhapDAO.getList();
+        }
+       
+        DefaultTableModel model = (DefaultTableModel)jTableDSPhieuNhap.getModel();
+        jTableDSPhieuNhap.setDefaultEditor(Object.class, null);
+        
+        model.setRowCount(0);
+        if (danhSachPhieuNhap.isEmpty()) {
+            JLabel JLbMessage = new JLabel();
+            JLbMessage.setText("Không tìm thấy phiếu nhập phù hợp!");
+            jScrollPaneDSPhieuNhap.getViewport().add(JLbMessage);
+            return;
+        }
+        
+        for (int i = 0; i < danhSachPhieuNhap.size(); i++) {
+            model.addRow(new Object[]{
+                danhSachPhieuNhap.get(i).getMaPhieuNhap(), 
+                danhSachPhieuNhap.get(i).getMaNhaCungCap(), 
+                danhSachPhieuNhap.get(i).getMaNhanVien(),                
+                danhSachPhieuNhap.get(i).getNgayLap(),
+                danhSachPhieuNhap.get(i).getTongTien(),
+
+            });
+        }
+        jTableDSPhieuNhap.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
+        jTableDSPhieuNhap.getTableHeader().setPreferredSize(new Dimension(50, 30));
+        jTableDSPhieuNhap.setRowHeight(30);
+        
+        jScrollPaneDSPhieuNhap.getViewport().add(jTableDSPhieuNhap);
+        
+        jTableDSPhieuNhap.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (jTableDSPhieuNhap.getSelectedRow() != -1) {
+                    
+                    DefaultTableModel model = (DefaultTableModel) jTableDSPhieuNhap.getModel();
+                    int selectedRowIndex = jTableDSPhieuNhap.getSelectedRow();
+                    
+                    PhieuNhap phieuNhap = new PhieuNhap();
+                    phieuNhap.setMaPhieuNhap((int) model.getValueAt(selectedRowIndex, 0));
+                    phieuNhap.setMaNhaCungCap((int) model.getValueAt(selectedRowIndex, 1));
+                    phieuNhap.setMaNhanVien((int) model.getValueAt(selectedRowIndex, 2));
+                    phieuNhap.setNgayLap(model.getValueAt(selectedRowIndex, 3).toString());
+                    phieuNhap.setTongTien((int) model.getValueAt(selectedRowIndex, 4));
+                    
+                    NhaCungCapDAO nhaCungCapDAO = new NhaCungCapDAOImpl();
+                    NhaCungCap nhaCungCap = nhaCungCapDAO.getByMaNCC(phieuNhap.getMaNhaCungCap());
+                    
+                    jTfPNMaPN.setText(phieuNhap.getMaPhieuNhap() + "");
+                    jTfPNMaNhaCC.setText(nhaCungCap.toString());
+                    jTfPNNhanVien.setText(phieuNhap.getMaNhanVien() + "");
+                    jTfPNNgayLap.setText(phieuNhap.getNgayLap());
+                    jTfPNTongTien.setText(phieuNhap.getTongTien() + "");
+                    
+                    loadChiTietPhieuNhap(phieuNhap.getMaPhieuNhap());
+                  
+                }
+            }
+            
+        });
+    
+    }
+    
+    public void loadChiTietPhieuNhap(int maPN) {
+        ChiTietPhieuNhapDAO ctPhieuNhapDAO = new ChiTietPhieuNhapDAOImpl();
+        
+        List<ChiTietPhieuNhap> listCTPhieuNhap = ctPhieuNhapDAO.getListByMaPN(maPN);
+        
+        DefaultTableModel model = (DefaultTableModel)jTableChiTietPN.getModel();
+        jTableChiTietPN.setDefaultEditor(Object.class, null);
+
+        model.setRowCount(0);
+        for (int i = 0; i < listCTPhieuNhap.size(); i++) {
+            model.addRow(new Object[]{
+                listCTPhieuNhap.get(i).getMaSanPham(), 
+                listCTPhieuNhap.get(i).getTenSanPham(), 
+                listCTPhieuNhap.get(i).getDonGia(),                
+                listCTPhieuNhap.get(i).getSoLuong(),
+                listCTPhieuNhap.get(i).getThanhTien(),
+
+            });
+        }
+        jTableChiTietPN.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
+        jTableChiTietPN.getTableHeader().setPreferredSize(new Dimension(50, 30));
+        jTableChiTietPN.setRowHeight(30);
+        
+        jScrollPaneChiTietPN.getViewport().add(jTableChiTietPN);
+        
+    
+    }
+    
     
     public void showDanhSachSanPhamNhap() {
         resetUI();
@@ -420,6 +587,12 @@ public class QuanLyNhapHangController {
             @Override
             public void mouseClicked(MouseEvent e) {
                 try {
+                    
+                    if (danhSachSanPhamNhap.isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Vui lòng chọn sản phẩm để nhập!");
+                        return;
+                    }
+                    
                     NhaCungCap nhaCC = (NhaCungCap) jComboBoxNhaCC.getSelectedItem();
                     
                     Date date = new Date();
@@ -523,7 +696,56 @@ public class QuanLyNhapHangController {
                     
                     JOptionPane.showMessageDialog(null, "Bạn chưa chọn hàng để cập nhật!");
                     
-                    
+                }
+                catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.toString());
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {}
+
+            @Override
+            public void mouseReleased(MouseEvent e) {}
+
+            @Override
+            public void mouseEntered(MouseEvent e) {}
+
+            @Override
+            public void mouseExited(MouseEvent e) {}
+            
+        });
+        
+        jTabbedPane.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                int index = jTabbedPane.getSelectedIndex();
+                if (index == 1) {
+                    loadPhieuNhapToTable();
+                }
+            }
+        });
+        
+        jBtnFilter.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    if (jTfPriceFrom.getText().equals("") && jTfPriceTo.getText().equals("")) {
+                        isFiltering = false;
+                        loadPhieuNhapToTable();
+                        return;
+                    }
+                    if (jTfPriceFrom.getText().equals("") || jTfPriceTo.getText().equals("")) {
+                        isFiltering = false;
+                        return;
+                    }
+                    isFiltering = true;
+                    int priceFrom = Integer.valueOf(jTfPriceFrom.getText());
+                    int priceTo = Integer.valueOf(jTfPriceTo.getText());
+                  
+                    PhieuNhapDAO phieuNhapDAO = new PhieuNhapDAOImpl();
+                    danhSachPhieuNhap = phieuNhapDAO.getListFilterPrice(priceFrom, priceTo);
+                    loadPhieuNhapToTable();
                     
                 }
                 catch (Exception ex) {
@@ -544,124 +766,8 @@ public class QuanLyNhapHangController {
             public void mouseExited(MouseEvent e) {}
             
         });
-//        jBtnAdd.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                try {
-//                    String tenncc = jTfTen.getText();
-//                    String sdt = jTfSDT.getText();
-//                    String diachi = jTfDiaChi.getText();
-//                    if (tenncc.equals("") || sdt.equals("") || diachi.equals("")) {
-//                        JOptionPane.showMessageDialog(null, "Ten NCC, So dien thoai, Dia chi khong duoc de trong!");
-//                    } else {
-//                        nhaCungCap.setTenncc(tenncc.trim());
-//                        nhaCungCap.setDienthoai(sdt);
-//                        nhaCungCap.setDiachi(diachi.trim());
-//                        
-////                        System.out.println(nhaCungCap);
-//                
-//                        boolean result = nhaCungCapDAO.create(nhaCungCap);
-//                        if (result) {
-//                            JOptionPane.showMessageDialog(null, "Thêm dữ liệu thành công");
-//                            
-//                            setDataToTable();
-//                        } else {
-//                            JOptionPane.showMessageDialog(null, "Có lỗi xảy ra, vui lòng thử lại");
-//                        }
-//                    }
-//                }
-//                catch (Exception ex) {
-//                    JOptionPane.showMessageDialog(null, ex.toString());
-//                }
-//            }
-//
-//            @Override
-//            public void mousePressed(MouseEvent e) {}
-//
-//            @Override
-//            public void mouseReleased(MouseEvent e) {}
-//
-//            @Override
-//            public void mouseEntered(MouseEvent e) {}
-//
-//            @Override
-//            public void mouseExited(MouseEvent e) {}
-//            
-//        });
-        
-//        jBtnUpdate.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                try {
-//                    String mancc = jTfMaNcc.getText();
-//                    String tenncc = jTfTen.getText();
-//                    String sdt = jTfSDT.getText();
-//                    String diachi = jTfDiaChi.getText();
-//                    if (mancc.equals("") || tenncc.equals("") || sdt.equals("") || diachi.equals("")) {
-//                        JOptionPane.showMessageDialog(null, "Ma NCC, Ten NCC, So dien thoai, Dia chi khong duoc de trong!");
-//                    } else {
-//                        nhaCungCap.setMancc(Integer.parseInt(mancc));
-//                        nhaCungCap.setTenncc(tenncc.trim());
-//                        nhaCungCap.setDienthoai(sdt);
-//                        nhaCungCap.setDiachi(diachi.trim());
-//                        
-//                        boolean result = nhaCungCapDAO.update(nhaCungCap);
-//                        if (result) {
-//                            JOptionPane.showMessageDialog(null, "Cập nhật dữ liệu thành công");
-//                            setDataToTable();
-//                        } else {
-//                            JOptionPane.showMessageDialog(null, "Có lỗi xảy ra, vui lòng thử lại");
-//                        }
-//                    }
-//                }
-//                catch (Exception ex) {
-//                    JOptionPane.showMessageDialog(null, ex.toString());
-//                }
-//            }
-//
-//        });
-//        
-//        jBtnDelete.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                try {
-//                    String mancc = jTfMaNcc.getText();
-//                    String tenncc = jTfTen.getText();
-//                    String sdt = jTfSDT.getText();
-//                    String diachi = jTfDiaChi.getText();
-//                    if (mancc.equals("")) {
-//                        JOptionPane.showMessageDialog(null, "Vui long chon NCC!");
-//                    } else {
-//                        nhaCungCap.setMancc(Integer.parseInt(mancc));
-//                        nhaCungCap.setTenncc(tenncc.trim());
-//                        nhaCungCap.setDienthoai(sdt);
-//                        nhaCungCap.setDiachi(diachi.trim());
-//                        
-////                        System.out.println(nhaCungCap);
-//                
-//                        boolean result = nhaCungCapDAO.delete(nhaCungCap);
-//                        if (result) {
-//                            JOptionPane.showMessageDialog(null, "Xóa dữ liệu thành công");
-//                            setDataToTable();
-//                        } else {
-//                            JOptionPane.showMessageDialog(null, "Có lỗi xảy ra, vui lòng thử lại");
-//                        }
-//                    }
-//                }
-//                catch (Exception ex) {
-//                    JOptionPane.showMessageDialog(null, ex.toString());
-//                }
-//            }
-//
-//        });
-        
-//        jBtnReset.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                setDataToTable();
-//            }
-//
-//        });
+           
+
     }
 }
 

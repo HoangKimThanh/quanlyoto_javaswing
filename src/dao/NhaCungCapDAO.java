@@ -14,6 +14,7 @@ import model.NhaCungCap;
 public interface NhaCungCapDAO {
     
     public List<NhaCungCap> getList();
+    public NhaCungCap getByMaNCC(int maNCC);
     public boolean create(NhaCungCap nhaCungCap);
     public boolean update(NhaCungCap nhaCungCap);
     public boolean delete(NhaCungCap nhaCungCap);

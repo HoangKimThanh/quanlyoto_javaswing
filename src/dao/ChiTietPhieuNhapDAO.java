@@ -13,7 +13,7 @@ import model.ChiTietPhieuNhap;
  */
 public interface ChiTietPhieuNhapDAO {
     
-//    public List<PhieuNhap> getList();
+    public List<ChiTietPhieuNhap> getListByMaPN(int maPN);
     public boolean create(ChiTietPhieuNhap ctPhieuNhap);
     
 }

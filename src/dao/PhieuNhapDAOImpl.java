@@ -20,6 +20,65 @@ import java.util.ArrayList;
 public class PhieuNhapDAOImpl implements PhieuNhapDAO {
 
     
+    @Override
+    public List<PhieuNhap> getList() {
+        try {
+            Connection cons = DBConnection.getConnection();
+            String sql = "SELECT * FROM phieunhap";
+            List<PhieuNhap> list = new ArrayList<>();
+            PreparedStatement ps = cons.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                PhieuNhap phieuNhap = new PhieuNhap();
+                phieuNhap.setMaPhieuNhap(rs.getInt("mapn"));                
+                phieuNhap.setMaNhaCungCap(rs.getInt("mancc"));
+                phieuNhap.setMaNhanVien(rs.getInt("manv"));
+                phieuNhap.setNgayLap(rs.getString("ngaylap"));
+                phieuNhap.setTongTien(rs.getInt("tongtien"));
+                list.add(phieuNhap);
+            }
+            rs.close();
+            ps.close();
+            cons.close();
+
+            return list;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
+    @Override
+    public List<PhieuNhap> getListFilterPrice(int min, int max) {
+        try {
+            Connection cons = DBConnection.getConnection();
+            String sql = "SELECT * FROM phieunhap where tongtien BETWEEN ? and ?";
+            List<PhieuNhap> list = new ArrayList<>();
+            PreparedStatement ps = cons.prepareCall(sql);
+            ps.setInt(1, min);
+            ps.setInt(2, max);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                PhieuNhap phieuNhap = new PhieuNhap();
+                phieuNhap.setMaPhieuNhap(rs.getInt("mapn"));                
+                phieuNhap.setMaNhaCungCap(rs.getInt("mancc"));
+                phieuNhap.setMaNhanVien(rs.getInt("manv"));
+                phieuNhap.setNgayLap(rs.getString("ngaylap"));
+                phieuNhap.setTongTien(rs.getInt("tongtien"));
+                list.add(phieuNhap);
+            }
+            rs.close();
+            ps.close();
+            cons.close();
+
+            return list;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
+    
     public static void main(String[] args) {
     }
     
