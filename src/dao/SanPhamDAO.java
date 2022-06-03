@@ -18,5 +18,7 @@ public interface SanPhamDAO {
     
     public int updateSanPham(SanPham sanPham);
     
+    public boolean updateSoLuong(int maSP, int newSL);
+    
     public int deleteSanPham(int makh);
 }

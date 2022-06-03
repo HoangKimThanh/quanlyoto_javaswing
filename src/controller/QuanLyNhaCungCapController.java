@@ -73,6 +73,7 @@ public class QuanLyNhaCungCapController {
         
         this.nhaCungCapDAO = new NhaCungCapDAOImpl();
         this.nhaCungCap = new NhaCungCap();
+       
     }
     
     public void setDataToTable() {
@@ -87,6 +88,7 @@ public class QuanLyNhaCungCapController {
         jBtnDelete.setEnabled(false);
         jBtnReset.setEnabled(false);
         
+         
         List<NhaCungCap> listItem = nhaCungCapDAO.getList();
         
         DefaultTableModel model = new ClassTableModel().setTableNhaCungCap(listItem, listColumn);

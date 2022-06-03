@@ -110,6 +110,23 @@ public class SanPhamDAOImpl implements SanPhamDAO{
         }
     }
     
+    public boolean updateSoLuong(int maSP, int newSL) {
+        try {
+            Connection cons = DBConnection.getConnection();
+            String sql = "UPDATE sanpham SET soluong = soluong + ? where masp = ?";
+            PreparedStatement ps = cons.prepareStatement(sql);
+            ps.setInt(1, newSL);
+            ps.setInt(2, maSP);
+            
+            int result = ps.executeUpdate();    
+            if (result == 1) return true;
+            return false;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+    
     public int deleteSanPham(int maSP) {
         try {
             Connection cons = DBConnection.getConnection();

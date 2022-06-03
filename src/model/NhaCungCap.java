@@ -44,6 +44,13 @@ public class NhaCungCap {
     public void setDiachi(String diachi) {
         this.diachi = diachi;
     }
+
+    @Override
+    public String toString() {
+        return this.mancc + " - " + this.tenncc + " - " + this.diachi;
+    }
+    
+    
     
     
     
