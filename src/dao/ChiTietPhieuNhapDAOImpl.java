@@ -19,8 +19,40 @@ import java.util.ArrayList;
  */
 public class ChiTietPhieuNhapDAOImpl implements ChiTietPhieuNhapDAO {
 
+    @Override
+    public List<ChiTietPhieuNhap> getListByMaPN(int maPN) {
+        try {
+            Connection cons = DBConnection.getConnection();
+            String sql = "SELECT * FROM ctpn, sanpham where mapn = ? and ctpn.masp = sanpham.masp";
+            List<ChiTietPhieuNhap> list = new ArrayList<>();
+            PreparedStatement ps = cons.prepareCall(sql);
+            ps.setInt(1, maPN);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                ChiTietPhieuNhap ctPhieuNhap = new ChiTietPhieuNhap();
+                ctPhieuNhap.setMaPhieuNhap(rs.getInt("mapn"));
+                ctPhieuNhap.setMaSanPham(rs.getInt("masp"));                
+                ctPhieuNhap.setDonGia(rs.getInt("dongia"));                
+                ctPhieuNhap.setSoLuong(rs.getInt("soluong"));   
+                ctPhieuNhap.setThanhTien(rs.getInt("thanhtien"));      
+                ctPhieuNhap.setTenSanPham(rs.getString("ten"));                
+                list.add(ctPhieuNhap);
+            }
+            rs.close();
+            ps.close();
+            cons.close();
+
+            return list;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
     
     public static void main(String[] args) {
+        
+        ChiTietPhieuNhapDAO ctPhieuNhapDAO = new ChiTietPhieuNhapDAOImpl();
+        System.out.println(ctPhieuNhapDAO.getListByMaPN(8));
     }
     
     @Override

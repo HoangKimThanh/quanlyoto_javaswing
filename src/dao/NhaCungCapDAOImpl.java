@@ -46,9 +46,36 @@ public class NhaCungCapDAOImpl implements NhaCungCapDAO {
         return null;
     }
     
+    @Override
+    public NhaCungCap getByMaNCC(int maNCC) {
+        try {
+            Connection cons = DBConnection.getConnection();
+            String sql = "SELECT * FROM nhacungcap where mancc = ?";
+            PreparedStatement ps = cons.prepareCall(sql);
+            ps.setInt(1, maNCC);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                NhaCungCap nhaCungCap = new NhaCungCap();
+                nhaCungCap.setMancc(rs.getInt("mancc"));                
+                nhaCungCap.setTenncc(rs.getString("tenncc"));
+                nhaCungCap.setDiachi(rs.getString("diachi"));
+                nhaCungCap.setDienthoai(rs.getString("dienthoai"));
+                return nhaCungCap;
+            }
+            rs.close();
+            ps.close();
+            cons.close();
+
+            return null;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
     public static void main(String[] args) {
         NhaCungCapDAO nhaCungCap = new NhaCungCapDAOImpl();
-        System.out.println(nhaCungCap.getList());
+        System.out.println(nhaCungCap.getByMaNCC(14));
     }
     
     @Override

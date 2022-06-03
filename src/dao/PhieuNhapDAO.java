@@ -13,7 +13,8 @@ import model.PhieuNhap;
  */
 public interface PhieuNhapDAO {
     
-//    public List<PhieuNhap> getList();
+    public List<PhieuNhap> getList();
+    public List<PhieuNhap> getListFilterPrice(int min, int max);
     public int create(PhieuNhap phieuNhap);
     
 }
