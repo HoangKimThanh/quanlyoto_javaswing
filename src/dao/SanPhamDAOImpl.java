@@ -142,4 +142,35 @@ public class SanPhamDAOImpl implements SanPhamDAO{
             return 0;
         }
     }
+    
+    public static int getTotalByLoai(int loai) {
+        String loaisp = "";
+        switch(loai) {
+            case 1:
+                loaisp = "1 - Ô tô";
+                break;
+            case 2:
+                loaisp = "2 - Phụ tùng";
+                break;
+        }
+        try {
+            Connection cons = DBConnection.getConnection();
+            String sql = "SELECT COUNT(*) AS TOTAL FROM sanpham WHERE loai = '" + loaisp +"'";
+            PreparedStatement ps = cons.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            int total = 0;
+            if (rs.next()) {
+                total = rs.getInt(1);
+            }
+            
+            ps.close();
+            cons.close();
+            
+            return total;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return 0;
+        }
+    }
 }

@@ -118,4 +118,26 @@ public class KhachHangDAOImpl implements KhachHangDAO{
             ex.printStackTrace();
         }
     }
+    
+    public static int getTotal() {
+        try {
+            Connection cons = DBConnection.getConnection();
+            String sql = "SELECT COUNT(*) AS TOTAL FROM khachhang ";
+            PreparedStatement ps = cons.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            int total = 0;
+            if (rs.next()) {
+                total = rs.getInt(1);
+            }
+            
+            ps.close();
+            cons.close();
+            
+            return total;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return 0;
+        }
+    }
 }
