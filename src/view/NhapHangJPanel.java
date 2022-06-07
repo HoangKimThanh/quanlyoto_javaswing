@@ -136,7 +136,7 @@ public class NhapHangJPanel extends javax.swing.JPanel {
                             .addComponent(jComboBoxNhaCC, 0, 225, Short.MAX_VALUE))))
                 .addContainerGap(35, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPnThongTinSP1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(146, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addGap(98, 98, 98))
         );
@@ -581,6 +581,10 @@ public class NhapHangJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jBtnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnFilterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnFilterActionPerformed
+
     private void jBtnXoaHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnXoaHangActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBtnXoaHangActionPerformed
@@ -596,10 +600,6 @@ public class NhapHangJPanel extends javax.swing.JPanel {
     private void jBtnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnXacNhanActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBtnXacNhanActionPerformed
-
-    private void jBtnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnFilterActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBtnFilterActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

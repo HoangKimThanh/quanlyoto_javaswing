@@ -9,6 +9,7 @@ import controller.ChuyenManHinhController;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -19,6 +20,12 @@ public class MainJFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainJFrame
      */
+    public void showWindow() {
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//        this.setUndecorated(true);
+//        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+    }
     public MainJFrame() {
         initComponents();
         setTitle("Phần mềm quản lý cửa hàng ô tô");

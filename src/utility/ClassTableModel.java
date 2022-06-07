@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import model.KhachHang;
 //import model.LoaiSanPham;
 import model.NhaCungCap;
+import model.NhanVien;
 import model.PhieuNhap;
 import model.SanPham;
 /**
@@ -132,6 +133,35 @@ public class ClassTableModel {
                 obj[3] = phieuNhap.getMaNhanVien();
                 obj[4] = phieuNhap.getNgayLap();
                 obj[5] = phieuNhap.getTongTien();
+                
+                dtm.addRow(obj);
+            }
+        }
+        
+        return dtm;
+    }
+
+    public DefaultTableModel setTableNhanVien(List<NhanVien> listItem, String[] listColumn) {
+        DefaultTableModel dtm = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        dtm.setColumnIdentifiers(listColumn);
+        int columns = listColumn.length;
+        Object[] obj = null;
+        
+        int rows = listItem.size();
+        if (rows > 0) {
+            for(int i = 0; i < rows; i++) {
+                NhanVien nhanVien = listItem.get(i);
+                obj = new Object[columns];
+                
+                obj[0] = (i + 1);
+                obj[1] = nhanVien.getMaNV();
+                obj[2] = nhanVien.getHoTen();
+                obj[3] = nhanVien.getChucVu();
                 
                 dtm.addRow(obj);
             }
