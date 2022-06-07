@@ -12,11 +12,12 @@ import model.KhachHang;
  * @author ASUS
  */
 public interface KhachHangDAO {
+
     public List<KhachHang> getList();
-    
+
     public int createKhachHang(KhachHang khachHang);
-    
-    public void updateKhachHang(KhachHang khachHang);
-    
-    public void deleteKhachHang(int makh);
+
+    public int updateKhachHang(KhachHang khachHang);
+
+    public int deleteKhachHang(int makh);
 }
