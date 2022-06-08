@@ -25,7 +25,7 @@ public class AddHoaDon extends javax.swing.JFrame {
         initComponents();
         ThemHoaDonController controller =new ThemHoaDonController(jTTenNV, jCbMaNV, jCbMaKH, jBAddHD, this, jBAddKH);
         controller.setEvent(hoaDon, listCart);
-        
+        controller.loadKHToComboBox();
         
     }
 

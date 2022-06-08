@@ -4,7 +4,6 @@
  */
 package controller;
 
-import dao.BanHangDAOImpl;
 import dao.CTHDDAO;
 import dao.CTHDDAOImpl;
 import dao.HoaDonDAO;

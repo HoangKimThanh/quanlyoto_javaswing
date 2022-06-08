@@ -8,6 +8,8 @@ import dao.CTHDDAO;
 import dao.CTHDDAOImpl;
 import dao.HoaDonDAO;
 import dao.HoaDonDAOImpl;
+import dao.KhachHangDAO;
+import dao.KhachHangDAOImpl;
 import dao.SanPhamDAO;
 import dao.SanPhamDAOImpl;
 import java.awt.event.MouseAdapter;
@@ -22,6 +24,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.CTHD;
 import model.HoaDon;
+import model.KhachHang;
 import model.SanPham;
 import view.AddHoaDon;
 import view.AddKhachHang;
@@ -51,9 +54,9 @@ public class ThemHoaDonController {
         jBAddHD.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                try {
-                        
-                        hoaDon.setMaKH(Integer.parseInt(jCbMaKH.getSelectedItem().toString()));
+                try {                       
+                        String[] container=(jCbMaKH.getSelectedItem().toString()).split("-");
+                        hoaDon.setMaKH(Integer.parseInt(container[0]));
                         hoaDon.setMaNV(Integer.parseInt(jCbMaNV.getSelectedItem().toString()));
                         
 //                        sanPham.setTenSP(jTTenSP.getText());
@@ -85,6 +88,9 @@ public class ThemHoaDonController {
                         hoaDon.setTongTien(tongTien);
                         
                         int check= hoaDonDAO.createHoaDon(hoaDon);
+                        if (check == 0) {
+                            System.out.println(false);
+                        }
                         SanPhamDAO sanPhamDAO=new SanPhamDAOImpl();
                         List<SanPham> listA=sanPhamDAO.getList();
                         
@@ -150,5 +156,11 @@ public class ThemHoaDonController {
             
             
         });
+    }
+    public void loadKHToComboBox(){
+        KhachHangDAO khachHangDAO=new KhachHangDAOImpl();
+        List <KhachHang> listKH=khachHangDAO.getList();
+        for (KhachHang KH: listKH)
+            jCbMaKH.addItem(KH.getMaKhachHang()+"-"+KH.getHoTen());
     }
 }

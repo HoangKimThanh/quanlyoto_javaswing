@@ -64,7 +64,6 @@ public class QuanLyBanHangController {
     private JButton jBAddToCart, jBDelete, jBXuatHoaDon,jBUpdate;
     private JSpinner jSoLuong;
     private JButton jBTest;
-    private JComboBox jCbKH, jCbNV;
     private SanPhamDAO sanPhamDAO = null;
     private HoaDonDAO hoaDonDAO = null;
     private CTHDDAO cthdDAO = null;
@@ -74,7 +73,7 @@ public class QuanLyBanHangController {
     File fileAnhSP;
     Integer tongTien = 0;
 
-    public QuanLyBanHangController(JPanel showTable, JPanel showTableCart, JTextField jTMaSP, JTextField jTTenSP, JTextField jTGia, JSpinner jSoLuong, JButton jBAddToCart, JButton jBDelete, JLabel jLbAnh, JButton jBXuatHoaDon, JComboBox jCbKH, JComboBox jCbNV, JButton jBTest,JButton jBUpdate) {
+    public QuanLyBanHangController(JPanel showTable, JPanel showTableCart, JTextField jTMaSP, JTextField jTTenSP, JTextField jTGia, JSpinner jSoLuong, JButton jBAddToCart, JButton jBDelete, JLabel jLbAnh, JButton jBXuatHoaDon, JButton jBTest,JButton jBUpdate) {
         this.showTable = showTable;
         this.showTableCart = showTableCart;
         this.jTMaSP = jTMaSP;
@@ -89,8 +88,6 @@ public class QuanLyBanHangController {
         this.listCart = new ArrayList<>();
         this.jBXuatHoaDon = jBXuatHoaDon;
         this.jBAddToCart = jBAddToCart;
-        this.jCbKH = jCbKH;
-        this.jCbNV = jCbNV;
         this.jBTest = jBTest;
         this.jBUpdate=jBUpdate;
     }
@@ -434,56 +431,56 @@ public class QuanLyBanHangController {
             public void mouseClicked(MouseEvent e) {
                 try {
 
-                    HoaDon hoaDon = new HoaDon();
-                    hoaDon.setMaKH(Integer.parseInt(jCbKH.getSelectedItem().toString()));
-                    hoaDon.setMaNV(Integer.parseInt(jCbNV.getSelectedItem().toString()));
-                    hoaDon.setNgayLap(java.time.LocalDate.now().toString());
-                    hoaDon.setTongTien(tongTien);
-                    hoaDon.setGhiChu("");
-//                        sanPham.setTenSP(jTTenSP.getText());
-//                        sanPham.setGia(jTGia.getText());
-
-//                        sanPham.setSoLuong(jSoLuong.getValue().toString());
-//                        listCart.add(sanPham);
-//                        String MaSP=jTMaSP.getText();
-//                        
-//                        for(SanPham SP: listCart) {
-//                            if(SP.getMaSP().equals(MaSP)) {
-//                            listCart.remove(SP);
-//                            }
-//                        }
-//                        setDataToCart();
-                    int check = hoaDonDAO.createHoaDon(hoaDon);
-                    List<HoaDon> listHoaDon = hoaDonDAO.getList();
-                    for (SanPham sanPham : listCart) {
-                        CTHD cthd = new CTHD();
-                        cthd.setMaHD(listHoaDon.get(listHoaDon.size() - 1).getMaHD());
-                        cthd.setMaSP(sanPham.getMaSanPham());
-                        cthd.setSoLuong(sanPham.getSoLuong());
-                        cthd.setGia(sanPham.getGia());
-                        System.out.println(sanPham.getSoLuong());
-                        cthd.setTien(sanPham.getGia() * sanPham.getSoLuong());
-                        tongTien = tongTien + sanPham.getGia() * sanPham.getSoLuong();
-                        int checkb = cthdDAO.createCTHD(cthd);
-
-                    }
-                    listCart = new ArrayList<>();
-                    setDataToCart();
-
-                    if (check != 0) {
-
-                        JOptionPane.showMessageDialog(null, "Thêm hóa đơn thành công", "Hóa đơn", JOptionPane.INFORMATION_MESSAGE);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Có lỗi xảy ra, vui lòng thử lại", "Hóa đơn", JOptionPane.ERROR_MESSAGE);
-                    }
-
-//                        String lastId = khachHangDAO.createOrUpdate(khachHang);
-//                        if (!lastId.equals("")) {
-//                            khachHang.setMaKhachHang(lastId);
-//                            JOptionPane.showMessageDialog(null, "Xử lý cập nhật dữ liệu thành công");
-//                        } else {
-//                            JOptionPane.showMessageDialog(null, "Có lỗi xảy ra, vui lòng thử lại");
-//                        }
+//                    HoaDon hoaDon = new HoaDon();
+//                    hoaDon.setMaKH(Integer.parseInt(jCbKH.getSelectedItem().toString()));
+//                    hoaDon.setMaNV(Integer.parseInt(jCbNV.getSelectedItem().toString()));
+//                    hoaDon.setNgayLap(java.time.LocalDate.now().toString());
+//                    hoaDon.setTongTien(tongTien);
+//                    hoaDon.setGhiChu("");
+////                        sanPham.setTenSP(jTTenSP.getText());
+////                        sanPham.setGia(jTGia.getText());
+//
+////                        sanPham.setSoLuong(jSoLuong.getValue().toString());
+////                        listCart.add(sanPham);
+////                        String MaSP=jTMaSP.getText();
+////                        
+////                        for(SanPham SP: listCart) {
+////                            if(SP.getMaSP().equals(MaSP)) {
+////                            listCart.remove(SP);
+////                            }
+////                        }
+////                        setDataToCart();
+//                    int check = hoaDonDAO.createHoaDon(hoaDon);
+//                    List<HoaDon> listHoaDon = hoaDonDAO.getList();
+//                    for (SanPham sanPham : listCart) {
+//                        CTHD cthd = new CTHD();
+//                        cthd.setMaHD(listHoaDon.get(listHoaDon.size() - 1).getMaHD());
+//                        cthd.setMaSP(sanPham.getMaSanPham());
+//                        cthd.setSoLuong(sanPham.getSoLuong());
+//                        cthd.setGia(sanPham.getGia());
+//                        System.out.println(sanPham.getSoLuong());
+//                        cthd.setTien(sanPham.getGia() * sanPham.getSoLuong());
+//                        tongTien = tongTien + sanPham.getGia() * sanPham.getSoLuong();
+//                        int checkb = cthdDAO.createCTHD(cthd);
+//
+//                    }
+//                    listCart = new ArrayList<>();
+//                    setDataToCart();
+//
+//                    if (check != 0) {
+//
+//                        JOptionPane.showMessageDialog(null, "Thêm hóa đơn thành công", "Hóa đơn", JOptionPane.INFORMATION_MESSAGE);
+//                    } else {
+//                        JOptionPane.showMessageDialog(null, "Có lỗi xảy ra, vui lòng thử lại", "Hóa đơn", JOptionPane.ERROR_MESSAGE);
+//                    }
+//
+////                        String lastId = khachHangDAO.createOrUpdate(khachHang);
+////                        if (!lastId.equals("")) {
+////                            khachHang.setMaKhachHang(lastId);
+////                            JOptionPane.showMessageDialog(null, "Xử lý cập nhật dữ liệu thành công");
+////                        } else {
+////                            JOptionPane.showMessageDialog(null, "Có lỗi xảy ra, vui lòng thử lại");
+////                        }
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.toString());
                 }
