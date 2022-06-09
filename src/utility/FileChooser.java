@@ -1,4 +1,4 @@
-package custom;
+package utility;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileView;

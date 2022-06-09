@@ -26,7 +26,7 @@ public class BanHangJPanel extends javax.swing.JPanel {
         QuanLyBanHangController controller = new QuanLyBanHangController(showTable,showTableCart,jTMaSP,jTTenSP,jTGia,jSoLuong,jBAddToCart, jBDelete, jLbAnh,
         jBXuatHoaDon,jBTest,jBUpdate);
         QuanLyHoaDonController controllerb= new QuanLyHoaDonController(showHoaDon,showCTHD, jTMaHD, jTMaKH, jTMaNV,jTNgay, jTTienHD, jTMaHDCT, 
-            jTMaSPCT, jTSoLuongCT, jTGiaCT, jTTienCT, jBReLoad,jBDeleteb,jTab);
+            jTMaSPCT, jTSoLuongCT, jTGiaCT, jTTienCT,jBDeleteb,jTab);
         jBTest.setVisible(true);
         jBTest.setEnabled(false);
         jBAddToCart.setEnabled(false);
@@ -113,7 +113,6 @@ public class BanHangJPanel extends javax.swing.JPanel {
         jTTienHD = new javax.swing.JTextField();
         showHoaDon = new javax.swing.JPanel();
         jBDeleteb = new javax.swing.JButton();
-        jBReLoad = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jPanel18 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
@@ -578,7 +577,7 @@ public class BanHangJPanel extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTNgay)
+                .addComponent(jTNgay, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
                 .addGap(30, 30, 30))
         );
         jPanel14Layout.setVerticalGroup(
@@ -622,17 +621,10 @@ public class BanHangJPanel extends javax.swing.JPanel {
         );
         showHoaDonLayout.setVerticalGroup(
             showHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 295, Short.MAX_VALUE)
+            .addGap(0, 260, Short.MAX_VALUE)
         );
 
         jBDeleteb.setText("Xóa");
-
-        jBReLoad.setText("Reload");
-        jBReLoad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBReLoadActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -646,8 +638,6 @@ public class BanHangJPanel extends javax.swing.JPanel {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jBDeleteb, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBReLoad)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(showHoaDon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -665,9 +655,7 @@ public class BanHangJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBDeleteb)
-                    .addComponent(jBReLoad))
+                .addComponent(jBDeleteb)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(showHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -847,7 +835,7 @@ public class BanHangJPanel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTab, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
+            .addComponent(jTab, javax.swing.GroupLayout.PREFERRED_SIZE, 638, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -859,16 +847,11 @@ public class BanHangJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jBDeleteActionPerformed
 
-    private void jBReLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBReLoadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBReLoadActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAddToCart;
     private javax.swing.JButton jBDelete;
     private javax.swing.JButton jBDeleteb;
-    private javax.swing.JButton jBReLoad;
     private javax.swing.JButton jBTest;
     private javax.swing.JButton jBUpdate;
     private javax.swing.JButton jBXuatHoaDon;

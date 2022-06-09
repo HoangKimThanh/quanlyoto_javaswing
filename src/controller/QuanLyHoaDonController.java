@@ -33,12 +33,14 @@ import model.CTHD;
 import model.HoaDon;
 import utility.ClassTableModel;
 import view.*;
+import controller.DangNhapController;
 
 /**
  *
  * @author ASUS
  */
 public class QuanLyHoaDonController {
+    private DangNhapController controllerDangNhap;
 
     private HoaDonDAO hoaDonDAO = null;
 
@@ -46,13 +48,13 @@ public class QuanLyHoaDonController {
     private JPanel showHoaDon, showCTHD;
     private JTextField jTMaHD, jTMaKH, jTMaNV, jTNgay, jTTienHD, jTMaHDCT,
             jTMaSPCT, jTSoLuongCT, jTGiaCT, jTTienCT;
-    private JButton jBReLoad, jBDeleteb;
+    private JButton jBDeleteb;
     private JTabbedPane jTab;
 
     private TableRowSorter<TableModel> rowSorter = null;
 
     public QuanLyHoaDonController(JPanel showHoaDon, JPanel showCTHD, JTextField jTMaHD, JTextField jTMaKH, JTextField jTMaNV, JTextField jTNgay, JTextField jTTienHD, JTextField jTMaHDCT,
-            JTextField jTMaSPCT, JTextField jTSoLuongCT, JTextField jTGiaCT, JTextField jTTienCT, JButton jBReLoad, JButton jBDeleteb, JTabbedPane jTab) {
+            JTextField jTMaSPCT, JTextField jTSoLuongCT, JTextField jTGiaCT, JTextField jTTienCT, JButton jBDeleteb, JTabbedPane jTab) {
         this.showHoaDon = showHoaDon;
         this.showCTHD = showCTHD;
         this.jTMaHD = jTMaHD;
@@ -66,13 +68,16 @@ public class QuanLyHoaDonController {
         this.jTGiaCT = jTGiaCT;
         this.jTTienCT = jTTienCT;
         this.hoaDonDAO = new HoaDonDAOImpl();
-        this.jBReLoad = jBReLoad;
         this.jBDeleteb = jBDeleteb;
         this.jTab = jTab;
 
+        controllerDangNhap = new DangNhapController();
     }
 
     public void setDataToTable() {
+        if (controllerDangNhap.taiKhoanLogin.getChucVu().equals("Nhân viên")) {
+            jBDeleteb.setVisible(false);
+        }
         List<HoaDon> listItem = hoaDonDAO.getList();
 
         DefaultTableModel model = new ClassTableModel().setTableHoaDon(listItem, listColumn);
@@ -171,13 +176,6 @@ public class QuanLyHoaDonController {
     }
 
     public void setEvent() {
-        jBReLoad.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                setDataToTable();
-            }
-        });
-
         jBDeleteb.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

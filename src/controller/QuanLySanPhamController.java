@@ -4,7 +4,7 @@
  */
 package controller;
 
-import custom.FileChooser;
+import utility.FileChooser;
 import dao.SanPhamDAO;
 import dao.SanPhamDAOImpl;
 import java.awt.BorderLayout;
@@ -39,6 +39,7 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import model.SanPham;
 import utility.ClassTableModel;
+import utility.XuatExcel;
 
 /**
  *
@@ -52,6 +53,7 @@ public class QuanLySanPhamController {
     private JButton jBtnUpdate;
     private JButton jBtnDelete;
     private JButton jBtnReset;
+    private JButton jBtnXuatExcel;
     private JButton jBtnChonAnh;
 
     private JLabel jLbAnh;
@@ -72,9 +74,26 @@ public class QuanLySanPhamController {
     private TableRowSorter<TableModel> rowSorter = null;
 
     File fileAnhSP;
+    
+    JTable table;
 
-    public QuanLySanPhamController(JPanel jPnView, JButton jBtnAdd, JButton jBtnUpdate, JButton jBtnDelete, JButton jBtnReset,
-            JButton jBtnChonAnh, JLabel jLbAnh, JTextField jTfSearch, JTextField jTfMaSP, JComboBox jCbLoai, JTextField jTfTen, JTextField jTfSoLuong, JTextField jTfGia, JTextField jTfHanBaoHanh) {
+    public QuanLySanPhamController(
+            JPanel jPnView, 
+            JButton jBtnAdd, 
+            JButton jBtnUpdate, 
+            JButton jBtnDelete, 
+            JButton jBtnReset,
+            JButton jBtnXuatExcel,
+            JButton jBtnChonAnh, 
+            JLabel jLbAnh, 
+            JTextField jTfSearch, 
+            JTextField jTfMaSP, 
+            JComboBox jCbLoai, 
+            JTextField jTfTen, 
+            JTextField jTfSoLuong, 
+            JTextField jTfGia, 
+            JTextField jTfHanBaoHanh
+    ) {
         this.jPnView = jPnView;
 
         this.jBtnAdd = jBtnAdd;
@@ -82,6 +101,7 @@ public class QuanLySanPhamController {
         this.jBtnDelete = jBtnDelete;
         this.jBtnReset = jBtnReset;
         this.jBtnChonAnh = jBtnChonAnh;
+        this.jBtnXuatExcel = jBtnXuatExcel;
 
         this.jLbAnh = jLbAnh;
 
@@ -102,7 +122,7 @@ public class QuanLySanPhamController {
         List<SanPham> listItem = sanPhamDAO.getList();
 
         DefaultTableModel model = new ClassTableModel().setTableSanPham(listItem, listColumn);
-        JTable table = new JTable(model);
+        table = new JTable(model);
 
         rowSorter = new TableRowSorter<>(table.getModel());
 
@@ -288,6 +308,13 @@ public class QuanLySanPhamController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 resetData();
+            }
+        });
+        
+        jBtnXuatExcel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new XuatExcel(table);
             }
         });
 

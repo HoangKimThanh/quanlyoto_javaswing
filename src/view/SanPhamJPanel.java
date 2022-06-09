@@ -18,8 +18,22 @@ public class SanPhamJPanel extends javax.swing.JPanel {
      */
     public SanPhamJPanel() {
         initComponents();
-        QuanLySanPhamController controller = new QuanLySanPhamController( jPnView,  jBtnAdd,  jBtnUpdate,  jBtnDelete,  jBtnReset, 
-             jBtnChonAnh,  jLbAnh,  jTfSearch,  jTfMaSP,  jCbLoai,  jTfTen,  jTfSoLuong,  jTfGia,  jTfHanBaoHanh);
+        QuanLySanPhamController controller = new QuanLySanPhamController( 
+                jPnView,  
+                jBtnAdd,  
+                jBtnUpdate,  
+                jBtnDelete,  
+                jBtnReset, 
+                jBtnXuatExcel,
+                jBtnChonAnh,  
+                jLbAnh,  
+                jTfSearch,  
+                jTfMaSP,  
+                jCbLoai,  
+                jTfTen,  
+                jTfSoLuong,  
+                jTfGia,  
+                jTfHanBaoHanh);
         controller.setDataToTable();
         controller.setEvent();
         
@@ -65,6 +79,7 @@ public class SanPhamJPanel extends javax.swing.JPanel {
         jTfGia = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jBtnXuatExcel = new javax.swing.JButton();
         jPnView = new javax.swing.JPanel();
         jLbSearch = new javax.swing.JLabel();
         jTfSearch = new javax.swing.JTextField();
@@ -158,6 +173,14 @@ public class SanPhamJPanel extends javax.swing.JPanel {
 
         jLabel3.setText("(Ô tô: 3, 4 hoặc 5 năm; Phụ tùng: 0)");
 
+        jBtnXuatExcel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jBtnXuatExcel.setText("Xuất Excel");
+        jBtnXuatExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnXuatExcelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -174,6 +197,8 @@ public class SanPhamJPanel extends javax.swing.JPanel {
                         .addComponent(jBtnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jBtnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBtnXuatExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -265,7 +290,8 @@ public class SanPhamJPanel extends javax.swing.JPanel {
                     .addComponent(jBtnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jBtnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jBtnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jBtnReset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jBtnReset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBtnXuatExcel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(130, 130, 130))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -354,6 +380,10 @@ public class SanPhamJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTfSoLuongActionPerformed
 
+    private void jBtnXuatExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnXuatExcelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnXuatExcelActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnAdd;
@@ -361,6 +391,7 @@ public class SanPhamJPanel extends javax.swing.JPanel {
     private javax.swing.JButton jBtnDelete;
     private javax.swing.JButton jBtnReset;
     private javax.swing.JButton jBtnUpdate;
+    private javax.swing.JButton jBtnXuatExcel;
     private javax.swing.JComboBox<String> jCbLoai;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
