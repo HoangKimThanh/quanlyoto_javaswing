@@ -20,9 +20,6 @@ import java.util.ArrayList;
  */
 public class PhanQuyenDAOImpl implements PhanQuyenDAO {
 
-
-    
-    
     @Override
     public List<Quyen> getListQuyen() {
         try {
@@ -31,15 +28,15 @@ public class PhanQuyenDAOImpl implements PhanQuyenDAO {
             List<Quyen> list = new ArrayList<>();
             PreparedStatement ps = cons.prepareCall(sql);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()) {
+            while (rs.next()) {
                 Quyen phanQuyen = new Quyen();
-                phanQuyen.setChucVu(rs.getString("chucvu"));                
-                phanQuyen.setTenloaiquanly(rs.getString("tenloaiquanly"));                
-                phanQuyen.setThem(rs.getInt(1));
-                phanQuyen.setXoa(rs.getInt(2));
+                phanQuyen.setChucVu(rs.getString("chucvu"));
+                phanQuyen.setTenloaiquanly(rs.getString("tenloaiquanly"));
+                phanQuyen.setCreate(rs.getInt("them"));
+                phanQuyen.setRead(rs.getInt("xem"));
 
-                phanQuyen.setSua(rs.getInt(3));
-                phanQuyen.setXem(rs.getInt(4));
+                phanQuyen.setUpdate(rs.getInt("sua"));
+                phanQuyen.setDelete(rs.getInt("xoa"));
 
                 list.add(phanQuyen);
             }
@@ -53,56 +50,55 @@ public class PhanQuyenDAOImpl implements PhanQuyenDAO {
         }
         return null;
     }
-    
 
     @Override
-    public Quyen getQuyen(String quyen,String tenloaiquanly) {
+    public Quyen getQuyen(String quyen, String tenloaiquanly) {
         try {
             Connection cons = DBConnection.getConnection();
-            String sql = "SELECT * FROM quyen where chucvu = '"+ quyen +"' AND tenloaiquanly='"+tenloaiquanly+"'" ;
+            String sql = "SELECT * FROM quyen where chucvu = '" + quyen + "' AND tenloaiquanly='" + tenloaiquanly + "'";
             PreparedStatement ps = cons.prepareCall(sql);
-            ps.setString(1, quyen);
-            ps.setString(2, tenloaiquanly);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()) {
-                Quyen phanQuyen = new Quyen();
-                phanQuyen.setChucVu(rs.getString("chucvu"));                
+
+            Quyen phanQuyen = new Quyen();
+            while (rs.next()) {
+                phanQuyen.setChucVu(rs.getString("chucvu"));
                 phanQuyen.setTenloaiquanly(rs.getString("tenloaiquanly"));
-                phanQuyen.setThem(rs.getInt("them"));
-                phanQuyen.setXoa(rs.getInt("xoa"));
-                phanQuyen.setSua(rs.getInt("sua"));
-                phanQuyen.setXem(rs.getInt("xem"));
-                
-                return phanQuyen;
+                phanQuyen.setCreate(rs.getInt("them"));
+                phanQuyen.setRead(rs.getInt("xem"));
+                phanQuyen.setUpdate(rs.getInt("sua"));
+                phanQuyen.setDelete(rs.getInt("xoa"));
             }
             rs.close();
             ps.close();
             cons.close();
 
-            return null;
+            return phanQuyen;
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return null;
     }
+
     public static void main(String[] args) {
         PhanQuyenDAO phanQuyen = new PhanQuyenDAOImpl();
 //        System.out.println(phanQuyen.getQuyen(14));
     }
-    
-  @Override
+
+    @Override
     public boolean suaQuyen(Quyen phanQuyen) {
         try {
             Connection cons = DBConnection.getConnection();
-            String sql = "UPDATE quyen SET Thêm = ?, Xóa = ?,Sửa=?,Xem=? where chucvu=? and tenloaiquanly=?";
+            String sql = "UPDATE quyen SET them = ?, xem = ?, sua= ?, xoa = ? where chucvu = ? and tenloaiquanly = ?";
             PreparedStatement pre = cons.prepareCall(sql);
-            
-            pre.setInt(1, phanQuyen.getThem());
-            pre.setInt(2, phanQuyen.getXoa());
-            pre.setInt(3, phanQuyen.getSua());
-            pre.setInt(4, phanQuyen.getXem());
-                    pre.setString(5, phanQuyen.getChucVu());
-                    pre.setString(6, phanQuyen.getTenloaiquanly());
+            System.out.println(phanQuyen);
+            System.out.println(sql);
+
+            pre.setInt(1, phanQuyen.getCreate());
+            pre.setInt(2, phanQuyen.getRead());
+            pre.setInt(3, phanQuyen.getUpdate());
+            pre.setInt(4, phanQuyen.getDelete());
+            pre.setString(5, phanQuyen.getChucVu());
+            pre.setString(6, phanQuyen.getTenloaiquanly());
             return pre.executeUpdate() > 0;
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -110,6 +106,4 @@ public class PhanQuyenDAOImpl implements PhanQuyenDAO {
         }
     }
 
-    
 }
-

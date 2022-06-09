@@ -5,6 +5,7 @@
 package view;
 
 import controller.QuanLySanPhamController;
+import controller.DangNhapController;
 
 /**
  *
@@ -21,6 +22,14 @@ public class SanPhamJPanel extends javax.swing.JPanel {
              jBtnChonAnh,  jLbAnh,  jTfSearch,  jTfMaSP,  jCbLoai,  jTfTen,  jTfSoLuong,  jTfGia,  jTfHanBaoHanh);
         controller.setDataToTable();
         controller.setEvent();
+        
+        DangNhapController controllerDangNhap = new DangNhapController();
+        if (controllerDangNhap.taiKhoanLogin.getChucVu().equals("Nhân viên")) {
+            jBtnAdd.setEnabled(false);
+            jBtnUpdate.setEnabled(false);
+            jBtnDelete.setEnabled(false);
+            jBtnReset.setEnabled(false);
+        }
     }
 
     /**

@@ -13,9 +13,9 @@ import model.NhanVien;
  */
 public interface NhanVienDAO {
     
-    public List<NhanVien> getList();
+    public List<NhanVien> getList(String chucVu);
     public NhanVien getByMaNV(int maNV);
-    public boolean create(NhanVien nhanVien);
+    public int create(NhanVien nhanVien);
     public boolean update(NhanVien nhanVien);
     public boolean delete(NhanVien nhanVien);
 

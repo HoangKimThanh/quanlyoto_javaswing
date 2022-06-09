@@ -21,10 +21,16 @@ import java.util.ArrayList;
 public class NhanVienDAOImpl implements NhanVienDAO {
 
     @Override
-    public List<NhanVien> getList() {
+    public List<NhanVien> getList(String chucVu) {
         try {
             Connection cons = DBConnection.getConnection();
-            String sql = "SELECT * FROM nhanvien";
+            String sql = "";
+            if (chucVu.equals("Quản lý")) {
+                sql = "SELECT * FROM nhanvien where chucVu = \"Nhân viên\"";
+            } else {
+                sql = "SELECT * FROM nhanvien";
+            }
+            
             List<NhanVien> list = new ArrayList<>();
             PreparedStatement ps = cons.prepareCall(sql);
             ResultSet rs = ps.executeQuery();
@@ -85,31 +91,29 @@ public class NhanVienDAOImpl implements NhanVienDAO {
     }
     
     @Override
-    public boolean create(NhanVien nhanVien) {
+    public int create(NhanVien nhanVien) {
         try {
             Connection cons = DBConnection.getConnection();
-             Statement stmt1 = (Statement) cons.createStatement();
-             Statement stmt2 = (Statement) cons.createStatement();
-             stmt1.executeUpdate("SET FOREIGN_KEY_CHECKS=0");
-            String sql =  " INSERT INTO nhanvien(hoten,taikhoan,matkhau,chucvu) VALUES(?,?,?,?)";
-            PreparedStatement prep = cons.prepareCall(sql);
-            prep.setString(1, nhanVien.getHoTen());
-           
-            prep.setString(2, nhanVien.getTaiKhoan());
-            prep.setString(3, nhanVien.getMatKhau());
-             prep.setString(4, nhanVien.getChucVu());
-            int result = prep.executeUpdate();   
-              stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=1");
-            prep.close();
-            cons.close();
-            if (result == 1) {
-                return true;
+            String sql = "INSERT INTO nhanvien(hoten, taikhoan, matkhau, chucvu) VALUES(?,?,?,?)";
+            PreparedStatement ps = cons.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            ps.setString(1, nhanVien.getHoTen());
+            ps.setString(2, nhanVien.getTaiKhoan());
+            ps.setString(3, nhanVien.getMatKhau());
+            ps.setString(4, nhanVien.getChucVu());
+
+            ps.execute();
+            ResultSet rs = ps.getGeneratedKeys();
+            int generatedKey = 0;
+            if (rs.next()) {
+                generatedKey = rs.getInt(1);
             }
-            return false;
-        } catch (SQLException ex) {
-            System.out.println(ex);
-            return false;
+            ps.close();
+            cons.close();
+            return generatedKey;
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
+        return 0;
     }
     
     @Override
