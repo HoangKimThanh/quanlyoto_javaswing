@@ -24,7 +24,7 @@ public class NhapHangJPanel extends javax.swing.JPanel {
             jTfSeach, jTfMaSP, jTfTenSP, jTfDonGia, jTfSLNhap, jTfNhanVien,
             jTfPNMaPN, jTfPNMaNhaCC, jTfPNNhanVien, jTfPNNgayLap, jTfPNTongTien,
             jTfPriceFrom, jTfPriceTo,
-            jBtnNhapHang, jBtnXoaHang, jBtnXacNhan, jBtnThayDoiSoLuong, jBtnFilter,
+            jBtnNhapHang, jBtnXoaHang, jBtnXacNhan, jBtnThayDoiSoLuong, jBtnFilter,jBtnAdd,
             jComboBoxNhaCC);
         controller.setEvent();
     }
@@ -47,6 +47,7 @@ public class NhapHangJPanel extends javax.swing.JPanel {
         jTfNhanVien = new javax.swing.JTextField();
         jBtnXacNhan = new javax.swing.JButton();
         jComboBoxNhaCC = new javax.swing.JComboBox();
+        jBtnAdd = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLbSearch = new javax.swing.JLabel();
         jTfSeach = new javax.swing.JTextField();
@@ -113,14 +114,23 @@ public class NhapHangJPanel extends javax.swing.JPanel {
             }
         });
 
+        jBtnAdd.setText("Thêm");
+        jBtnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAddActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPnThongTinSP1Layout = new javax.swing.GroupLayout(jPnThongTinSP1);
         jPnThongTinSP1.setLayout(jPnThongTinSP1Layout);
         jPnThongTinSP1Layout.setHorizontalGroup(
             jPnThongTinSP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPnThongTinSP1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(jPnThongTinSP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPnThongTinSP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPnThongTinSP1Layout.createSequentialGroup()
+                        .addComponent(jBtnAdd)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                         .addComponent(jBtnXacNhan)
                         .addGap(140, 140, 140))
                     .addGroup(jPnThongTinSP1Layout.createSequentialGroup()
@@ -154,7 +164,9 @@ public class NhapHangJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel10)
                     .addComponent(jTfNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
-                .addComponent(jBtnXacNhan)
+                .addGroup(jPnThongTinSP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnXacNhan)
+                    .addComponent(jBtnAdd))
                 .addGap(41, 41, 41))
         );
 
@@ -601,8 +613,13 @@ public class NhapHangJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jBtnXacNhanActionPerformed
 
+    private void jBtnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAddActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnAddActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBtnAdd;
     private javax.swing.JButton jBtnFilter;
     private javax.swing.JButton jBtnNhapHang;
     private javax.swing.JButton jBtnThayDoiSoLuong;
