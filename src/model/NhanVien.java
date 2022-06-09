@@ -62,4 +62,10 @@ public class NhanVien {
         this.chucVu = chucVu;
     }
 
+    @Override
+    public String toString() {
+        return "NhanVien{" + "maNV=" + maNV + ", hoTen=" + hoTen + ", taiKhoan=" + taiKhoan + ", matKhau=" + matKhau + ", chucVu=" + chucVu + '}';
+    }
+    
+    
 }

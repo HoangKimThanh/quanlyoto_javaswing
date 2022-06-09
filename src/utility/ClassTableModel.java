@@ -169,6 +169,7 @@ public class ClassTableModel {
                 obj[2] = nhanVien.getHoTen();
                 obj[3] = nhanVien.getChucVu();
                 obj[4] = nhanVien.getTaiKhoan();
+                obj[5] = nhanVien.getMatKhau();
                 
                 dtm.addRow(obj);
             }

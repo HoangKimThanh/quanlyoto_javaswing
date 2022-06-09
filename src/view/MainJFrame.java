@@ -10,6 +10,7 @@ import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.WindowConstants;
+import controller.DangNhapController;
 
 /**
  *
@@ -26,25 +27,48 @@ public class MainJFrame extends javax.swing.JFrame {
 //        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
+
     public MainJFrame() {
         initComponents();
         setTitle("Phần mềm quản lý cửa hàng ô tô");
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/logo.png")));
-        
+
         ChuyenManHinhController chuyenManHinhController = new ChuyenManHinhController(jPnView);
         chuyenManHinhController.setView(jPnBanHang, jLbBanHang);
-        
-        List<DanhMucBean> listItem = new ArrayList<>();
-        listItem.add(new DanhMucBean("BanHang", jPnBanHang, jLbBanHang));         
-        listItem.add(new DanhMucBean("NhaCungCap", jPnNhaCungCap, jLbNhaCungCap));  
-       
-        listItem.add(new DanhMucBean("SanPham", jPnSanPham, jLbSanPham));
-        listItem.add(new DanhMucBean("NhanVien", jPnNhanVien, jLbNhanVien));        
-        listItem.add(new DanhMucBean("KhachHang", jPnKhachHang, jLbKhachHang));        
-        listItem.add(new DanhMucBean("NhapHang", jPnNhapHang, jLbNhapHang));
-        listItem.add(new DanhMucBean("ThongKe", jPnThongKe, jLbThongKe));
 
-        
+        DangNhapController controllerDangNhap = new DangNhapController();
+
+        List<DanhMucBean> listItem = new ArrayList<>();
+
+        listItem.add(new DanhMucBean("SanPham", jPnSanPham, jLbSanPham));
+        listItem.add(new DanhMucBean("BanHang", jPnBanHang, jLbBanHang));
+        listItem.add(new DanhMucBean("KhachHang", jPnKhachHang, jLbKhachHang));
+
+        String chucVu = controllerDangNhap.taiKhoanLogin.getChucVu();
+
+        switch (chucVu) {
+            case "Nhân viên":
+                jPnThongKe.setVisible(false);
+                jPnNhanVien.setVisible(false);
+                jPnNhapHang.setVisible(false);
+                jPnNhaCungCap.setVisible(false);
+                break;
+            case "Quản lý":
+                listItem.add(new DanhMucBean("ThongKe", jPnThongKe, jLbThongKe));
+                listItem.add(new DanhMucBean("NhanVien", jPnNhanVien, jLbNhanVien));
+                listItem.add(new DanhMucBean("NhapHang", jPnNhapHang, jLbNhapHang));
+                jPnNhaCungCap.setVisible(false);
+                break;
+            case "Quản trị":
+                listItem.add(new DanhMucBean("ThongKe", jPnThongKe, jLbThongKe));
+                listItem.add(new DanhMucBean("NhanVien", jPnNhanVien, jLbNhanVien));
+                listItem.add(new DanhMucBean("NhapHang", jPnNhapHang, jLbNhapHang));
+                listItem.add(new DanhMucBean("NhaCungCap", jPnNhaCungCap, jLbNhaCungCap));
+                break;
+            default:
+                throw new AssertionError();
+        }
+
         chuyenManHinhController.setEvent(listItem);
     }
 

@@ -4,8 +4,9 @@
  */
 package view;
 
+import controller.PhanQuyenController;
 import controller.QuanLyNhanVienController;
-//import controller.PhanQuyenController;
+import controller.DangNhapController;
 
 /**
  *
@@ -21,12 +22,24 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         
         QuanLyNhanVienController controller = new QuanLyNhanVienController(jPnView, jBtnAdd, jBtnUpdate,
                 jBtnDelete, jBtnReset, jTfMaNv, jTfHoTen,jCbChucVu1,jTfTaiKhoan,jTfMatKhau, jTfSeach);
-//        PhanQuyenController controller2 = new PhanQuyenController(jPnView, jBtnUpdate1,
-//                 jCbChucVu,jCbQuyen,jCheckBox1,jCheckBox2,jCheckBox3,jCheckBox4);
+        PhanQuyenController controllerPhanQuyen = new PhanQuyenController(
+                jCbChucVu,
+                jCbQuyen,
+                jCheckBoxCreate,
+                jCheckBoxRead,
+                jCheckBoxUpdate,
+                jCheckBoxDelete,
+                jBtnUpdateAll
+        );
         controller.setDataToTable();
         controller.setEvent();
-//        controller2.setEvent();
+        controllerPhanQuyen.setEvent();
 
+        DangNhapController controllerDangNhap = new DangNhapController();
+        
+        if (controllerDangNhap.taiKhoanLogin.getChucVu().equals("Quản trị")) {
+            jTabbedPane1.setEnabled(true);
+        }
     }
   
 
@@ -41,7 +54,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel12 = new javax.swing.JPanel();
+        jPnThongTinTK = new javax.swing.JPanel();
         jPnTabNhânViên = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jTfSeach = new javax.swing.JTextField();
@@ -59,10 +72,10 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         jLbChucVu1 = new javax.swing.JLabel();
         jTfTaiKhoan = new javax.swing.JTextField();
         jLbChucVu2 = new javax.swing.JLabel();
-        jTfMatKhau = new javax.swing.JTextField();
         jCbChucVu1 = new javax.swing.JComboBox();
+        jTfMatKhau = new javax.swing.JTextField();
         jPnView = new javax.swing.JPanel();
-        jPanel13 = new javax.swing.JPanel();
+        jPnQuyen = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jPnPhanQuyen = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -70,12 +83,13 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         jCbChucVu = new javax.swing.JComboBox();
         jLabel17 = new javax.swing.JLabel();
         jCbQuyen = new javax.swing.JComboBox();
-        jBtnUpdate1 = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
+        jBtnUpdateAll = new javax.swing.JButton();
+        jCheckBoxCreate = new javax.swing.JCheckBox();
+        jCheckBoxRead = new javax.swing.JCheckBox();
+        jCheckBoxUpdate = new javax.swing.JCheckBox();
+        jCheckBoxDelete = new javax.swing.JCheckBox();
 
+        jTabbedPane1.setEnabled(false);
         jTabbedPane1.setPreferredSize(new java.awt.Dimension(1176, 1200));
 
         jPnTabNhânViên.setMaximumSize(new java.awt.Dimension(5000, 5000));
@@ -141,7 +155,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         jLbChucVu2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLbChucVu2.setText("Mật khẩu");
 
-        jCbChucVu1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Quản lý", "Quản trị", "Nhân viên" }));
+        jCbChucVu1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nhân viên" }));
         jCbChucVu1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCbChucVu1ActionPerformed(evt);
@@ -173,12 +187,12 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                             .addComponent(jLbChucVu2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(60, 60, 60)
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTfHoTen, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)
+                            .addComponent(jTfHoTen)
                             .addComponent(jTfMaNv)
                             .addComponent(jTfTaiKhoan)
-                            .addComponent(jTfMatKhau)
-                            .addComponent(jCbChucVu1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(357, Short.MAX_VALUE))
+                            .addComponent(jCbChucVu1, 0, 406, Short.MAX_VALUE)
+                            .addComponent(jTfMatKhau))))
+                .addContainerGap(198, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,8 +216,8 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLbChucVu2)
-                    .addComponent(jTfMatKhau))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                    .addComponent(jTfMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnAdd)
                     .addComponent(jBtnUpdate)
@@ -222,7 +236,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         );
         jPnViewLayout.setVerticalGroup(
             jPnViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 127, Short.MAX_VALUE)
+            .addGap(0, 69, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPnTabNhânViênLayout = new javax.swing.GroupLayout(jPnTabNhânViên);
@@ -242,7 +256,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                 .addGroup(jPnTabNhânViênLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTfSeach, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(385, Short.MAX_VALUE))
+                .addContainerGap(228, Short.MAX_VALUE))
         );
         jPnTabNhânViênLayout.setVerticalGroup(
             jPnTabNhânViênLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,28 +270,30 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jPnView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPnView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPnThongTinTKLayout = new javax.swing.GroupLayout(jPnThongTinTK);
+        jPnThongTinTK.setLayout(jPnThongTinTKLayout);
+        jPnThongTinTKLayout.setHorizontalGroup(
+            jPnThongTinTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPnThongTinTKLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(jPnTabNhânViên, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addComponent(jPnTabNhânViên, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
+        jPnThongTinTKLayout.setVerticalGroup(
+            jPnThongTinTKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPnThongTinTKLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jPnTabNhânViên, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(584, Short.MAX_VALUE))
+                .addComponent(jPnTabNhânViên, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Nhân viên", jPanel12);
+        jTabbedPane1.addTab("Nhân viên", jPnThongTinTK);
+
+        jPnQuyen.setEnabled(false);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setText("QUẢN LÝ PHÂN QUYỀN");
@@ -290,7 +306,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel15.setText("Chức vụ:");
 
-        jCbChucVu.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Chọn chức vụ", "Quản lý", "Quản trị", "Nhân viên" }));
+        jCbChucVu.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-- Chọn chức vụ --", "Quản trị", "Quản lý", "Nhân viên" }));
         jCbChucVu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCbChucVuActionPerformed(evt);
@@ -300,28 +316,33 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel17.setText("Nhóm quyền:");
 
-        jCbQuyen.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Chọn quyền", "Quản lý sản phẩm", "Quản lý hóa đơn", "Quản lý nhân viên", "Quản lý khách hàng", "Quản lý thống kê", "Quản lý nhà cung cấp", "Bảo hành" }));
+        jCbQuyen.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-- Chọn quyền --", "Quản lý sản phẩm", "Quản lý hóa đơn", "Quản lý nhân viên", "Quản lý khách hàng", "Quản lý nhà cung cấp", "Thống kê" }));
+        jCbQuyen.setEnabled(false);
         jCbQuyen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCbQuyenActionPerformed(evt);
             }
         });
 
-        jBtnUpdate1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jBtnUpdate1.setText("Cập nhật quyền");
+        jBtnUpdateAll.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jBtnUpdateAll.setText("Cập nhật quyền");
 
-        jCheckBox1.setText("Xem");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        jCheckBoxCreate.setText("Xem");
+        jCheckBoxCreate.setEnabled(false);
+        jCheckBoxCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                jCheckBoxCreateActionPerformed(evt);
             }
         });
 
-        jCheckBox2.setText("Thêm");
+        jCheckBoxRead.setText("Thêm");
+        jCheckBoxRead.setEnabled(false);
 
-        jCheckBox3.setText("Sửa");
+        jCheckBoxUpdate.setText("Sửa");
+        jCheckBoxUpdate.setEnabled(false);
 
-        jCheckBox4.setText("Xóa");
+        jCheckBoxDelete.setText("Xóa");
+        jCheckBoxDelete.setEnabled(false);
 
         javax.swing.GroupLayout jPnPhanQuyenLayout = new javax.swing.GroupLayout(jPnPhanQuyen);
         jPnPhanQuyen.setLayout(jPnPhanQuyenLayout);
@@ -348,15 +369,15 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                         .addGroup(jPnPhanQuyenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPnPhanQuyenLayout.createSequentialGroup()
                                 .addGroup(jPnPhanQuyenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBox1)
-                                    .addComponent(jCheckBox4))
+                                    .addComponent(jCheckBoxCreate)
+                                    .addComponent(jCheckBoxDelete))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPnPhanQuyenLayout.createSequentialGroup()
                                 .addGroup(jPnPhanQuyenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBox3)
-                                    .addComponent(jCheckBox2))
+                                    .addComponent(jCheckBoxUpdate)
+                                    .addComponent(jCheckBoxRead))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 266, Short.MAX_VALUE)
-                                .addComponent(jBtnUpdate1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jBtnUpdateAll, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(170, 170, 170))))))
         );
         jPnPhanQuyenLayout.setVerticalGroup(
@@ -372,51 +393,51 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel17)
                     .addComponent(jCbQuyen, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jCheckBox1)
+                .addComponent(jCheckBoxCreate)
                 .addGap(20, 20, 20)
                 .addGroup(jPnPhanQuyenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPnPhanQuyenLayout.createSequentialGroup()
-                        .addComponent(jCheckBox2)
+                        .addComponent(jCheckBoxRead)
                         .addGap(18, 18, 18)
-                        .addComponent(jCheckBox3))
-                    .addComponent(jBtnUpdate1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jCheckBoxUpdate))
+                    .addComponent(jBtnUpdateAll, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jCheckBox4)
+                .addComponent(jCheckBoxDelete)
                 .addContainerGap(148, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPnQuyenLayout = new javax.swing.GroupLayout(jPnQuyen);
+        jPnQuyen.setLayout(jPnQuyenLayout);
+        jPnQuyenLayout.setHorizontalGroup(
+            jPnQuyenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPnQuyenLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPnQuyenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPnPhanQuyen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(354, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
+        jPnQuyenLayout.setVerticalGroup(
+            jPnQuyenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPnQuyenLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPnPhanQuyen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(699, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Quyền", jPanel13);
+        jTabbedPane1.addTab("Quyền", jPnQuyen);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 874, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -444,9 +465,9 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCbQuyenActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void jCheckBoxCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxCreateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_jCheckBoxCreateActionPerformed
 
     private void jCbChucVu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCbChucVu1ActionPerformed
         // TODO add your handling code here:
@@ -458,14 +479,14 @@ public class NhanVienJPanel extends javax.swing.JPanel {
     private javax.swing.JButton jBtnDelete;
     private javax.swing.JButton jBtnReset;
     private javax.swing.JButton jBtnUpdate;
-    private javax.swing.JButton jBtnUpdate1;
+    private javax.swing.JButton jBtnUpdateAll;
     private javax.swing.JComboBox jCbChucVu;
     private javax.swing.JComboBox jCbChucVu1;
     private javax.swing.JComboBox jCbQuyen;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
+    private javax.swing.JCheckBox jCheckBoxCreate;
+    private javax.swing.JCheckBox jCheckBoxDelete;
+    private javax.swing.JCheckBox jCheckBoxRead;
+    private javax.swing.JCheckBox jCheckBoxUpdate;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
@@ -478,10 +499,10 @@ public class NhanVienJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLbMaNv;
     private javax.swing.JLabel jLbSearch;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPnPhanQuyen;
+    private javax.swing.JPanel jPnQuyen;
     private javax.swing.JPanel jPnTabNhânViên;
+    private javax.swing.JPanel jPnThongTinTK;
     private javax.swing.JPanel jPnView;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTfHoTen;
