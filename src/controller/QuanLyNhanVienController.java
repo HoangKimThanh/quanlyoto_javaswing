@@ -30,6 +30,8 @@ import model.NhanVien;
 import utility.ClassTableModel;
 
 import controller.DangNhapController;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -194,9 +196,9 @@ public class QuanLyNhanVienController {
     }
 
     public void setEvent() {
-        jBtnAdd.addMouseListener(new MouseAdapter() {
+        jBtnAdd.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 try {
                     String tennv = jTfHoTen.getText();
 
@@ -242,28 +244,11 @@ public class QuanLyNhanVienController {
                     JOptionPane.showMessageDialog(null, ex.toString());
                 }
             }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-            }
-
         });
 
-        jBtnUpdate.addMouseListener(new MouseAdapter() {
+        jBtnUpdate.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 try {
                     String manv = jTfMaNv.getText();
                     String tennv = jTfHoTen.getText();
@@ -297,9 +282,9 @@ public class QuanLyNhanVienController {
 
         });
 
-        jBtnDelete.addMouseListener(new MouseAdapter() {
+        jBtnDelete.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 try {
                     String manv = jTfMaNv.getText();
                     String tennv = jTfHoTen.getText();
@@ -335,9 +320,9 @@ public class QuanLyNhanVienController {
 
         });
 
-        jBtnReset.addMouseListener(new MouseAdapter() {
+        jBtnReset.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 setDataToTable();
             }
 

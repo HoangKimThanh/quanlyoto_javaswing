@@ -18,6 +18,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -201,9 +203,9 @@ public class QuanLyBanHangController {
     }
 
     public void setEvent(QuanLyBanHangController testController) {
-        jBAddToCart.addMouseListener(new MouseAdapter() {
+        jBAddToCart.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 try {
                     Boolean isInCart = false;
                     SanPham sanPham = new SanPham();
@@ -233,9 +235,9 @@ public class QuanLyBanHangController {
             }
 
         });
-        jBDelete.addMouseListener(new MouseAdapter() {
+        jBDelete.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 Integer MaSP = Integer.parseInt(jTMaSP.getText());
 
                 for (SanPham SP : listCart) {
@@ -251,9 +253,9 @@ public class QuanLyBanHangController {
                 jSoLuong.setValue(0);
             }
         });
-        jBTest.addMouseListener(new MouseAdapter() {
+        jBTest.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 HoaDon hoaDon = new HoaDon();
                 hoaDon.setNgayLap(java.time.LocalDate.now().toString());
                 hoaDon.setGhiChu("");
@@ -266,9 +268,9 @@ public class QuanLyBanHangController {
             }
 
         });
-        jBUpdate.addMouseListener(new MouseAdapter() {
+        jBUpdate.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 Integer MaSP = Integer.parseInt(jTMaSP.getText());
 
                 for (SanPham SP : listCart) {
@@ -285,9 +287,9 @@ public class QuanLyBanHangController {
             }
 
         });
-        jBXuatHoaDon.addMouseListener(new MouseAdapter() {
+        jBXuatHoaDon.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 try {
                     listCart = new ArrayList<>();
                     setDataToCart();
