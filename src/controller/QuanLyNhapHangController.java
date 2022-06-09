@@ -48,6 +48,7 @@ import model.NhaCungCap;
 import model.PhieuNhap;
 import model.SanPham;
 import utility.ClassTableModel;
+import view.AddNhaCungCap;
 
 /**
  *
@@ -92,6 +93,7 @@ public class QuanLyNhapHangController {
     private JButton jBtnXacNhan;
     private JButton jBtnThayDoiSoLuong;
     private JButton jBtnFilter;
+    private JButton jBtnAdd;
 
     private JComboBox jComboBoxNhaCC;
     
@@ -119,7 +121,7 @@ public class QuanLyNhapHangController {
             JTextField jTfPNMaPN, JTextField jTfPNMaNhaCC, JTextField jTfPNNhanVien,
             JTextField jTfPNNgayLap, JTextField jTfPNTongTien,
             JTextField jTfPriceFrom, JTextField jTfPriceTo,
-            JButton jBtnNhapHang, JButton jBtnXoaHang, JButton jBtnXacNhan, JButton jBtnThayDoiSoLuong, JButton jBtnFilter,
+            JButton jBtnNhapHang, JButton jBtnXoaHang, JButton jBtnXacNhan, JButton jBtnThayDoiSoLuong, JButton jBtnFilter,JButton jBtnAdd,
             JComboBox jComboBoxNhaCC) {
         
         this.jTabbedPane = jTabbedPane;
@@ -159,6 +161,7 @@ public class QuanLyNhapHangController {
         this.jBtnXacNhan = jBtnXacNhan;
         this.jBtnThayDoiSoLuong = jBtnThayDoiSoLuong;
         this.jBtnFilter = jBtnFilter;
+        this.jBtnAdd=jBtnAdd;
 
         this.jComboBoxNhaCC = jComboBoxNhaCC;
         
@@ -262,6 +265,12 @@ public class QuanLyNhapHangController {
                     
                     jBtnNhapHang.setEnabled(true);
                 }
+            }
+        });
+        jBtnAdd.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                new AddNhaCungCap(jComboBoxNhaCC).setVisible(true);
             }
         });
     }

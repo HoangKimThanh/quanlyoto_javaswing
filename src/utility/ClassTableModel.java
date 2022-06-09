@@ -7,6 +7,8 @@ package utility;
 import java.text.DecimalFormat;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import model.CTHD;
+import model.HoaDon;
 import model.KhachHang;
 //import model.LoaiSanPham;
 import model.NhaCungCap;
@@ -169,6 +171,97 @@ public class ClassTableModel {
                 obj[2] = nhanVien.getHoTen();
                 obj[3] = nhanVien.getChucVu();
                 obj[4] = nhanVien.getTaiKhoan();
+                
+                dtm.addRow(obj);
+            }
+        }
+        
+        return dtm;
+    }
+    public DefaultTableModel setTableBanHang(List<SanPham> listItem, String[] listColumn) {
+        DefaultTableModel dtm = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        dtm.setColumnIdentifiers(listColumn);
+        int columns = listColumn.length;
+        Object[] obj = null;
+        
+        int rows = listItem.size();
+        if (rows > 0) {
+            for(int i = 0; i < rows; i++) {
+                SanPham sanPham = listItem.get(i);
+                obj = new Object[columns];
+                
+                obj[0] = (i + 1);
+                obj[1] = sanPham.getMaSanPham();
+                obj[2] = sanPham.getTen();
+                obj[3] = sanPham.getGia();
+                obj[4] = sanPham.getSoLuong();
+                
+                dtm.addRow(obj);
+            }
+        }
+        
+        return dtm;
+    }
+    public DefaultTableModel setTableHoaDon(List<HoaDon> listItem, String[] listColumn) {
+        DefaultTableModel dtm = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        dtm.setColumnIdentifiers(listColumn);
+        int columns = listColumn.length;
+        Object[] obj = null;
+        
+        int rows = listItem.size();
+        if (rows > 0) {
+            for(int i = 0; i < rows; i++) {
+                HoaDon hoaDon = listItem.get(i);
+                obj = new Object[columns];
+                
+                obj[0] = (i + 1);
+                obj[1] = hoaDon.getMaHD();
+                obj[2] = hoaDon.getMaNV();
+                obj[3] = hoaDon.getMaKH();
+                obj[4] = hoaDon.getNgayLap();
+                obj[5] = hoaDon.getTongTien();
+                obj[6] =hoaDon.getGhiChu();
+                
+                dtm.addRow(obj);
+            }
+        }
+        
+        return dtm;
+        
+    }
+    public DefaultTableModel setTableCTHD(List<CTHD> listItem, String[] listColumn) {
+        DefaultTableModel dtm = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        dtm.setColumnIdentifiers(listColumn);
+        int columns = listColumn.length;
+        Object[] obj = null;
+        
+        int rows = listItem.size();
+        if (rows > 0) {
+            for(int i = 0; i < rows; i++) {
+                CTHD cthd = listItem.get(i);
+                obj = new Object[columns];
+                
+                obj[0] = (i + 1);
+                obj[1] = cthd.getMaHD();
+                obj[2] = cthd.getMaSP();
+                obj[3] = cthd.getSoLuong();
+                obj[4] = cthd.getGia();
+                obj[5] = cthd.getTien();
                 
                 dtm.addRow(obj);
             }
