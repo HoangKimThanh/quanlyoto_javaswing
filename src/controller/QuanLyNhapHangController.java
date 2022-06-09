@@ -13,6 +13,8 @@ import dao.PhieuNhapDAOImpl;
 import dao.SanPhamDAO;
 import dao.SanPhamDAOImpl;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -96,7 +98,8 @@ public class QuanLyNhapHangController {
     private JTabbedPane jTabbedPane;
 
     
-    private List<ChiTietPhieuNhap> danhSachSanPhamNhap;
+    private List<ChiTietPhieuNhap> danhSachSanPhamNhap;    
+
     private List<PhieuNhap> danhSachPhieuNhap;
     
     private boolean isFiltering = false;
@@ -189,7 +192,6 @@ public class QuanLyNhapHangController {
        
     }
     
-    
     public void loadSanPhamToTable() {
         SanPhamDAO sanPhamDAO = new SanPhamDAOImpl();
         
@@ -197,6 +199,10 @@ public class QuanLyNhapHangController {
         
         DefaultTableModel model = (DefaultTableModel)jTableKhoHang.getModel();
         jTableKhoHang.setDefaultEditor(Object.class, null);
+        
+        TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(model);
+
+        jTableKhoHang.setRowSorter(rowSorter);
 
         model.setRowCount(0);
         for (int i = 0; i < listSanPham.size(); i++) {
@@ -207,23 +213,49 @@ public class QuanLyNhapHangController {
 
             });
         }
+        
         jTableKhoHang.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
         jTableKhoHang.getTableHeader().setPreferredSize(new Dimension(50, 30));
         jTableKhoHang.setRowHeight(30);
         
         jScrollPaneKhoHang.getViewport().add(jTableKhoHang);
         
+        jTfSearch.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                String text = jTfSearch.getText();
+                if (text.trim().length() == 0) {
+                    rowSorter.setRowFilter(null);
+                } else {
+                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                String text = jTfSearch.getText();
+                if (text.trim().length() == 0) {
+                    rowSorter.setRowFilter(null);
+                } else {
+                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            }
+        });
+
+        
         jTableKhoHang.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (jTableKhoHang.getSelectedRow() != -1) {
-                    DefaultTableModel model = (DefaultTableModel) jTableKhoHang.getModel();
                     int selectedRowIndex = jTableKhoHang.getSelectedRow();
-                   
                     SanPham sanPham = new SanPham();
-                    sanPham.setMaSanPham((int) model.getValueAt(selectedRowIndex, 0));
-                    sanPham.setTen(model.getValueAt(selectedRowIndex, 1).toString());
-                    sanPham.setSoLuong((int) model.getValueAt(selectedRowIndex, 2));
+                    sanPham.setMaSanPham((int) jTableKhoHang.getValueAt(selectedRowIndex, 0));
+                    sanPham.setTen(jTableKhoHang.getValueAt(selectedRowIndex, 1).toString());
+                    sanPham.setSoLuong((int) jTableKhoHang.getValueAt(selectedRowIndex, 2));
                     
                     jTfMaSP.setText((sanPham.getMaSanPham()) + "");
                     jTfTenSP.setText(sanPham.getTen());
@@ -366,6 +398,24 @@ public class QuanLyNhapHangController {
         jTableHangChoNhap.setRowHeight(30);
 
         jScrollPaneHangChoNhap.getViewport().add(jTableHangChoNhap);
+        
+        jTableHangChoNhap.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (jTableHangChoNhap.getSelectedRow() != -1) {
+                    int selectedRowIndex = jTableHangChoNhap.getSelectedRow();
+                    SanPham sanPham = new SanPham();
+                    sanPham.setMaSanPham((int) jTableHangChoNhap.getValueAt(selectedRowIndex, 0));
+                    sanPham.setTen(jTableHangChoNhap.getValueAt(selectedRowIndex, 1).toString());
+                    sanPham.setSoLuong((int) jTableHangChoNhap.getValueAt(selectedRowIndex, 2));
+                    
+                    jTfMaSP.setText((sanPham.getMaSanPham()) + "");
+                    jTfTenSP.setText(sanPham.getTen());
+                    
+                    jBtnNhapHang.setEnabled(true);
+                }
+            }
+        });
         
     }
     

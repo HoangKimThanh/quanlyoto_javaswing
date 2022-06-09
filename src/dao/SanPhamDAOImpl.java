@@ -47,7 +47,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
         }
         return null;
     }
-
+    
     public static void main(String[] args) {
         SanPhamDAO sanPham = new SanPhamDAOImpl();
 
