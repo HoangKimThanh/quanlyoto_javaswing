@@ -6,7 +6,7 @@ import quanlyoto.QuanLyOTo;
 
 import MyCustom.ImagePanel;
 import MyCustom.MyDialog;
-import controller.DangNhapBUS;
+import controller.DangNhapController;
 import model.NhanVien;
 
 import java.awt.*;
@@ -34,7 +34,7 @@ public class DangNhapGUI extends javax.swing.JFrame {
     }
 
     private void xuLyTaiKhoanDaGhiNho() {
-        DangNhapBUS dangNhapBUS = new DangNhapBUS();
+        DangNhapController dangNhapBUS = new DangNhapController();
         String line = dangNhapBUS.getTaiKhoanGhiNho();
         try {
             String[] arr = line.split(" | ");
@@ -230,7 +230,7 @@ public class DangNhapGUI extends javax.swing.JFrame {
     }
 
     private void xuLyDangNhap() {
-        DangNhapBUS dangNhapBUS = new DangNhapBUS();
+        DangNhapController dangNhapBUS = new DangNhapController();
         NhanVien tk = dangNhapBUS.getTaiKhoanDangNhap(txtUser.getText(),
                 txtPassword.getText(), ckbRemember.isSelected());
         if (tk != null) {

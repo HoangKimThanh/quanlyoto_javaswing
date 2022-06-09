@@ -2,24 +2,56 @@ package model;
 
 public class Quyen {
     private String chucVu;
-    private String quyen;
-    private int nhapHang;
-    private int qlSanPham;
-    private int qlNhanVien;
-    private int qlKhachHang;
-    private int thongKe;
+    private String tenloaiquanly;
+    private int them;
+    private int xoa;
+    private int sua;
+    private int xem;
+
+    public int getThem() {
+        return them;
+    }
+
+    public void setThem(int them) {
+        this.them = them;
+    }
+
+    public int getXoa() {
+        return xoa;
+    }
+
+    public void setXoa(int xoa) {
+        this.xoa = xoa;
+    }
+
+    public int getSua() {
+        return sua;
+    }
+
+    public void setSua(int sua) {
+        this.sua = sua;
+    }
+
+    public int getXem() {
+        return xem;
+    }
+
+    public void setXem(int xem) {
+        this.xem = xem;
+    }
+    
 
     public Quyen() {
     }
 
-    public Quyen(String chucVu,String quyen, int nhapHang, int qlSanPham, int qlNhanVien, int qlKhachHang, int thongKe) {
-                this.chucVu = chucVu;
-        this.quyen = quyen;
-        this.nhapHang = nhapHang;
-        this.qlSanPham = qlSanPham;
-        this.qlNhanVien = qlNhanVien;
-        this.qlKhachHang = qlKhachHang;
-        this.thongKe = thongKe;
+    public Quyen(String chucVu,String tenloaiquanly, int them, int xoa, int sua, int xem) {
+        this.chucVu = chucVu;
+        this.tenloaiquanly = tenloaiquanly;
+        this.them = them;
+        this.xoa = xoa;
+        this.sua = sua;
+        this.xem = xem;
+        
     }
 
     public String getChucVu() {
@@ -29,54 +61,15 @@ public class Quyen {
     public void setChucVu(String chucVu) {
         this.chucVu = chucVu;
     }
-    public String getQuyen() {
-        return quyen;
+    public String getTenloaiquanly() {
+        return tenloaiquanly;
     }
 
-    public void setQuyen(String quyen) {
-        this.quyen = quyen;
+    public void setTenloaiquanly(String tenloaiquanly) {
+        this.tenloaiquanly = tenloaiquanly;
     }
 
-    public int getNhapHang() {
-        return nhapHang;
-    }
-
-    public void setNhapHang(int nhapHang) {
-        this.nhapHang = nhapHang;
-    }
-
-    public int getQlSanPham() {
-        return qlSanPham;
-    }
-
-    public void setQlSanPham(int qlSanPham) {
-        this.qlSanPham = qlSanPham;
-    }
-
-    public int getQlNhanVien() {
-        return qlNhanVien;
-    }
-
-    public void setQlNhanVien(int qlNhanVien) {
-        this.qlNhanVien = qlNhanVien;
-    }
-
-    public int getQlKhachHang() {
-        return qlKhachHang;
-    }
-
-    public void setQlKhachHang(int qlKhachHang) {
-        this.qlKhachHang = qlKhachHang;
-    }
-
-    public int getThongKe() {
-        return thongKe;
-    }
-
-    public void setThongKe(int thongKe) {
-        this.thongKe = thongKe;
-    }
-
+    
    
 
 }

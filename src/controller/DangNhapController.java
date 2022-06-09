@@ -1,13 +1,15 @@
 package controller;
 
 import dao.DangNhapDAO;
+import controller.PhanQuyenBUS;
 import model.Quyen;
 import model.NhanVien;
 import MyCustom.MyDialog;
 
 import java.io.*;
 
-public class DangNhapBUS {
+public class DangNhapController {
+    
 
     private final static int EMPTY_ERROR = 1;
     private final static int WRONG_ERROR = 2;
@@ -29,11 +31,11 @@ public class DangNhapBUS {
         if (account == null) {
             new MyDialog("Sai thông tin đăng nhập hoặc tài khoản đã bị khoá!", MyDialog.ERROR_DIALOG);
         } else {
-            PhanQuyenBUS phanQuyenBUS = new PhanQuyenBUS();
-            phanQuyenBUS.kiemTraQuyen(account.getChucVu());
+//            PhanQuyenBUS phanQuyenBUS = new PhanQuyenBUS();
+//            phanQuyenBUS.kiemTraQuyen(account.getChucVu());
             xuLyGhiNhoDangNhap(user, password, selected);
             new MyDialog("Đăng nhập thành công!", MyDialog.SUCCESS_DIALOG);
-//            new MyDialog("Vì tình hình dịch Covid phức tạp, cửa hàng chỉ thực hiện bán mang về!", MyDialog.INFO_DIALOG);
+
         }
         return account;
     }

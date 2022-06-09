@@ -31,8 +31,10 @@ public class NhanVienDAOImpl implements NhanVienDAO {
             while(rs.next()) {
                 NhanVien nhanVien = new NhanVien();
                 nhanVien.setMaNV(rs.getInt("manv"));                
-                nhanVien.setHoTen(rs.getString("hoten"));
+                nhanVien.setHoTen(rs.getString("hoten"));                
                 
+                nhanVien.setTaiKhoan(rs.getString("taikhoan"));
+                nhanVien.setMatKhau(rs.getString("matkhau"));
                 nhanVien.setChucVu(rs.getString("chucvu"));
                 list.add(nhanVien);
             }
@@ -59,6 +61,9 @@ public class NhanVienDAOImpl implements NhanVienDAO {
                 NhanVien nhanVien = new NhanVien();
                 nhanVien.setMaNV(rs.getInt("manv"));                
                 nhanVien.setHoTen(rs.getString("hoten"));
+                
+                nhanVien.setTaiKhoan(rs.getString("taikhoan"));
+                nhanVien.setMatKhau(rs.getString("matkhau"));
                 nhanVien.setChucVu(rs.getString("chucvu"));
                 
                 return nhanVien;
@@ -86,11 +91,13 @@ public class NhanVienDAOImpl implements NhanVienDAO {
              Statement stmt1 = (Statement) cons.createStatement();
              Statement stmt2 = (Statement) cons.createStatement();
              stmt1.executeUpdate("SET FOREIGN_KEY_CHECKS=0");
-            String sql =  " INSERT INTO nhanvien(hoten, chucvu) VALUES(?,?)";
+            String sql =  " INSERT INTO nhanvien(hoten,taikhoan,matkhau,chucvu) VALUES(?,?,?,?)";
             PreparedStatement prep = cons.prepareCall(sql);
             prep.setString(1, nhanVien.getHoTen());
-            prep.setString(2, nhanVien.getChucVu());
-            
+           
+            prep.setString(2, nhanVien.getTaiKhoan());
+            prep.setString(3, nhanVien.getMatKhau());
+             prep.setString(4, nhanVien.getChucVu());
             int result = prep.executeUpdate();   
               stmt2.executeUpdate("SET FOREIGN_KEY_CHECKS=1");
             prep.close();

@@ -13,6 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -47,20 +48,25 @@ public class QuanLyNhanVienController {
     private final JTextField jTfSearch;
     private final JTextField jTfMaNv;    
     private final JTextField jTfHoTen;
+        private final JComboBox jCbChucVu1;
 
-    private final JTextField jTfChucVu;
+    private final JTextField jTfTaiKhoan;    
+    private final JTextField jTfMatKhau;
+
+//    private final JTextField jTfChucVu;
    
     
     private NhanVien nhanVien = null;
     private NhanVienDAO nhanVienDAO = null;
     
-    private final String[] listColumn = {"STT", "Mã NV", "Tên NV", "Chức vụ"};
+    private final String[] listColumn = {"STT", "Mã NV", "Tên NV", "Chức vụ","Tài Khoản"};
     
     private TableRowSorter<TableModel> rowSorter = null;
+    
 
     public QuanLyNhanVienController(JPanel jPnView, JButton jBtnAdd, JButton jBtnUpdate, 
-            JButton jBtnDelete, JButton jBtnReset, JTextField jTfMaNv, JTextField jTfHoTen, 
-            JTextField jTfChucVu, JTextField jTfSearch) {
+            JButton jBtnDelete, JButton jBtnReset, JTextField jTfMaNv, JTextField jTfHoTen, JTextField jTfTaiKhoan,JTextField jTfMatKhau,
+            JComboBox jCbChucVu1, JTextField jTfSearch) {
         this.jPnView = jPnView;
         this.jBtnAdd = jBtnAdd;
         this.jBtnUpdate = jBtnUpdate;
@@ -68,21 +74,42 @@ public class QuanLyNhanVienController {
         this.jBtnReset = jBtnReset;
         this.jTfHoTen = jTfHoTen;        
         this.jTfMaNv = jTfMaNv;
+        this.jTfTaiKhoan = jTfTaiKhoan;        
+        this.jTfMatKhau = jTfMatKhau;
 
       
-        this.jTfChucVu = jTfChucVu;
+        this.jCbChucVu1 = jCbChucVu1;
         this.jTfSearch = jTfSearch;
         
         this.nhanVienDAO = new NhanVienDAOImpl();
         this.nhanVien = new NhanVien();
        
     }
+
+    public QuanLyNhanVienController(JPanel jPnView, JButton jBtnAdd, JButton jBtnUpdate, JButton jBtnDelete, JButton jBtnReset, JTextField jTfMaNv, JTextField jTfHoTen, JComboBox jCbChucVu1, JTextField jTfTaiKhoan, JTextField jTfMatKhau, JTextField jTfSeach) {
+       this.jPnView = jPnView;
+        this.jBtnAdd = jBtnAdd;
+        this.jBtnUpdate = jBtnUpdate;
+        this.jBtnDelete = jBtnDelete;
+        this.jBtnReset = jBtnReset;
+        this.jTfHoTen = jTfHoTen;        
+        this.jTfMaNv = jTfMaNv;
+        this.jTfTaiKhoan = jTfTaiKhoan;        
+        this.jTfMatKhau = jTfMatKhau;
+
+      
+        this.jCbChucVu1 = jCbChucVu1;
+        this.jTfSearch = jTfSeach;
+        
+        this.nhanVienDAO = new NhanVienDAOImpl();
+        this.nhanVien = new NhanVien();
+    }
     
     public void setDataToTable() {
         
         jTfMaNv.setText("");
         jTfHoTen.setText("");        
-        jTfChucVu.setText("");
+        jCbChucVu1.setSelectedItem("Nhân viên");
        
         
         jBtnAdd.setEnabled(true);
@@ -146,7 +173,10 @@ public class QuanLyNhanVienController {
                     jTfMaNv.setText((nhanVien.getMaNV()) + "");
                     jTfHoTen.setText(nhanVien.getHoTen());
                     
-                    jTfChucVu.setText(nhanVien.getChucVu());
+                    jCbChucVu1.setSelectedItem(nhanVien.getChucVu());
+                    jTfTaiKhoan.setText(nhanVien.getTaiKhoan());
+                    
+                    jTfMatKhau.setText(nhanVien.getMatKhau());
                     
                     jBtnAdd.setEnabled(false);
                     jBtnUpdate.setEnabled(true);
@@ -174,7 +204,7 @@ public class QuanLyNhanVienController {
         jPnView.validate();
         jPnView.repaint();
     }
-
+    
     public void setEvent() {
         jBtnAdd.addMouseListener(new MouseAdapter() {
             @Override
@@ -182,12 +212,33 @@ public class QuanLyNhanVienController {
                 try {
                     String tennv = jTfHoTen.getText();
                     
-                    String chucVu = jTfChucVu.getText();
-                    if (tennv.equals("")  || chucVu.equals("")) {
-                        JOptionPane.showMessageDialog(null, "Ten NV,  ChucVu khong duoc de trong!");
+                    String chucVu =jCbChucVu1.getSelectedItem().toString();
+                    String taikhoan = jTfTaiKhoan.getText();
+                    
+                    String matkhau = jTfMatKhau.getText();
+                    if (tennv.equals("")  || chucVu.equals("")||taikhoan.equals("")||matkhau.equals("")) {
+                        JOptionPane.showMessageDialog(null, "Du lieu khong duoc de trong!");
                     } else {
-                        nhanVien.setHoTen(tennv.trim());
+                        String pattern,pattern1;
+                        String title = "Thông báo";
+                           pattern = "^([A-Z]){1}([\\w_\\.!@#$%^&*()]+){5,31}$";
+                           
+                           pattern1 = "^[A-Za-z0-9]{6,32}$";
+            boolean matchFound1= taikhoan.matches(pattern1);
+            if (!matchFound1) {
+                JOptionPane.showMessageDialog(null, "Tai Khoan sai định dạng can do dai tu 6 ki tu", title, JOptionPane.ERROR_MESSAGE);
+                return;
+            }                  
+            boolean matchFound = matkhau.matches(pattern);
+            if (!matchFound) {
+                JOptionPane.showMessageDialog(null, "Mat khau sai định dạng can do dai tu 6 ki tu va ki tu dau viet hoa", title, JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+                nhanVien.setHoTen(tennv.trim());
                         nhanVien.setChucVu(chucVu.trim());
+                        nhanVien.setTaiKhoan(taikhoan.trim());
+                        nhanVien.setMatKhau(matkhau.trim());
                         
                         
 //                        System.out.println(nhanVien);
@@ -228,7 +279,10 @@ public class QuanLyNhanVienController {
                     String manv = jTfMaNv.getText();
                     String tennv = jTfHoTen.getText();
                     
-                    String chucVu = jTfChucVu.getText();
+                    String chucVu =  jCbChucVu1.getSelectedItem().toString();
+                    String taikhoan = jTfTaiKhoan.getText();
+                    
+                    String matkhau = jTfMatKhau.getText();
                     if (manv.equals("") || tennv.equals("")|| chucVu.equals("")) {
                         JOptionPane.showMessageDialog(null, "Ma NV, Ten NV, chuc vu khong duoc de trong!");
                     } else {
@@ -236,6 +290,8 @@ public class QuanLyNhanVienController {
                         nhanVien.setHoTen(tennv.trim());
                         
                         nhanVien.setChucVu(chucVu.trim());
+                        nhanVien.setTaiKhoan(taikhoan.trim());
+                        nhanVien.setMatKhau(matkhau.trim());
                         
                         boolean result = nhanVienDAO.update(nhanVien);
                         if (result) {
@@ -260,7 +316,11 @@ public class QuanLyNhanVienController {
                     String manv = jTfMaNv.getText();
                     String tennv = jTfHoTen.getText();
                    
-                    String chucVu = jTfChucVu.getText();
+                                        String chucVu = jCbChucVu1.getSelectedItem().toString();
+
+                    String taikhoan = jTfTaiKhoan.getText();
+                    
+                    String matkhau = jTfMatKhau.getText();
                     if (manv.equals("")) {
                         JOptionPane.showMessageDialog(null, "Vui long chon NV!");
                     } else {
@@ -268,7 +328,8 @@ public class QuanLyNhanVienController {
                         nhanVien.setHoTen(tennv.trim());
                         nhanVien.setChucVu(chucVu.trim());
                         
-                        
+                        nhanVien.setTaiKhoan(taikhoan.trim());
+                        nhanVien.setMatKhau(matkhau.trim());
 //                        System.out.println(nhaCungCap);
                 
                         boolean result = nhanVienDAO.delete(nhanVien);
