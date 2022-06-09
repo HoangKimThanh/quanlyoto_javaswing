@@ -129,15 +129,14 @@ public class QuanLyNhaCungCapController {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (table.getSelectedRow() != -1) {
-                    DefaultTableModel model = (DefaultTableModel) table.getModel();
                     int selectedRowIndex = table.getSelectedRow();
                     
                     NhaCungCap nhaCungCap = new NhaCungCap();
-                    int mancc = (int) (model.getValueAt(selectedRowIndex, 1));
+                    int mancc = (int) (table.getValueAt(selectedRowIndex, 1));
                     nhaCungCap.setMancc(mancc);
-                    nhaCungCap.setTenncc(model.getValueAt(selectedRowIndex, 2).toString());
-                    nhaCungCap.setDienthoai(model.getValueAt(selectedRowIndex, 3).toString());
-                    nhaCungCap.setDiachi(model.getValueAt(selectedRowIndex, 4).toString());
+                    nhaCungCap.setTenncc(table.getValueAt(selectedRowIndex, 2).toString());
+                    nhaCungCap.setDienthoai(table.getValueAt(selectedRowIndex, 3).toString());
+                    nhaCungCap.setDiachi(table.getValueAt(selectedRowIndex, 4).toString());
                     
 //                    System.out.println(nhaCungCap.getMacc());
                     

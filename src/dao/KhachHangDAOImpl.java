@@ -16,7 +16,7 @@ import java.util.ArrayList;
  *
  * @author ASUS
  */
-public class KhachHangDAOImpl implements KhachHangDAO{
+public class KhachHangDAOImpl implements KhachHangDAO {
 
     @Override
     public List<KhachHang> getList() {
@@ -26,7 +26,7 @@ public class KhachHangDAOImpl implements KhachHangDAO{
             List<KhachHang> list = new ArrayList<>();
             PreparedStatement ps = cons.prepareCall(sql);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()) {
+            while (rs.next()) {
                 KhachHang khachHang = new KhachHang();
                 khachHang.setMaKhachHang(rs.getInt("makh"));
                 khachHang.setHoTen(rs.getString("hoten"));
@@ -44,10 +44,10 @@ public class KhachHangDAOImpl implements KhachHangDAO{
         }
         return null;
     }
-    
+
     public static void main(String[] args) {
         KhachHangDAO khachHang = new KhachHangDAOImpl();
-        
+
         System.out.println(khachHang.getList());
     }
 
@@ -60,7 +60,7 @@ public class KhachHangDAOImpl implements KhachHangDAO{
             ps.setString(1, khachHang.getHoTen());
             ps.setString(2, khachHang.getDienThoai());
             ps.setString(3, khachHang.getDiaChi());
-            
+
             ps.execute();
             ResultSet rs = ps.getGeneratedKeys();
             int generatedKey = 0;
@@ -75,8 +75,8 @@ public class KhachHangDAOImpl implements KhachHangDAO{
         }
         return 0;
     }
-    
-    public void updateKhachHang(KhachHang khachHang) {
+
+    public int updateKhachHang(KhachHang khachHang) {
         try {
             Connection cons = DBConnection.getConnection();
             String sql = "UPDATE khachhang "
@@ -88,34 +88,59 @@ public class KhachHangDAOImpl implements KhachHangDAO{
             ps.setString(1, khachHang.getHoTen());
             ps.setString(2, khachHang.getDienThoai());
             ps.setString(3, khachHang.getDiaChi());
-            
-            ps.execute();
-//            ResultSet rs = ps.getGeneratedKeys();
-//            int generatedKey = 0;
-//            if (rs.next()) {
-//                generatedKey = rs.getInt(1);
-//            }
+
+            int result = ps.executeUpdate();
             ps.close();
             cons.close();
-//            return generatedKey;
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            if (result == 1) {
+                return 1;
+            }
+            return 0;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
         }
-//        return 0;
+        return 0;
     }
-    
-    public void deleteKhachHang(int maKH) {
+
+    public int deleteKhachHang(int maKH) {
         try {
             Connection cons = DBConnection.getConnection();
             String sql = "DELETE FROM khachhang "
                     + "WHERE makh = " + maKH + "";
             PreparedStatement ps = cons.prepareStatement(sql);
-            
-            ps.execute();
+
+            int result = ps.executeUpdate();
             ps.close();
             cons.close();
+            if (result == 1) {
+                return 1;
+            }
+            return 0;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return 0;
+    }
+
+    public static int getTotal() {
+        try {
+            Connection cons = DBConnection.getConnection();
+            String sql = "SELECT COUNT(*) AS TOTAL FROM khachhang ";
+            PreparedStatement ps = cons.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            int total = 0;
+            if (rs.next()) {
+                total = rs.getInt(1);
+            }
+
+            ps.close();
+            cons.close();
+
+            return total;
         } catch (Exception ex) {
             ex.printStackTrace();
+            return 0;
         }
     }
 }
