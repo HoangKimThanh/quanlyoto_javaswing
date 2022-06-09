@@ -1,7 +1,7 @@
 package controller;
 
 import dao.DangNhapDAO;
-import controller.PhanQuyenBUS;
+import controller.PhanQuyenController;
 import model.Quyen;
 import model.NhanVien;
 import MyCustom.MyDialog;
