@@ -208,7 +208,7 @@ public class QuanLyNhapHangController {
     public void loadSanPhamToTable() {
         SanPhamDAO sanPhamDAO = new SanPhamDAOImpl();
         
-        List<SanPham> listSanPham = sanPhamDAO.getList();
+        List<SanPham> listSanPham = sanPhamDAO.getListNhapHang();
         
         DefaultTableModel model = (DefaultTableModel)jTableKhoHang.getModel();
         jTableKhoHang.setDefaultEditor(Object.class, null);

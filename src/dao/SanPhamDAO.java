@@ -14,6 +14,10 @@ import model.SanPham;
 public interface SanPhamDAO {
     public List<SanPham> getList();
     
+    public List<SanPham> getListCanBuy();
+    
+    public List<SanPham> getListNhapHang();
+    
     public int createSanPham(SanPham sanPham);
     
     public int updateSanPham(SanPham sanPham);

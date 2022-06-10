@@ -97,7 +97,7 @@ public class QuanLyBanHangController {
     }
 
     public void setDataToTable() {
-        List<SanPham> listItem = sanPhamDAO.getList();
+        List<SanPham> listItem = sanPhamDAO.getListCanBuy();
         DefaultTableModel model = new ClassTableModel().setTableBanHang(listItem, listColumn);
         JTable table = new JTable(model);
         jBDelete.setEnabled(true);

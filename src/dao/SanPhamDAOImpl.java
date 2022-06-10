@@ -48,6 +48,64 @@ public class SanPhamDAOImpl implements SanPhamDAO {
         return null;
     }
     
+    public List<SanPham> getListCanBuy() {
+        try {
+            Connection cons = DBConnection.getConnection();
+            String sql = "SELECT * FROM sanpham WHERE soluong > 0";
+            List<SanPham> list = new ArrayList<>();
+            PreparedStatement ps = cons.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                SanPham sanPham = new SanPham();
+                sanPham.setMaSanPham(rs.getInt("masp"));
+                sanPham.setLoai(rs.getString("loai"));
+                sanPham.setTen(rs.getString("ten"));
+                sanPham.setSoLuong(rs.getInt("soluong"));
+                sanPham.setGia(rs.getInt("gia"));
+                sanPham.setHanBaoHanh(rs.getInt("hanbaohanh"));
+                sanPham.setAnh(rs.getString("anh"));
+                list.add(sanPham);
+            }
+            rs.close();
+            ps.close();
+            cons.close();
+
+            return list;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
+    public List<SanPham> getListNhapHang() {
+        try {
+            Connection cons = DBConnection.getConnection();
+            String sql = "SELECT * FROM sanpham ORDER BY soluong ";
+            List<SanPham> list = new ArrayList<>();
+            PreparedStatement ps = cons.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                SanPham sanPham = new SanPham();
+                sanPham.setMaSanPham(rs.getInt("masp"));
+                sanPham.setLoai(rs.getString("loai"));
+                sanPham.setTen(rs.getString("ten"));
+                sanPham.setSoLuong(rs.getInt("soluong"));
+                sanPham.setGia(rs.getInt("gia"));
+                sanPham.setHanBaoHanh(rs.getInt("hanbaohanh"));
+                sanPham.setAnh(rs.getString("anh"));
+                list.add(sanPham);
+            }
+            rs.close();
+            ps.close();
+            cons.close();
+
+            return list;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
     public static void main(String[] args) {
         SanPhamDAO sanPham = new SanPhamDAOImpl();
 
