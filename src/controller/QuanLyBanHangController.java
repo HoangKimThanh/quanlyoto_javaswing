@@ -108,15 +108,14 @@ public class QuanLyBanHangController {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (table.getSelectedRow() != -1) {
-                    DefaultTableModel model = (DefaultTableModel) table.getModel();
                     int selectedRowIndex = table.getSelectedRow();
-                    jTMaSP.setText(model.getValueAt(selectedRowIndex, 1).toString());
-                    jTTenSP.setText(model.getValueAt(selectedRowIndex, 2).toString());
-                    jTGia.setText(model.getValueAt(selectedRowIndex, 3).toString());
-                    SpinnerNumberModel md = new SpinnerNumberModel(1, 1, Integer.parseInt(model.getValueAt(selectedRowIndex, 4).toString()), 1);
+                    jTMaSP.setText(table.getValueAt(selectedRowIndex, 1).toString());
+                    jTTenSP.setText(table.getValueAt(selectedRowIndex, 2).toString());
+                    jTGia.setText(table.getValueAt(selectedRowIndex, 3).toString());
+                    SpinnerNumberModel md = new SpinnerNumberModel(1, 1, Integer.parseInt(table.getValueAt(selectedRowIndex, 4).toString()), 1);
                     jSoLuong.setModel(md);
                     for (SanPham SP : listItem) {
-                        if ((model.getValueAt(selectedRowIndex, 1)).equals(SP.getMaSanPham())) {
+                        if ((table.getValueAt(selectedRowIndex, 1)).equals(SP.getMaSanPham())) {
                             loadAnh("src/images/SanPham/" + SP.getAnh());
                         }
                     }
@@ -165,17 +164,15 @@ public class QuanLyBanHangController {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (table.getSelectedRow() != -1) {
-                    DefaultTableModel model = (DefaultTableModel) table.getModel();
                     int selectedRowIndex = table.getSelectedRow();
-                    selectedRowIndex = table.convertColumnIndexToModel(selectedRowIndex);
 
-                    jTMaSP.setText(model.getValueAt(selectedRowIndex, 1).toString());
-                    jTTenSP.setText(model.getValueAt(selectedRowIndex, 2).toString());
-                    jTGia.setText(model.getValueAt(selectedRowIndex, 3).toString());
-                    jSoLuong.setValue(model.getValueAt(selectedRowIndex, 4));
+                    jTMaSP.setText(table.getValueAt(selectedRowIndex, 1).toString());
+                    jTTenSP.setText(table.getValueAt(selectedRowIndex, 2).toString());
+                    jTGia.setText(table.getValueAt(selectedRowIndex, 3).toString());
+                    jSoLuong.setValue(table.getValueAt(selectedRowIndex, 4));
                     
                     for (SanPham SP : listItemA) {
-                        if ((model.getValueAt(selectedRowIndex, 1)).equals(SP.getMaSanPham())) {
+                        if ((table.getValueAt(selectedRowIndex, 1)).equals(SP.getMaSanPham())) {
                             loadAnh("src/images/SanPham/" + SP.getAnh());
                         }
                     }
@@ -291,9 +288,9 @@ public class QuanLyBanHangController {
 
         });
 
-        jBtnXoaGioHang.addMouseListener(new MouseAdapter() {
+        jBtnXoaGioHang.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 try {
                     listCart = new ArrayList<>();
                     setDataToCart();

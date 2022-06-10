@@ -91,7 +91,7 @@ public class PhieuNhapDAOImpl implements PhieuNhapDAO {
             prep.setInt(1, phieNhap.getMaNhaCungCap());
             prep.setInt(2, phieNhap.getMaNhanVien());
             prep.setString(3, phieNhap.getNgayLap());            
-            prep.setInt(4, phieNhap.getTongTien());
+            prep.setLong(4, phieNhap.getTongTien());
 
             prep.executeUpdate(); 
             ResultSet rs = prep.getGeneratedKeys();

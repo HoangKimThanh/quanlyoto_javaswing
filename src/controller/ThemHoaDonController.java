@@ -64,9 +64,9 @@ public class ThemHoaDonController {
     }
 
     public void setEvent(HoaDon hoaDon, List<SanPham> listCart, JFrame k) {
-        jBAddHD.addMouseListener(new MouseAdapter() {
+        jBAddHD.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 try {
                     String[] container = (jCbMaKH.getSelectedItem().toString()).split("-");
                     DangNhapController controllerDangNhap = new DangNhapController();
@@ -74,7 +74,7 @@ public class ThemHoaDonController {
                     hoaDon.setMaNV(controllerDangNhap.taiKhoanLogin.getMaNV());
 
                     HoaDonDAO hoaDonDAO = new HoaDonDAOImpl();
-                    Integer tongTien = 0;
+                    long tongTien = 0;
                     CTHDDAO cthdDAO = new CTHDDAOImpl();
 
                     for (SanPham sanPham : listCart) {
@@ -123,9 +123,9 @@ public class ThemHoaDonController {
             }
 
         });
-        jBtnAddKH.addMouseListener(new MouseAdapter() {
+        jBtnAddKH.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 try {
                     AddKhachHang a = new AddKhachHang(k, hoaDon, listCart);
                     a.setVisible(true);
@@ -194,7 +194,7 @@ public class ThemHoaDonController {
                 + "<th>Đơn giá</th>"
                 + "<th>Thành tiền</th>"
                 + "</tr>";
-        Integer tongTien=0;
+        long tongTien=0;
         for (SanPham sanPham : listCart) {
                         tongTien = tongTien + sanPham.getGia() * sanPham.getSoLuong();
                     }
@@ -214,31 +214,7 @@ public class ThemHoaDonController {
         hd += "<td style='text-align:center;font-weight:bold'>Tổng cộng</td>";
         hd += "<td style='text-align:center;'>" + dcf.format(tongTien) + "</td>";
         hd += "</tr>";
-//        if (timMaUI.maGiamTimDuoc != null) {
-//            int percent = 0;
-//            // lấy phần trăm giảm
-//            percent = timMaUI.maGiamTimDuoc.getPhanTramGiam();
-//            if (tongTien >= timMaUI.maGiamTimDuoc.getDieuKien()) {
-//                tongTien = tongTien - (tongTien * percent / 100);
-//            } else {
-//                new MyDialog("Không đủ điều kiện nhận ưu đãi!", MyDialog.ERROR_DIALOG);
-//                btnTimMaGiam.setEnabled(true);
-//                return;
-//            }
-//        }
-//        hd += "<tr>";
-//        hd += "<td style='text-align:center;'>" + "</td>";
-//        hd += "<td style='text-align:left;'>" + "</td>";
-//        hd += "<td style='text-align:center;'>" + "</td>";
-//        hd += "<td style='text-align:center;font-weight:bold'>Khuyến mãi</td>";
-//        hd += "<td style='text-align:center;'>" + timMaUI.maGiamTimDuoc.getPhanTramGiam() + "%" + "</td>";
-//        hd += "</tr>";
-//        hd += "<tr>";
-//        hd += "<td style='text-align:center;'>" + "</td>";
-//        hd += "<td style='text-align:left;'>" + "</td>";
-//        hd += "<td style='text-align:center;'>" + "</td>";
-//        hd += "<td style='text-align:center;font-weight:bold'>Thành tiền</td>";
-//        hd += "<td style='text-align:center;'>" + dcf.format(tongTien) + "</td>";
+
         hd += "</tr>";
         hd += "</table>";
         hd += "</div>";

@@ -10,7 +10,8 @@ package model;
  */
 public class ChiTietPhieuNhap {
     
-    private int maPhieuNhap, maSanPham, soLuong, donGia, thanhTien;
+    private int maPhieuNhap, maSanPham, soLuong;
+    private long donGia, thanhTien;
     private String tenSanPham;
 
     public ChiTietPhieuNhap() {
@@ -40,19 +41,19 @@ public class ChiTietPhieuNhap {
         this.soLuong = soLuong;
     }
 
-    public int getDonGia() {
+    public long getDonGia() {
         return donGia;
     }
 
-    public void setDonGia(int donGia) {
+    public void setDonGia(long donGia) {
         this.donGia = donGia;
     }
 
-    public int getThanhTien() {
+    public long getThanhTien() {
         return thanhTien;
     }
 
-    public void setThanhTien(int thanhTien) {
+    public void setThanhTien(long thanhTien) {
         this.thanhTien = thanhTien;
     }
 

@@ -83,7 +83,7 @@ public class ThongKeController {
         int tongKhachHang = KhachHangDAOImpl.getTotal();
         jLbTongKhachHang.setText(tongKhachHang + "");
         
-        int tongDoanhThu = getTongDoanhThu();
+        long tongDoanhThu = getTongDoanhThu();
         jLbTongDoanhThu.setText(tongDoanhThu + "");
         
         
@@ -121,11 +121,11 @@ public class ThongKeController {
     }
     
     public void setDoanhThu(int nam) {
-        int doanhThuQuy1 = getDoanhThuTheoQuy(nam, 1);
-        int doanhThuQuy2 = getDoanhThuTheoQuy(nam, 2);
-        int doanhThuQuy3 = getDoanhThuTheoQuy(nam, 3);
-        int doanhThuQuy4 = getDoanhThuTheoQuy(nam, 4);
-        int tongDoanhThu = doanhThuQuy1 + doanhThuQuy2 + doanhThuQuy3 + doanhThuQuy4;
+        long doanhThuQuy1 = getDoanhThuTheoQuy(nam, 1);
+        long doanhThuQuy2 = getDoanhThuTheoQuy(nam, 2);
+        long doanhThuQuy3 = getDoanhThuTheoQuy(nam, 3);
+        long doanhThuQuy4 = getDoanhThuTheoQuy(nam, 4);
+        long tongDoanhThu = doanhThuQuy1 + doanhThuQuy2 + doanhThuQuy3 + doanhThuQuy4;
 
         jLbQuy1.setText(doanhThuQuy1 + "");
         jLbQuy2.setText(doanhThuQuy2 + "");
@@ -135,16 +135,16 @@ public class ThongKeController {
         jLbDoanhThuNam.setText(tongDoanhThu + "");
     }
     
-    public int getDoanhThuTheoQuy(int nam, int quarter) {
+    public long getDoanhThuTheoQuy(int nam, int quarter) {
         try {
             Connection cons = DBConnection.getConnection();
             String sql = "SELECT sum(tongtien) "
                     + "FROM hoadon WHERE YEAR(ngaylap) = '" + nam + "' AND QUARTER(ngaylap) = '" + quarter + "'";
             PreparedStatement ps = cons.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            int doanhThu = 0;
+            long doanhThu = 0;
             if (rs.next()) {
-                doanhThu = rs.getInt(1);
+                doanhThu = rs.getLong(1);
             }
 
             ps.close();
@@ -156,7 +156,7 @@ public class ThongKeController {
         return 0;
     }
     
-    public int getTongDoanhThu() {
+    public long getTongDoanhThu() {
         try {
             Connection cons = DBConnection.getConnection();
             String sql = "SELECT sum(tongtien) "
@@ -164,9 +164,9 @@ public class ThongKeController {
             PreparedStatement ps = cons.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             
-            int doanhThu = 0;
+            long doanhThu = 0;
             if (rs.next()) {
-                doanhThu = rs.getInt(1);
+                doanhThu = rs.getLong(1);
             }
 
             ps.close();
@@ -204,16 +204,16 @@ public class ThongKeController {
         }
     }
     
-    public int getDoanhThuTheoThang(int thang, int nam) {
+    public long getDoanhThuTheoThang(int thang, int nam) {
         try {
             Connection cons = DBConnection.getConnection();
             String sql = "SELECT sum(tongtien) "
                     + "FROM hoadon WHERE MONTH(ngaylap) = '" + thang + "' AND YEAR(ngaylap) = '" + nam + "'";
             PreparedStatement ps = cons.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            int doanhThu = 0;
+            long doanhThu = 0;
             if (rs.next()) {
-                doanhThu = rs.getInt(1);
+                doanhThu = rs.getLong(1);
             }
 
             ps.close();
@@ -238,7 +238,7 @@ public class ThongKeController {
         final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         int year = Calendar.getInstance().get(Calendar.YEAR);
         for(int i = 1; i <= 12; i++) {
-            int value = getDoanhThuTheoThang(i, year);
+            long value = getDoanhThuTheoThang(i, year);
             dataset.setValue(value, "Doanh thu (vnđ)", i + "");
         }
         return dataset;

@@ -171,17 +171,16 @@ public class QuanLySanPhamController {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (table.getSelectedRow() != -1) {
-                    DefaultTableModel model = (DefaultTableModel) table.getModel();
                     int selectedRowIndex = table.getSelectedRow();
 
                     SanPham sanPham = new SanPham();
-                    sanPham.setMaSanPham((int) model.getValueAt(selectedRowIndex, 1));
-                    sanPham.setLoai(model.getValueAt(selectedRowIndex, 2).toString());
-                    sanPham.setTen(model.getValueAt(selectedRowIndex, 3).toString());
-                    sanPham.setSoLuong((int) model.getValueAt(selectedRowIndex, 4));
-                    sanPham.setGia(Integer.parseInt((model.getValueAt(selectedRowIndex, 5) + "").replace(",", "").replace(" VNĐ", "")));
-                    sanPham.setHanBaoHanh(Integer.parseInt((model.getValueAt(selectedRowIndex, 6) + "").replace(" năm", "")));
-                    sanPham.setAnh(model.getValueAt(selectedRowIndex, 7).toString());
+                    sanPham.setMaSanPham((int) table.getValueAt(selectedRowIndex, 1));
+                    sanPham.setLoai(table.getValueAt(selectedRowIndex, 2).toString());
+                    sanPham.setTen(table.getValueAt(selectedRowIndex, 3).toString());
+                    sanPham.setSoLuong((int) table.getValueAt(selectedRowIndex, 4));
+                    sanPham.setGia(Integer.parseInt((table.getValueAt(selectedRowIndex, 5) + "").replace(",", "").replace(" VNĐ", "")));
+                    sanPham.setHanBaoHanh(Integer.parseInt((table.getValueAt(selectedRowIndex, 6) + "").replace(" năm", "")));
+                    sanPham.setAnh(table.getValueAt(selectedRowIndex, 7).toString());
 
                     jTfMaSP.setText(Integer.toString(sanPham.getMaSanPham()));
                     jCbLoai.setSelectedItem(sanPham.getLoai());

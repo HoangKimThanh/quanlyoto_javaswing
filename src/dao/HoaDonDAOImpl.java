@@ -60,7 +60,7 @@ public class HoaDonDAOImpl implements HoaDonDAO {
             ps.setInt(1, hoaDon.getMaKH());
             ps.setInt(2, hoaDon.getMaNV());
             ps.setString(3, hoaDon.getNgayLap());
-            ps.setInt(4, hoaDon.getTongTien());
+            ps.setLong(4, hoaDon.getTongTien());
             ps.setString(5,hoaDon.getGhiChu());
             
             ps.execute();
@@ -91,7 +91,7 @@ public class HoaDonDAOImpl implements HoaDonDAO {
             ps.setInt(1, hoaDon.getMaKH());
             ps.setInt(2, hoaDon.getMaNV());
             ps.setString(3, hoaDon.getNgayLap());
-            ps.setInt(4, hoaDon.getTongTien());
+            ps.setLong(4, hoaDon.getTongTien());
             ps.setString(5,hoaDon.getGhiChu());
             
             ps.execute();

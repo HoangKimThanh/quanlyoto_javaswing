@@ -34,6 +34,8 @@ import model.HoaDon;
 import utility.ClassTableModel;
 import view.*;
 import controller.DangNhapController;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -89,14 +91,13 @@ public class QuanLyHoaDonController {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (table.getSelectedRow() != -1) {
-                    DefaultTableModel model = (DefaultTableModel) table.getModel();
                     int selectedRowIndex = table.getSelectedRow();
 
-                    jTMaHD.setText(model.getValueAt(selectedRowIndex, 1).toString());
-                    jTMaKH.setText(model.getValueAt(selectedRowIndex, 3).toString());
-                    jTMaNV.setText(model.getValueAt(selectedRowIndex, 2).toString());
-                    jTNgay.setText(model.getValueAt(selectedRowIndex, 4).toString());
-                    jTTienHD.setText(model.getValueAt(selectedRowIndex, 5).toString());
+                    jTMaHD.setText(table.getValueAt(selectedRowIndex, 1).toString());
+                    jTMaKH.setText(table.getValueAt(selectedRowIndex, 3).toString());
+                    jTMaNV.setText(table.getValueAt(selectedRowIndex, 2).toString());
+                    jTNgay.setText(table.getValueAt(selectedRowIndex, 4).toString());
+                    jTTienHD.setText(table.getValueAt(selectedRowIndex, 5).toString());
 
                     setDataToCTHD(Integer.parseInt(jTMaHD.getText()));
                 }
@@ -142,15 +143,13 @@ public class QuanLyHoaDonController {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (table.getSelectedRow() != -1) {
-                    DefaultTableModel model = (DefaultTableModel) table.getModel();
                     int selectedRowIndex = table.getSelectedRow();
-                    selectedRowIndex = table.convertColumnIndexToModel(selectedRowIndex);
 
-                    jTMaHDCT.setText(model.getValueAt(selectedRowIndex, 1).toString());
-                    jTMaSPCT.setText(model.getValueAt(selectedRowIndex, 2).toString());
-                    jTSoLuongCT.setText(model.getValueAt(selectedRowIndex, 3).toString());
-                    jTGiaCT.setText(model.getValueAt(selectedRowIndex, 4).toString());
-                    jTTienCT.setText(model.getValueAt(selectedRowIndex, 5).toString());
+                    jTMaHDCT.setText(table.getValueAt(selectedRowIndex, 1).toString());
+                    jTMaSPCT.setText(table.getValueAt(selectedRowIndex, 2).toString());
+                    jTSoLuongCT.setText(table.getValueAt(selectedRowIndex, 3).toString());
+                    jTGiaCT.setText(table.getValueAt(selectedRowIndex, 4).toString());
+                    jTTienCT.setText(table.getValueAt(selectedRowIndex, 5).toString());
 
                 }
 
@@ -176,9 +175,9 @@ public class QuanLyHoaDonController {
     }
 
     public void setEvent() {
-        jBDeleteb.addMouseListener(new MouseAdapter() {
+        jBDeleteb.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 CTHDDAO cthdDAO = new CTHDDAOImpl();
                 cthdDAO.deleteCTHD(Integer.parseInt(jTMaHD.getText()));
                 HoaDonDAO hoaDonDAO = new HoaDonDAOImpl();

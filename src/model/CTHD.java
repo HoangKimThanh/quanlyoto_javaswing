@@ -9,7 +9,9 @@ package model;
  * @author ASUS
  */
 public class CTHD {
-    private Integer maHD, maSP, soLuong,gia, tien;
+    private Integer maHD, maSP, soLuong;
+    
+    private Long gia, tien;
 
     public Integer getMaHD() {
         return maHD;
@@ -35,20 +37,21 @@ public class CTHD {
         this.soLuong = soLuong;
     }
 
-    public Integer getGia() {
+    public Long getGia() {
         return gia;
     }
 
-    public void setGia(Integer gia) {
+    public void setGia(Long gia) {
         this.gia = gia;
     }
 
-    public Integer getTien() {
+    public Long getTien() {
         return tien;
     }
 
-    public void setTien(Integer tien) {
+    public void setTien(Long tien) {
         this.tien = tien;
     }
+
     
 }

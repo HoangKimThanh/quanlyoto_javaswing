@@ -113,14 +113,13 @@ public class QuanLyKhachHangController {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (table.getSelectedRow() != -1) {
-                    DefaultTableModel model = (DefaultTableModel) table.getModel();
                     int selectedRowIndex = table.getSelectedRow();
 
                     KhachHang khachHang = new KhachHang();
-                    khachHang.setMaKhachHang((int) model.getValueAt(selectedRowIndex, 1));
-                    khachHang.setHoTen(model.getValueAt(selectedRowIndex, 2).toString());
-                    khachHang.setDienThoai(model.getValueAt(selectedRowIndex, 3).toString());
-                    khachHang.setDiaChi(model.getValueAt(selectedRowIndex, 4).toString());
+                    khachHang.setMaKhachHang((int) table.getValueAt(selectedRowIndex, 1));
+                    khachHang.setHoTen(table.getValueAt(selectedRowIndex, 2).toString());
+                    khachHang.setDienThoai(table.getValueAt(selectedRowIndex, 3).toString());
+                    khachHang.setDiaChi(table.getValueAt(selectedRowIndex, 4).toString());
 
                     jTfMaKH.setText(Integer.toString(khachHang.getMaKhachHang()));
                     jTfHoTen.setText(khachHang.getHoTen());

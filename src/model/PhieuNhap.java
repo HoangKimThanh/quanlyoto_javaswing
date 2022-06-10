@@ -10,14 +10,15 @@ package model;
  */
 public class PhieuNhap {
     
-    private int maPhieuNhap, maNhaCungCap, maNhanVien, tongTien;
+    private int maPhieuNhap, maNhaCungCap, maNhanVien;
+    private long tongTien;
     private String ngayLap;
 
     public PhieuNhap() {
     }
     
 
-    public PhieuNhap(int maPhieuNhap, int maNhaCungCap, int maNhanVien, int tongTien, String ngayLap) {
+    public PhieuNhap(int maPhieuNhap, int maNhaCungCap, int maNhanVien, long tongTien, String ngayLap) {
         this.maPhieuNhap = maPhieuNhap;
         this.maNhaCungCap = maNhaCungCap;
         this.maNhanVien = maNhanVien;
@@ -49,11 +50,11 @@ public class PhieuNhap {
         this.maNhanVien = maNhanVien;
     }
 
-    public int getTongTien() {
+    public long getTongTien() {
         return tongTien;
     }
 
-    public void setTongTien(int tongTien) {
+    public void setTongTien(long tongTien) {
         this.tongTien = tongTien;
     }
 

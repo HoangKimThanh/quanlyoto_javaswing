@@ -334,15 +334,14 @@ public class QuanLyNhapHangController {
             public void mouseClicked(MouseEvent e) {
                 if (jTableDSPhieuNhap.getSelectedRow() != -1) {
                     
-                    DefaultTableModel model = (DefaultTableModel) jTableDSPhieuNhap.getModel();
                     int selectedRowIndex = jTableDSPhieuNhap.getSelectedRow();
                     
                     PhieuNhap phieuNhap = new PhieuNhap();
-                    phieuNhap.setMaPhieuNhap((int) model.getValueAt(selectedRowIndex, 0));
-                    phieuNhap.setMaNhaCungCap((int) model.getValueAt(selectedRowIndex, 1));
-                    phieuNhap.setMaNhanVien((int) model.getValueAt(selectedRowIndex, 2));
-                    phieuNhap.setNgayLap(model.getValueAt(selectedRowIndex, 3).toString());
-                    phieuNhap.setTongTien((int) model.getValueAt(selectedRowIndex, 4));
+                    phieuNhap.setMaPhieuNhap((int) jTableDSPhieuNhap.getValueAt(selectedRowIndex, 0));
+                    phieuNhap.setMaNhaCungCap((int) jTableDSPhieuNhap.getValueAt(selectedRowIndex, 1));
+                    phieuNhap.setMaNhanVien((int) jTableDSPhieuNhap.getValueAt(selectedRowIndex, 2));
+                    phieuNhap.setNgayLap(jTableDSPhieuNhap.getValueAt(selectedRowIndex, 3).toString());
+                    phieuNhap.setTongTien((int) jTableDSPhieuNhap.getValueAt(selectedRowIndex, 4));
                     
                     NhaCungCapDAO nhaCungCapDAO = new NhaCungCapDAOImpl();
                     NhaCungCap nhaCungCap = nhaCungCapDAO.getByMaNCC(phieuNhap.getMaNhaCungCap());

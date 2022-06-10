@@ -63,7 +63,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
             ps.setString(1, sanPham.getLoai());
             ps.setString(2, sanPham.getTen());
             ps.setInt(3, sanPham.getSoLuong());
-            ps.setInt(4, sanPham.getGia());
+            ps.setLong(4, sanPham.getGia());
             ps.setInt(5, sanPham.getHanBaoHanh());
             ps.setString(6, sanPham.getAnh());
 
@@ -97,7 +97,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
             ps.setString(1, sanPham.getLoai());
             ps.setString(2, sanPham.getTen());
             ps.setInt(3, sanPham.getSoLuong());
-            ps.setInt(4, sanPham.getGia());
+            ps.setLong(4, sanPham.getGia());
             ps.setInt(5, sanPham.getHanBaoHanh());
             ps.setString(6, sanPham.getAnh());
 

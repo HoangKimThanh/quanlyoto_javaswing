@@ -152,16 +152,15 @@ public class QuanLyNhanVienController {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (table.getSelectedRow() != -1) {
-                    DefaultTableModel model = (DefaultTableModel) table.getModel();
                     int selectedRowIndex = table.getSelectedRow();
 
                     NhanVien nhanVien = new NhanVien();
-                    int manv = (int) (model.getValueAt(selectedRowIndex, 1));
+                    int manv = (int) (table.getValueAt(selectedRowIndex, 1));
                     nhanVien.setMaNV(manv);
-                    nhanVien.setHoTen(model.getValueAt(selectedRowIndex, 2).toString());
-                    nhanVien.setChucVu(model.getValueAt(selectedRowIndex, 3).toString());
-                    nhanVien.setTaiKhoan(model.getValueAt(selectedRowIndex, 4).toString());
-                    nhanVien.setMatKhau(model.getValueAt(selectedRowIndex, 5).toString());
+                    nhanVien.setHoTen(table.getValueAt(selectedRowIndex, 2).toString());
+                    nhanVien.setChucVu(table.getValueAt(selectedRowIndex, 3).toString());
+                    nhanVien.setTaiKhoan(table.getValueAt(selectedRowIndex, 4).toString());
+                    nhanVien.setMatKhau(table.getValueAt(selectedRowIndex, 5).toString());
 
                     jTfMaNv.setText((nhanVien.getMaNV()) + "");
                     jTfHoTen.setText(nhanVien.getHoTen());
