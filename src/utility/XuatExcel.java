@@ -40,17 +40,9 @@ public class XuatExcel {
 
                 Font headerFont = workbook.createFont();
                 headerFont.setBold(true);
-                headerFont.setFontHeightInPoints((short) 14);
-                headerFont.setColor(IndexedColors.WHITE.getIndex());
+                headerFont.setFontHeightInPoints((short) 12);
                 CellStyle headerCellStyle = workbook.createCellStyle();
                 headerCellStyle.setFont(headerFont);
-                headerCellStyle.setFillBackgroundColor(IndexedColors.GREEN.getIndex());
-                headerCellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-                headerCellStyle.setBorderTop(BorderStyle.THIN);
-                headerCellStyle.setBorderBottom(BorderStyle.THIN);
-                headerCellStyle.setBorderLeft(BorderStyle.THIN);
-                headerCellStyle.setBorderRight(BorderStyle.THIN);
-                headerCellStyle.setAlignment(HorizontalAlignment.CENTER);
 
                 Row headerRow = sheet.createRow(0);
 
@@ -63,14 +55,9 @@ public class XuatExcel {
 
                 Font contentFont = workbook.createFont();
                 contentFont.setBold(false);
-                contentFont.setFontHeightInPoints((short) 13);
-                contentFont.setColor(IndexedColors.BLACK.getIndex());
+                contentFont.setFontHeightInPoints((short) 11);
                 CellStyle contentCellStyle = workbook.createCellStyle();
                 contentCellStyle.setFont(contentFont);
-                contentCellStyle.setBorderTop(BorderStyle.THIN);
-                contentCellStyle.setBorderBottom(BorderStyle.THIN);
-                contentCellStyle.setBorderLeft(BorderStyle.THIN);
-                contentCellStyle.setBorderRight(BorderStyle.THIN);
 
                 for (int i = 0; i < dtm.getRowCount(); i++) {
                     Row row = sheet.createRow(i + 1);

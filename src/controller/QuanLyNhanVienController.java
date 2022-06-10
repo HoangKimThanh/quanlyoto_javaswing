@@ -32,6 +32,7 @@ import utility.ClassTableModel;
 import controller.DangNhapController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import utility.XuatExcel;
 
 /**
  *
@@ -45,6 +46,7 @@ public class QuanLyNhanVienController {
     private final JButton jBtnDelete;
 
     private final JButton jBtnReset;
+    private final JButton jBtnXuatExcel;
 
     private final JTextField jTfSearch;
     private final JTextField jTfMaNv;
@@ -63,6 +65,8 @@ public class QuanLyNhanVienController {
     private final String[] listColumn = {"STT", "Mã NV", "Tên NV", "Chức vụ", "Tài Khoản", "Mật khẩu"};
 
     private TableRowSorter<TableModel> rowSorter = null;
+    
+    JTable table;
 
     public QuanLyNhanVienController(
             JPanel jPnView, 
@@ -70,6 +74,7 @@ public class QuanLyNhanVienController {
             JButton jBtnUpdate, 
             JButton jBtnDelete, 
             JButton jBtnReset, 
+            JButton jBtnXuatExcel,
             JTextField jTfMaNv, 
             JTextField jTfHoTen, 
             JComboBox jCbChucVu1, 
@@ -81,6 +86,7 @@ public class QuanLyNhanVienController {
         this.jBtnUpdate = jBtnUpdate;
         this.jBtnDelete = jBtnDelete;
         this.jBtnReset = jBtnReset;
+        this.jBtnXuatExcel = jBtnXuatExcel;
         this.jTfHoTen = jTfHoTen;
         this.jTfMaNv = jTfMaNv;
         this.jTfTaiKhoan = jTfTaiKhoan;
@@ -116,7 +122,7 @@ public class QuanLyNhanVienController {
         List<NhanVien> listItem = nhanVienDAO.getList(chucVu);
 
         DefaultTableModel model = new ClassTableModel().setTableNhanVien(listItem, listColumn);
-        JTable table = new JTable(model);
+        table = new JTable(model);
 
         rowSorter = new TableRowSorter<>(table.getModel());
 
@@ -324,7 +330,13 @@ public class QuanLyNhanVienController {
             public void actionPerformed(ActionEvent e) {
                 setDataToTable();
             }
-
+        });
+        
+        jBtnXuatExcel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new XuatExcel(table);
+            }
         });
     }
 }

@@ -29,6 +29,7 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import model.NhaCungCap;
 import utility.ClassTableModel;
+import utility.XuatExcel;
 
 /**
  *
@@ -41,7 +42,7 @@ public class QuanLyNhaCungCapController {
     private JButton jBtnDelete;    
     
     private JButton jBtnReset;
-
+    private JButton jBtnXuatExcel;
 
     
     private JTextField jTfSearch;
@@ -57,15 +58,28 @@ public class QuanLyNhaCungCapController {
     private String[] listColumn = {"STT", "Mã NCC", "Tên NCC", "Số điện thoại", "Địa chỉ"};
     
     private TableRowSorter<TableModel> rowSorter = null;
+    
+    JTable table;
 
-    public QuanLyNhaCungCapController(JPanel jPnView, JButton jBtnAdd, JButton jBtnUpdate, 
-            JButton jBtnDelete, JButton jBtnReset, JTextField jTfMaNcc, JTextField jTfTen, JTextField jTfSDT, 
-            JTextField jTfDiaChi, JTextField jTfSearch) {
+    public QuanLyNhaCungCapController(
+            JPanel jPnView, 
+            JButton jBtnAdd, 
+            JButton jBtnUpdate, 
+            JButton jBtnDelete, 
+            JButton jBtnReset, 
+            JButton jBtnXuatExcel,
+            JTextField jTfMaNcc, 
+            JTextField jTfTen, 
+            JTextField jTfSDT, 
+            JTextField jTfDiaChi, 
+            JTextField jTfSearch
+    ) {
         this.jPnView = jPnView;
         this.jBtnAdd = jBtnAdd;
         this.jBtnUpdate = jBtnUpdate;
         this.jBtnDelete = jBtnDelete;
         this.jBtnReset = jBtnReset;
+        this.jBtnXuatExcel = jBtnXuatExcel;
         this.jTfTen = jTfTen;        
         this.jTfMaNcc = jTfMaNcc;
 
@@ -94,7 +108,7 @@ public class QuanLyNhaCungCapController {
         List<NhaCungCap> listItem = nhaCungCapDAO.getList();
         
         DefaultTableModel model = new ClassTableModel().setTableNhaCungCap(listItem, listColumn);
-        JTable table = new JTable(model);
+        table = new JTable(model);
         
         rowSorter = new TableRowSorter<>(table.getModel());
         
@@ -278,7 +292,13 @@ public class QuanLyNhaCungCapController {
             public void actionPerformed(ActionEvent e) {
                 setDataToTable();
             }
-
+        });
+        
+        jBtnXuatExcel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new XuatExcel(table);
+            }
         });
     }
 }
