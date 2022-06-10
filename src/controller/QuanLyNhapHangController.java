@@ -17,6 +17,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
@@ -48,6 +50,7 @@ import model.NhaCungCap;
 import model.PhieuNhap;
 import model.SanPham;
 import utility.ClassTableModel;
+import view.AddNhaCungCap;
 
 /**
  *
@@ -92,6 +95,7 @@ public class QuanLyNhapHangController {
     private JButton jBtnXacNhan;
     private JButton jBtnThayDoiSoLuong;
     private JButton jBtnFilter;
+    private JButton jBtnAdd;
 
     private JComboBox jComboBoxNhaCC;
     
@@ -119,7 +123,7 @@ public class QuanLyNhapHangController {
             JTextField jTfPNMaPN, JTextField jTfPNMaNhaCC, JTextField jTfPNNhanVien,
             JTextField jTfPNNgayLap, JTextField jTfPNTongTien,
             JTextField jTfPriceFrom, JTextField jTfPriceTo,
-            JButton jBtnNhapHang, JButton jBtnXoaHang, JButton jBtnXacNhan, JButton jBtnThayDoiSoLuong, JButton jBtnFilter,
+            JButton jBtnNhapHang, JButton jBtnXoaHang, JButton jBtnXacNhan, JButton jBtnThayDoiSoLuong, JButton jBtnFilter,JButton jBtnAdd,
             JComboBox jComboBoxNhaCC) {
         
         this.jTabbedPane = jTabbedPane;
@@ -159,6 +163,15 @@ public class QuanLyNhapHangController {
         this.jBtnXacNhan = jBtnXacNhan;
         this.jBtnThayDoiSoLuong = jBtnThayDoiSoLuong;
         this.jBtnFilter = jBtnFilter;
+        this.jBtnAdd=jBtnAdd;
+        
+        DangNhapController controllerDangNhap = new DangNhapController();
+        
+        if (controllerDangNhap.taiKhoanLogin.getChucVu().equals("Quản trị")) {
+            jBtnAdd.setVisible(true);
+        } else {
+            jBtnAdd.setVisible(false);
+        }
 
         this.jComboBoxNhaCC = jComboBoxNhaCC;
         
@@ -262,6 +275,12 @@ public class QuanLyNhapHangController {
                     
                     jBtnNhapHang.setEnabled(true);
                 }
+            }
+        });
+        jBtnAdd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new AddNhaCungCap(jComboBoxNhaCC).setVisible(true);
             }
         });
     }
@@ -543,9 +562,9 @@ public class QuanLyNhapHangController {
 //    }
 
     public void setEvent() {
-        jBtnNhapHang.addMouseListener(new MouseAdapter() {
+        jBtnNhapHang.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 try {
                     if (jTfMaSP.getText().equals("")) {
                         JOptionPane.showMessageDialog(null, "Vui lòng chọn sản phẩm để nhập!");
@@ -583,23 +602,10 @@ public class QuanLyNhapHangController {
                     JOptionPane.showMessageDialog(null, ex.toString());
                 }
             }
-
-            @Override
-            public void mousePressed(MouseEvent e) {}
-
-            @Override
-            public void mouseReleased(MouseEvent e) {}
-
-            @Override
-            public void mouseEntered(MouseEvent e) {}
-
-            @Override
-            public void mouseExited(MouseEvent e) {}
-            
         });
-        jBtnXoaHang.addMouseListener(new MouseAdapter() {
+        jBtnXoaHang.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 try {
                     if (jTableHangChoNhap.getSelectedRow() != -1) {
                         DefaultTableModel model = (DefaultTableModel) jTableHangChoNhap.getModel();
@@ -619,23 +625,10 @@ public class QuanLyNhapHangController {
                     JOptionPane.showMessageDialog(null, ex.toString());
                 }
             }
-
-            @Override
-            public void mousePressed(MouseEvent e) {}
-
-            @Override
-            public void mouseReleased(MouseEvent e) {}
-
-            @Override
-            public void mouseEntered(MouseEvent e) {}
-
-            @Override
-            public void mouseExited(MouseEvent e) {}
-            
         });
-        jBtnXacNhan.addMouseListener(new MouseAdapter() {
+        jBtnXacNhan.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 try {
                     
                     if (danhSachSanPhamNhap.isEmpty()) {
@@ -687,23 +680,10 @@ public class QuanLyNhapHangController {
                     JOptionPane.showMessageDialog(null, ex.toString());
                 }
             }
-
-            @Override
-            public void mousePressed(MouseEvent e) {}
-
-            @Override
-            public void mouseReleased(MouseEvent e) {}
-
-            @Override
-            public void mouseEntered(MouseEvent e) {}
-
-            @Override
-            public void mouseExited(MouseEvent e) {}
-            
         });
-        jBtnThayDoiSoLuong.addMouseListener(new MouseAdapter() {
+        jBtnThayDoiSoLuong.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 try {
                     
                     if (jTableHangChoNhap.getSelectedRow() != -1) {
@@ -751,19 +731,6 @@ public class QuanLyNhapHangController {
                     JOptionPane.showMessageDialog(null, ex.toString());
                 }
             }
-
-            @Override
-            public void mousePressed(MouseEvent e) {}
-
-            @Override
-            public void mouseReleased(MouseEvent e) {}
-
-            @Override
-            public void mouseEntered(MouseEvent e) {}
-
-            @Override
-            public void mouseExited(MouseEvent e) {}
-            
         });
         
         jTabbedPane.addChangeListener(new ChangeListener() {
@@ -776,9 +743,9 @@ public class QuanLyNhapHangController {
             }
         });
         
-        jBtnFilter.addMouseListener(new MouseAdapter() {
+        jBtnFilter.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 try {
                     if (jTfPriceFrom.getText().equals("") && jTfPriceTo.getText().equals("")) {
                         isFiltering = false;
@@ -802,22 +769,7 @@ public class QuanLyNhapHangController {
                     JOptionPane.showMessageDialog(null, ex.toString());
                 }
             }
-
-            @Override
-            public void mousePressed(MouseEvent e) {}
-
-            @Override
-            public void mouseReleased(MouseEvent e) {}
-
-            @Override
-            public void mouseEntered(MouseEvent e) {}
-
-            @Override
-            public void mouseExited(MouseEvent e) {}
-            
         });
-           
-
     }
 }
 

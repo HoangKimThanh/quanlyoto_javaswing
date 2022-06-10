@@ -9,6 +9,8 @@ import dao.NhaCungCapDAOImpl;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -173,9 +175,9 @@ public class QuanLyNhaCungCapController {
     }
 
     public void setEvent() {
-        jBtnAdd.addMouseListener(new MouseAdapter() {
+        jBtnAdd.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 try {
                     String tenncc = jTfTen.getText();
                     String sdt = jTfSDT.getText();
@@ -203,24 +205,11 @@ public class QuanLyNhaCungCapController {
                     JOptionPane.showMessageDialog(null, ex.toString());
                 }
             }
-
-            @Override
-            public void mousePressed(MouseEvent e) {}
-
-            @Override
-            public void mouseReleased(MouseEvent e) {}
-
-            @Override
-            public void mouseEntered(MouseEvent e) {}
-
-            @Override
-            public void mouseExited(MouseEvent e) {}
-            
         });
         
-        jBtnUpdate.addMouseListener(new MouseAdapter() {
+        jBtnUpdate.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 try {
                     String mancc = jTfMaNcc.getText();
                     String tenncc = jTfTen.getText();
@@ -250,9 +239,9 @@ public class QuanLyNhaCungCapController {
 
         });
         
-        jBtnDelete.addMouseListener(new MouseAdapter() {
+        jBtnDelete.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 try {
                     String mancc = jTfMaNcc.getText();
                     String tenncc = jTfTen.getText();
@@ -284,9 +273,9 @@ public class QuanLyNhaCungCapController {
 
         });
         
-        jBtnReset.addMouseListener(new MouseAdapter() {
+        jBtnReset.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 setDataToTable();
             }
 
