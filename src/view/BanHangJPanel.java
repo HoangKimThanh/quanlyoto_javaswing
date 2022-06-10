@@ -24,7 +24,7 @@ public class BanHangJPanel extends javax.swing.JPanel {
     public BanHangJPanel() {
         initComponents();
         QuanLyBanHangController controller = new QuanLyBanHangController(showTable,showTableCart,jTMaSP,jTTenSP,jTGia,jSoLuong,jBAddToCart, jBDelete, jLbAnh,
-        jBXuatHoaDon,jBTest,jBUpdate);
+        jBtnXoaGioHang,jBTest,jBUpdate,this);
         QuanLyHoaDonController controllerb= new QuanLyHoaDonController(showHoaDon,showCTHD, jTMaHD, jTMaKH, jTMaNV,jTNgay, jTTienHD, jTMaHDCT, 
             jTMaSPCT, jTSoLuongCT, jTGiaCT, jTTienCT, jBReLoad,jBDeleteb,jTab);
         jBTest.setVisible(true);
@@ -89,7 +89,7 @@ public class BanHangJPanel extends javax.swing.JPanel {
         jBUpdate = new javax.swing.JButton();
         jBDelete = new javax.swing.JButton();
         jPanel34 = new javax.swing.JPanel();
-        jBXuatHoaDon = new javax.swing.JButton();
+        jBtnXoaGioHang = new javax.swing.JButton();
         jBTest = new javax.swing.JButton();
         jPanel35 = new javax.swing.JPanel();
         jLbAnh = new javax.swing.JLabel();
@@ -388,8 +388,8 @@ public class BanHangJPanel extends javax.swing.JPanel {
         });
         jPanel27.add(jBDelete);
 
-        jBXuatHoaDon.setText("XÓA GIỎ HÀNG");
-        jPanel34.add(jBXuatHoaDon);
+        jBtnXoaGioHang.setText("XÓA GIỎ HÀNG");
+        jPanel34.add(jBtnXoaGioHang);
 
         jBTest.setText("XUẤT HÓA ĐƠN");
         jPanel34.add(jBTest);
@@ -871,7 +871,7 @@ public class BanHangJPanel extends javax.swing.JPanel {
     private javax.swing.JButton jBReLoad;
     private javax.swing.JButton jBTest;
     private javax.swing.JButton jBUpdate;
-    private javax.swing.JButton jBXuatHoaDon;
+    private javax.swing.JButton jBtnXoaGioHang;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;

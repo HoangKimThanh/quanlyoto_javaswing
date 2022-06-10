@@ -558,7 +558,7 @@
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
                       <SubComponents>
-                        <Component class="javax.swing.JButton" name="jBXuatHoaDon">
+                        <Component class="javax.swing.JButton" name="jBtnXoaGioHang">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="X&#xd3;A GI&#x1ece; H&#xc0;NG"/>
                           </Properties>

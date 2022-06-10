@@ -21,6 +21,7 @@ public class DangNhapDAO {
             if (rs.next()) {
                 tkLogin = tk;
                 tkLogin.setMaNV(rs.getInt("manv"));
+                tkLogin.setHoTen(rs.getString("hoten"));
                 tkLogin.setChucVu(rs.getString("chucvu"));
             }
             return tkLogin;

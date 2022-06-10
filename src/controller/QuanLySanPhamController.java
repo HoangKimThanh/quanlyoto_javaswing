@@ -4,7 +4,7 @@
  */
 package controller;
 
-import custom.FileChooser;
+import utility.FileChooser;
 import dao.SanPhamDAO;
 import dao.SanPhamDAOImpl;
 import java.awt.BorderLayout;
