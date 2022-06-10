@@ -61,7 +61,11 @@ public class ThemKhachHangController {
                         JOptionPane.showMessageDialog(null, "Thêm khách hàng thành công");
                         root.dispose();
                         AddHoaDon.dispose();
-                        new AddHoaDon(hoaDon,listCart).setVisible(true);
+                        DangNhapController controllerDangNhap = new DangNhapController();
+                        AddHoaDon addHoaDon =new AddHoaDon(hoaDon,listCart,controllerDangNhap.taiKhoanLogin.getHoTen());
+                        addHoaDon.setVisible(true);
+                        addHoaDon.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        
                         
                     } else {
                         JOptionPane.showMessageDialog(null, "Có lỗi xảy ra, vui lòng thử lại");
