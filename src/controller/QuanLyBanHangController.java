@@ -292,7 +292,8 @@ public class QuanLyBanHangController {
         });
 
         jBtnXoaGioHang.addMouseListener(new MouseAdapter() {
-            public void actionPerformed(ActionEvent e) {
+            @Override
+            public void mouseClicked(MouseEvent e) {
                 try {
                     listCart = new ArrayList<>();
                     setDataToCart();
