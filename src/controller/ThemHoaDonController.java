@@ -108,6 +108,8 @@ public class ThemHoaDonController {
 
                     }
                     showPreviewHoaDon(listCart);
+                    jBAddHD.setEnabled(false);
+                    jBtnIn.setEnabled(true);
                     if (check != 0) {
                         
                         JOptionPane.showMessageDialog(null, "Thanh toán và thêm hóa đơn thành công", "Hóa đơn", JOptionPane.INFORMATION_MESSAGE);
