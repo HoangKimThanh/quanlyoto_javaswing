@@ -4,6 +4,7 @@
  */
 package view;
 
+import controller.DangNhapController;
 import controller.QuanLyNhapHangController;
 
 /**
@@ -17,6 +18,7 @@ public class NhapHangJPanel extends javax.swing.JPanel {
      */
     public NhapHangJPanel() {
         initComponents();
+        DangNhapController controllerDangNhap = new DangNhapController();
         QuanLyNhapHangController controller = new QuanLyNhapHangController(jTabbedPane,
             jPnTabNhapHang, jPnTabPhieuNhap,
             jScrollPaneKhoHang, jScrollPaneHangChoNhap, jScrollPaneDSPhieuNhap, jScrollPaneChiTietPN,
@@ -26,6 +28,8 @@ public class NhapHangJPanel extends javax.swing.JPanel {
             jTfPriceFrom, jTfPriceTo,
             jBtnNhapHang, jBtnXoaHang, jBtnXacNhan, jBtnThayDoiSoLuong, jBtnFilter,jBtnAdd,
             jComboBoxNhaCC);
+        String NV=controllerDangNhap.taiKhoanLogin.getHoTen();
+        jTfNhanVien.setText(NV);
         controller.setEvent();
     }
 

@@ -62,7 +62,7 @@ public class ThemKhachHangController {
                         root.dispose();
                         AddHoaDon.dispose();
                         DangNhapController controllerDangNhap = new DangNhapController();
-                        AddHoaDon addHoaDon =new AddHoaDon(hoaDon,listCart,controllerDangNhap.taiKhoanLogin.getHoTen());
+                        AddHoaDon addHoaDon =new AddHoaDon(hoaDon,listCart,controllerDangNhap.taiKhoanLogin.getHoTen(),null);
                         addHoaDon.setVisible(true);
                         addHoaDon.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                         

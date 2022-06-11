@@ -14,6 +14,9 @@ import dao.KhachHangDAO;
 import dao.KhachHangDAOImpl;
 import dao.SanPhamDAO;
 import dao.SanPhamDAOImpl;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -32,10 +35,14 @@ import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import model.CTHD;
 import model.HoaDon;
 import model.KhachHang;
 import model.SanPham;
+import utility.ClassTableModel;
 import view.AddHoaDon;
 import view.AddKhachHang;
 import view.BanHangJPanel;
@@ -52,8 +59,9 @@ public class ThemHoaDonController {
     private JButton jBAddHD, jBtnIn;
     private JFrame root;
     private JButton jBtnAddKH;
+    private JPanel showTableCart;
 
-    public ThemHoaDonController(JTextField jTTenNV, JComboBox jCbMaKH, JButton jBAddHD, JFrame root, JButton jBtnAddKH, JEditorPane jEditHoaDon, JButton jBtnIn) {
+    public ThemHoaDonController(JTextField jTTenNV, JComboBox jCbMaKH, JButton jBAddHD, JFrame root, JButton jBtnAddKH, JEditorPane jEditHoaDon, JButton jBtnIn,JPanel showTableCart) {
         this.jTTenNV = jTTenNV;
         this.jCbMaKH = jCbMaKH;
         this.jBAddHD = jBAddHD;
@@ -61,6 +69,7 @@ public class ThemHoaDonController {
         this.jBtnAddKH = jBtnAddKH; 
         this.jEditHoaDon=jEditHoaDon;
         this.jBtnIn=jBtnIn;
+        this.showTableCart=showTableCart;
     }
 
     public void setEvent(HoaDon hoaDon, List<SanPham> listCart, JFrame k) {
@@ -111,7 +120,24 @@ public class ThemHoaDonController {
                     jBAddHD.setEnabled(false);
                     jBtnIn.setEnabled(true);
                     if (check != 0) {
-                        
+                        String[] listColumn = {"STT", "Mã SP", "Tên SP", "GIÁ", "SỐ LƯỢNG"};
+                        listCart.removeAll(listCart);
+                        DefaultTableModel model = new ClassTableModel().setTableBanHang(listCart, listColumn);
+                        JTable table=new JTable(model);
+                        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
+                        table.getTableHeader().setPreferredSize(new Dimension(100, 50));
+                        table.setRowHeight(50);
+                        table.validate();
+                        table.repaint();
+                        JScrollPane scrollPane = new JScrollPane();
+                        scrollPane.getViewport().add(table);
+                        scrollPane.setPreferredSize(new Dimension(1300, 400));
+
+                        showTableCart.removeAll();
+                        showTableCart.setLayout(new BorderLayout());
+                        showTableCart.add(scrollPane);
+                        showTableCart.validate();
+                        showTableCart.repaint();
                         JOptionPane.showMessageDialog(null, "Thanh toán và thêm hóa đơn thành công", "Hóa đơn", JOptionPane.INFORMATION_MESSAGE);
                         root.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
