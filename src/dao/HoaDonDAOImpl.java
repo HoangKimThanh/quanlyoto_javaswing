@@ -31,7 +31,7 @@ public class HoaDonDAOImpl implements HoaDonDAO {
                 hoaDon.setMaKH(rs.getInt("makh"));
                 hoaDon.setMaNV(rs.getInt("manv"));
                 hoaDon.setNgayLap(rs.getString("ngaylap"));
-                hoaDon.setTongTien(rs.getInt("tongtien"));
+                hoaDon.setTongTien(rs.getLong("tongtien"));
                 hoaDon.setGhiChu(rs.getString("ghichu"));
                 list.add(hoaDon);
             }

@@ -46,6 +46,8 @@ public class NhapHangJPanel extends javax.swing.JPanel {
             jTfPriceFrom, jTfPriceTo,
             jBtnNhapHang, jBtnXoaHang, jBtnXacNhan, jBtnThayDoiSoLuong, jBtnFilter,jBtnAdd,
             jComboBoxNhaCC);
+        String NV=controllerDangNhap.taiKhoanLogin.getHoTen();
+        jTfNhanVien.setText(NV);
         controller.setEvent();
     }
 

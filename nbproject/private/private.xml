@@ -3,6 +3,28 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
+            <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/controller/QuanLyBanHangController.java</file>
+            <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/model/HoaDon.java</file>
+            <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/utility/ClassTableModel.java</file>
+            <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/view/BanHangJPanel.java</file>
+            <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/controller/QuanLyHoaDonController.java</file>
+            <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/view/NhapHangJPanel.java</file>
+            <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/controller/QuanLySanPhamController.java</file>
+            <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/controller/QuanLyNhapHangController.java</file>
+            <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/dao/HoaDonDAOImpl.java</file>
+            <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/controller/ThemKhachHangController.java</file>
+            <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/dao/HoaDonDAO.java</file>
+            <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/view/AddHoaDon.java</file>
+            <file>file:/F:/DoanJAVA/quanlyoto_javaswing/nbproject/private/private.xml</file>
+            <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/controller/QuanLyKhachHangController.java</file>
+            <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/controller/QuanLyNhanVienController.java</file>
+            <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/controller/ThemHoaDonController.java</file>
+            <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/dao/DangNhapDAO.java</file>
+            <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/controller/ChuyenManHinhController.java</file>
+            <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/model/SanPham.java</file>
+            <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/controller/DangNhapController.java</file>
+=======
             <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/view/SanPhamJPanel.java</file>
             <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/controller/QuanLyKhachHangController.java</file>
             <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/dao/HoaDonDAOImpl.java</file>
@@ -20,6 +42,7 @@
             <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/view/NhanVienJPanel.java</file>
             <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/view/NhaCungCapJPanel.java</file>
             <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/controller/QuanLyBanHangController.java</file>
+>>>>>>> main
         </group>
     </open-files>
 </project-private>
