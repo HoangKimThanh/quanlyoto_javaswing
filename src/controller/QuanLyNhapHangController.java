@@ -166,12 +166,6 @@ public class QuanLyNhapHangController {
         this.jBtnAdd=jBtnAdd;
         
         DangNhapController controllerDangNhap = new DangNhapController();
-        
-        if (controllerDangNhap.taiKhoanLogin.getChucVu().equals("Quản trị")) {
-            jBtnAdd.setVisible(true);
-        } else {
-            jBtnAdd.setVisible(false);
-        }
 
         this.jComboBoxNhaCC = jComboBoxNhaCC;
         
