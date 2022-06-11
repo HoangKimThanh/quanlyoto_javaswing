@@ -143,13 +143,13 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="jBtnAdd" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="61" max="32767" attributes="0"/>
                                   <Component id="jBtnXacNhan" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="140" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="jBtnPreviewPN" min="-2" pref="116" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -163,15 +163,19 @@
                                       </Group>
                                   </Group>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jTfNhanVien" max="32767" attributes="0"/>
-                                      <Component id="jComboBoxNhaCC" pref="225" max="32767" attributes="0"/>
+                                      <Component id="jTfNhanVien" min="-2" pref="225" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Component id="jComboBoxNhaCC" max="32767" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jBtnAdd" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
                           <EmptySpace pref="35" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="146" max="32767" attributes="0"/>
+                          <EmptySpace pref="166" max="32767" attributes="0"/>
                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
                       </Group>
@@ -185,7 +189,10 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                              <Component id="jComboBoxNhaCC" pref="28" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jComboBoxNhaCC" alignment="3" pref="28" max="32767" attributes="0"/>
+                                  <Component id="jBtnAdd" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -195,7 +202,7 @@
                           <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jBtnXacNhan" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jBtnAdd" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jBtnPreviewPN" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                       </Group>
@@ -256,6 +263,14 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnAddActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="jBtnPreviewPN">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Xem phi&#x1ebf;u nh&#x1ead;p"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnPreviewPNActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -566,8 +581,8 @@
         <Container class="javax.swing.JPanel" name="jPnTabPhieuNhap">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Xem phi&#x1ebf;u nh&#x1ead;p">
-                <Property name="tabTitle" type="java.lang.String" value="Xem phi&#x1ebf;u nh&#x1ead;p"/>
+              <JTabbedPaneConstraints tabName="Danh s&#xe1;ch phi&#x1ebf;u nh&#x1ead;p">
+                <Property name="tabTitle" type="java.lang.String" value="Danh s&#xe1;ch phi&#x1ebf;u nh&#x1ead;p"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>

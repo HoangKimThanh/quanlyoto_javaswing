@@ -36,8 +36,8 @@ public class ChuyenManHinhController {
     public void setView(JPanel jPnItem, JLabel jLbItem) {
         kindSelected = "BanHang";
         
-        jPnItem.setBackground(new Color(96, 100, 191));
-        jLbItem.setBackground(new Color(96, 100, 191));
+        jPnItem.setBackground(new Color(33,46,52));
+        jLbItem.setBackground(new Color(33,46,52));
         
         root.removeAll();
         root.setLayout(new BorderLayout());
@@ -104,8 +104,8 @@ public class ChuyenManHinhController {
         @Override
         public void mousePressed(MouseEvent e) {
             kindSelected = kind;
-            jPnItem.setBackground(new Color(96, 100, 191));            
-            jLbItem.setBackground(new Color(96, 100, 191));
+            jPnItem.setBackground(new Color(61, 86, 98));            
+            jLbItem.setBackground(new Color(61, 86, 98));
 
         }
 
@@ -115,15 +115,15 @@ public class ChuyenManHinhController {
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            jPnItem.setBackground(new Color(96, 100, 191));            
-            jLbItem.setBackground(new Color(96, 100, 191));
+            jPnItem.setBackground(new Color(61, 86, 98));            
+            jLbItem.setBackground(new Color(61, 86, 98));
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
             if (!kindSelected.equalsIgnoreCase(kind)) {
-                jPnItem.setBackground(new Color(76, 175, 80));            
-                jLbItem.setBackground(new Color(76, 175, 80));
+                jPnItem.setBackground(new Color(33,46,52));            
+                jLbItem.setBackground(new Color(33,46,52));
             }
         }
         
@@ -135,8 +135,8 @@ public class ChuyenManHinhController {
                 item.getjPn().setBackground(new Color(80, 99, 126));
                 item.getjLb().setBackground(new Color(80, 99, 126));
             } else {
-                item.getjPn().setBackground(new Color(76, 175, 80));            
-                item.getjLb().setBackground(new Color(76, 175, 80));
+                item.getjPn().setBackground(new Color(33,46,52));            
+                item.getjLb().setBackground(new Color(33,46,52));
             }
         }
     }

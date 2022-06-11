@@ -29,6 +29,7 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import model.KhachHang;
 import utility.ClassTableModel;
+import utility.XuatExcel;
 
 /**
  *
@@ -42,6 +43,7 @@ public class QuanLyKhachHangController {
     private JButton jBtnUpdate;
     private JButton jBtnDelete;
     private JButton jBtnReset;
+    private JButton jBtnXuatExcel;
 
     private JTextField jTfMaKH;
     private JTextField jTfHoTen;
@@ -54,15 +56,30 @@ public class QuanLyKhachHangController {
     private String[] listColumn = {"STT", "Mã KH", "Họ tên", "Số điện thoại", "Địa chỉ"};
 
     private TableRowSorter<TableModel> rowSorter = null;
+    
+    private JTable table;
 
-    public QuanLyKhachHangController(JPanel jPnView, JTextField jTfSearch, JButton jBtnAdd, JButton jBtnUpdate,
-            JButton jBtnDelete, JButton jBtnReset, JTextField jTfMaKhachHang, JTextField jTfHoTen, JTextField jTfDienThoai, JTextArea jTaDiaChi) {
+    public QuanLyKhachHangController(
+            JPanel jPnView, 
+            JTextField jTfSearch, 
+            JButton jBtnAdd, 
+            JButton jBtnUpdate,
+            JButton jBtnDelete, 
+            JButton jBtnReset, 
+            JButton jBtnXuatExcel,
+            JTextField jTfMaKhachHang, 
+            JTextField jTfHoTen, 
+            JTextField jTfDienThoai, 
+            JTextArea jTaDiaChi
+    ) {
         this.jPnView = jPnView;
         this.jTfSearch = jTfSearch;
         this.jBtnAdd = jBtnAdd;
         this.jBtnUpdate = jBtnUpdate;
         this.jBtnDelete = jBtnDelete;
         this.jBtnReset = jBtnReset;
+        this.jBtnXuatExcel = jBtnXuatExcel;
+        
         this.jTfMaKH = jTfMaKhachHang;
         this.jTfHoTen = jTfHoTen;
         this.jTfSDT = jTfDienThoai;
@@ -77,7 +94,7 @@ public class QuanLyKhachHangController {
         List<KhachHang> listItem = khachHangDAO.getList();
 
         DefaultTableModel model = new ClassTableModel().setTableKhachHang(listItem, listColumn);
-        JTable table = new JTable(model);
+        table = new JTable(model);
 
         rowSorter = new TableRowSorter<>(table.getModel());
 
@@ -113,14 +130,13 @@ public class QuanLyKhachHangController {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (table.getSelectedRow() != -1) {
-                    DefaultTableModel model = (DefaultTableModel) table.getModel();
                     int selectedRowIndex = table.getSelectedRow();
 
                     KhachHang khachHang = new KhachHang();
-                    khachHang.setMaKhachHang((int) model.getValueAt(selectedRowIndex, 1));
-                    khachHang.setHoTen(model.getValueAt(selectedRowIndex, 2).toString());
-                    khachHang.setDienThoai(model.getValueAt(selectedRowIndex, 3).toString());
-                    khachHang.setDiaChi(model.getValueAt(selectedRowIndex, 4).toString());
+                    khachHang.setMaKhachHang((int) table.getValueAt(selectedRowIndex, 1));
+                    khachHang.setHoTen(table.getValueAt(selectedRowIndex, 2).toString());
+                    khachHang.setDienThoai(table.getValueAt(selectedRowIndex, 3).toString());
+                    khachHang.setDiaChi(table.getValueAt(selectedRowIndex, 4).toString());
 
                     jTfMaKH.setText(Integer.toString(khachHang.getMaKhachHang()));
                     jTfHoTen.setText(khachHang.getHoTen());
@@ -231,6 +247,13 @@ public class QuanLyKhachHangController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 resetData();
+            }
+        });
+        
+        jBtnXuatExcel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new XuatExcel(table);
             }
         });
 

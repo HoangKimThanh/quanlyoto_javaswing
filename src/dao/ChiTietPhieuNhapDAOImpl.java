@@ -64,8 +64,8 @@ public class ChiTietPhieuNhapDAOImpl implements ChiTietPhieuNhapDAO {
             prep.setInt(1, ctPhieNhap.getMaPhieuNhap());
             prep.setInt(2, ctPhieNhap.getMaSanPham());
             prep.setInt(3, ctPhieNhap.getSoLuong());            
-            prep.setInt(4, ctPhieNhap.getDonGia());
-            prep.setInt(5, ctPhieNhap.getThanhTien());
+            prep.setLong(4, ctPhieNhap.getDonGia());
+            prep.setLong(5, ctPhieNhap.getThanhTien());
             
             int result = prep.executeUpdate();   
             if (result == 1) {

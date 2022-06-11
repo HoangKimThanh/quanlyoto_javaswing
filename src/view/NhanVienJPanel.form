@@ -180,7 +180,9 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="198" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jBtnXuatExcel" min="-2" pref="112" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -218,6 +220,7 @@
                                   <Component id="jBtnUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jBtnDelete" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jBtnReset" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jBtnXuatExcel" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                           </Group>
@@ -339,6 +342,17 @@
                       </AuxValues>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jTfMatKhau">
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jBtnXuatExcel">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="14" style="1"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t Excel"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnXuatExcelActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>

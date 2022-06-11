@@ -10,7 +10,8 @@ package model;
  */
 public class HoaDon {
     private String ngayLap, ghiChu;
-    private Integer maHD,maKH,maNV,tongTien;
+    private Integer maHD,maKH,maNV;
+    private long tongTien;
 
     public String getNgayLap() {
         return ngayLap;
@@ -44,11 +45,11 @@ public class HoaDon {
         this.maKH = maKH;
     }
 
-    public Integer getTongTien() {
+    public long getTongTien() {
         return tongTien;
     }
 
-    public void setTongTien(Integer tongTien) {
+    public void setTongTien(long tongTien) {
         this.tongTien = tongTien;
     }
 

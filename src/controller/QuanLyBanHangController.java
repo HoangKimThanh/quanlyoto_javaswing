@@ -59,12 +59,12 @@ import utility.ClassTableModel;
 public class QuanLyBanHangController {
 
     private JPanel showTable;
-    private JPanel showTableCart;
+    private JPanel showTableCart, root;
     private JTextField jTMaSP;
     private JTextField jTTenSP;
     private JTextField jTGia;
     private JLabel jLbAnh;
-    private JButton jBAddToCart, jBDelete, jBXuatHoaDon, jBUpdate;
+    private JButton jBAddToCart, jBDelete, jBtnXoaGioHang, jBUpdate;
     private JSpinner jSoLuong;
     private JButton jBTest;
     private SanPhamDAO sanPhamDAO = null;
@@ -76,7 +76,7 @@ public class QuanLyBanHangController {
     File fileAnhSP;
     Integer tongTien = 0;
 
-    public QuanLyBanHangController(JPanel showTable, JPanel showTableCart, JTextField jTMaSP, JTextField jTTenSP, JTextField jTGia, JSpinner jSoLuong, JButton jBAddToCart, JButton jBDelete, JLabel jLbAnh, JButton jBXuatHoaDon, JButton jBTest, JButton jBUpdate) {
+    public QuanLyBanHangController(JPanel showTable, JPanel showTableCart, JTextField jTMaSP, JTextField jTTenSP, JTextField jTGia, JSpinner jSoLuong, JButton jBAddToCart, JButton jBDelete, JLabel jLbAnh, JButton jBtnXoaGioHang, JButton jBTest, JButton jBUpdate, JPanel root) {
         this.showTable = showTable;
         this.showTableCart = showTableCart;
         this.jTMaSP = jTMaSP;
@@ -89,14 +89,15 @@ public class QuanLyBanHangController {
         this.jSoLuong = jSoLuong;
         this.jBDelete = jBDelete;
         this.listCart = new ArrayList<>();
-        this.jBXuatHoaDon = jBXuatHoaDon;
+        this.jBtnXoaGioHang = jBtnXoaGioHang;
         this.jBAddToCart = jBAddToCart;
         this.jBTest = jBTest;
         this.jBUpdate = jBUpdate;
+        this.root=root;
     }
 
     public void setDataToTable() {
-        List<SanPham> listItem = sanPhamDAO.getList();
+        List<SanPham> listItem = sanPhamDAO.getListCanBuy();
         DefaultTableModel model = new ClassTableModel().setTableBanHang(listItem, listColumn);
         JTable table = new JTable(model);
         jBDelete.setEnabled(true);
@@ -107,15 +108,14 @@ public class QuanLyBanHangController {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (table.getSelectedRow() != -1) {
-                    DefaultTableModel model = (DefaultTableModel) table.getModel();
                     int selectedRowIndex = table.getSelectedRow();
-                    jTMaSP.setText(model.getValueAt(selectedRowIndex, 1).toString());
-                    jTTenSP.setText(model.getValueAt(selectedRowIndex, 2).toString());
-                    jTGia.setText(model.getValueAt(selectedRowIndex, 3).toString());
-                    SpinnerNumberModel md = new SpinnerNumberModel(1, 1, Integer.parseInt(model.getValueAt(selectedRowIndex, 4).toString()), 1);
+                    jTMaSP.setText(table.getValueAt(selectedRowIndex, 1).toString());
+                    jTTenSP.setText(table.getValueAt(selectedRowIndex, 2).toString());
+                    jTGia.setText(table.getValueAt(selectedRowIndex, 3).toString());
+                    SpinnerNumberModel md = new SpinnerNumberModel(1, 1, Integer.parseInt(table.getValueAt(selectedRowIndex, 4).toString()), 1);
                     jSoLuong.setModel(md);
                     for (SanPham SP : listItem) {
-                        if ((model.getValueAt(selectedRowIndex, 1)).equals(SP.getMaSanPham())) {
+                        if ((table.getValueAt(selectedRowIndex, 1)).equals(SP.getMaSanPham())) {
                             loadAnh("src/images/SanPham/" + SP.getAnh());
                         }
                     }
@@ -149,10 +149,10 @@ public class QuanLyBanHangController {
         
         if (listCart.size() != 0) {
             jBTest.setEnabled(true);
-            jBXuatHoaDon.setEnabled(true);
+            jBtnXoaGioHang.setEnabled(true);
         } else {
             jBTest.setEnabled(false);
-            jBXuatHoaDon.setEnabled(false);
+            jBtnXoaGioHang.setEnabled(false);
         }
         DefaultTableModel model = new ClassTableModel().setTableBanHang(listCart, listColumn);
         JTable table = new JTable(model);
@@ -164,17 +164,15 @@ public class QuanLyBanHangController {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (table.getSelectedRow() != -1) {
-                    DefaultTableModel model = (DefaultTableModel) table.getModel();
                     int selectedRowIndex = table.getSelectedRow();
-                    selectedRowIndex = table.convertColumnIndexToModel(selectedRowIndex);
 
-                    jTMaSP.setText(model.getValueAt(selectedRowIndex, 1).toString());
-                    jTTenSP.setText(model.getValueAt(selectedRowIndex, 2).toString());
-                    jTGia.setText(model.getValueAt(selectedRowIndex, 3).toString());
-                    jSoLuong.setValue(model.getValueAt(selectedRowIndex, 4));
+                    jTMaSP.setText(table.getValueAt(selectedRowIndex, 1).toString());
+                    jTTenSP.setText(table.getValueAt(selectedRowIndex, 2).toString());
+                    jTGia.setText(table.getValueAt(selectedRowIndex, 3).toString());
+                    jSoLuong.setValue(table.getValueAt(selectedRowIndex, 4));
                     
                     for (SanPham SP : listItemA) {
-                        if ((model.getValueAt(selectedRowIndex, 1)).equals(SP.getMaSanPham())) {
+                        if ((table.getValueAt(selectedRowIndex, 1)).equals(SP.getMaSanPham())) {
                             loadAnh("src/images/SanPham/" + SP.getAnh());
                         }
                     }
@@ -259,9 +257,11 @@ public class QuanLyBanHangController {
                 HoaDon hoaDon = new HoaDon();
                 hoaDon.setNgayLap(java.time.LocalDate.now().toString());
                 hoaDon.setGhiChu("");
-
+                
+                DangNhapController controllerDangNhap = new DangNhapController();
+                
                 AddHoaDon frameAddHoaDon;
-                frameAddHoaDon = new AddHoaDon(hoaDon, listCart);
+                frameAddHoaDon = new AddHoaDon(hoaDon, listCart,controllerDangNhap.taiKhoanLogin.getHoTen());
                 frameAddHoaDon.setVisible(true);
                 frameAddHoaDon.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -287,7 +287,8 @@ public class QuanLyBanHangController {
             }
 
         });
-        jBXuatHoaDon.addActionListener(new ActionListener() {
+
+        jBtnXoaGioHang.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {

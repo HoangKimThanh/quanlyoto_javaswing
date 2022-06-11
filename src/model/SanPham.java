@@ -13,7 +13,7 @@ public class SanPham {
     private String loai;
     private String ten;
     private int soLuong;
-    private int gia;
+    private long gia;
     private int hanBaoHanh;
     private String anh;
 
@@ -49,11 +49,11 @@ public class SanPham {
         this.soLuong = soLuong;
     }
 
-    public int getGia() {
+    public long getGia() {
         return gia;
     }
 
-    public void setGia(int gia) {
+    public void setGia(long gia) {
         this.gia = gia;
     }
 

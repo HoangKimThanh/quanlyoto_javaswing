@@ -21,11 +21,13 @@ public class AddHoaDon extends javax.swing.JFrame {
     /**
      * Creates new form AddHoaDon
      */
-    public AddHoaDon(HoaDon hoaDon, List<SanPham> listCart) {
+    public AddHoaDon(HoaDon hoaDon, List<SanPham> listCart, String Hoten) {
         initComponents();
-        ThemHoaDonController controller =new ThemHoaDonController(jTTenNV, jCbMaNV, jCbMaKH, jBAddHD, this, jBAddKH);
-        controller.setEvent(hoaDon, listCart, this);
+        ThemHoaDonController controller =new ThemHoaDonController(jTTenNV, jCbMaKH, jBAddHD, this, jBAddKH,jEditHoaDon,jBtnIn);
+        jTTenNV.setText(Hoten);
         controller.loadKHToComboBox();
+        controller.setEvent(hoaDon, listCart, this);
+        
         
         
     }
@@ -42,38 +44,29 @@ public class AddHoaDon extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jCbMaNV = new javax.swing.JComboBox<>();
         jCbMaKH = new javax.swing.JComboBox<>();
         jTTenNV = new javax.swing.JTextField();
         jBAddKH = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jEditHoaDon = new javax.swing.JEditorPane();
+        jPanel3 = new javax.swing.JPanel();
         jBAddHD = new javax.swing.JButton();
+        jBtnIn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("THÊM HÓA ĐƠN");
         jPanel1.add(jLabel1);
 
-        jLabel2.setText("Mã nhân viên");
-
         jLabel3.setText("Tên nhân viên");
 
         jLabel4.setText("Mã khách hàng");
 
-        jCbMaNV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1" }));
-
-        jTTenNV.setText("jTextField1");
+        jTTenNV.setEnabled(false);
 
         jBAddKH.setText("Thêm KH");
-
-        jBAddHD.setText("OK");
-        jBAddHD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBAddHDActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -83,29 +76,19 @@ public class AddHoaDon extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jCbMaNV, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jCbMaKH, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTTenNV, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jBAddKH)
-                .addContainerGap(24, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBAddHD)
-                .addGap(172, 172, 172))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jCbMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTTenNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -114,10 +97,27 @@ public class AddHoaDon extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jCbMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBAddKH))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addComponent(jBAddHD)
-                .addGap(27, 27, 27))
+                .addContainerGap())
         );
+
+        jScrollPane1.setViewportView(jEditHoaDon);
+
+        jBAddHD.setText("Thanh toán");
+        jBAddHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAddHDActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jBAddHD);
+
+        jBtnIn.setText("In hóa đơn");
+        jBtnIn.setEnabled(false);
+        jBtnIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnInActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jBtnIn);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -125,13 +125,25 @@ public class AddHoaDon extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -142,6 +154,10 @@ public class AddHoaDon extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jBAddHDActionPerformed
 
+    private void jBtnInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnInActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnInActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -150,14 +166,16 @@ public class AddHoaDon extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAddHD;
     private javax.swing.JButton jBAddKH;
+    private javax.swing.JButton jBtnIn;
     private javax.swing.JComboBox<String> jCbMaKH;
-    private javax.swing.JComboBox<String> jCbMaNV;
+    private javax.swing.JEditorPane jEditHoaDon;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTTenNV;
     // End of variables declaration//GEN-END:variables
 }

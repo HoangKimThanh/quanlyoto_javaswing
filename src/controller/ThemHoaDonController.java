@@ -4,6 +4,8 @@
  */
 package controller;
 
+import controller.DangNhapController;
+import MyCustom.MyDialog;
 import dao.CTHDDAO;
 import dao.CTHDDAOImpl;
 import dao.HoaDonDAO;
@@ -12,13 +14,21 @@ import dao.KhachHangDAO;
 import dao.KhachHangDAOImpl;
 import dao.SanPhamDAO;
 import dao.SanPhamDAOImpl;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.print.PrinterException;
+import java.text.DecimalFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -35,34 +45,36 @@ import view.BanHangJPanel;
  * @author ASUS
  */
 public class ThemHoaDonController {
-
+    private DangNhapController controllerDangNhap;
+    private JEditorPane jEditHoaDon;
     private JTextField jTTenNV;
-    private JComboBox jCbMaNV;
     private JComboBox jCbMaKH;
-    private JButton jBAddHD;
+    private JButton jBAddHD, jBtnIn;
     private JFrame root;
     private JButton jBtnAddKH;
 
-    public ThemHoaDonController(JTextField jTTenNV, JComboBox jCbMaNV, JComboBox jCbMaKH, JButton jBAddHD, JFrame root, JButton jBtnAddKH) {
+    public ThemHoaDonController(JTextField jTTenNV, JComboBox jCbMaKH, JButton jBAddHD, JFrame root, JButton jBtnAddKH, JEditorPane jEditHoaDon, JButton jBtnIn) {
         this.jTTenNV = jTTenNV;
-        this.jCbMaNV = jCbMaNV;
         this.jCbMaKH = jCbMaKH;
         this.jBAddHD = jBAddHD;
         this.root = root;
-        this.jBtnAddKH = jBtnAddKH;
+        this.jBtnAddKH = jBtnAddKH; 
+        this.jEditHoaDon=jEditHoaDon;
+        this.jBtnIn=jBtnIn;
     }
 
     public void setEvent(HoaDon hoaDon, List<SanPham> listCart, JFrame k) {
-        jBAddHD.addMouseListener(new MouseAdapter() {
+        jBAddHD.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 try {
                     String[] container = (jCbMaKH.getSelectedItem().toString()).split("-");
+                    DangNhapController controllerDangNhap = new DangNhapController();
                     hoaDon.setMaKH(Integer.parseInt(container[0]));
-                    hoaDon.setMaNV(Integer.parseInt(jCbMaNV.getSelectedItem().toString()));
+                    hoaDon.setMaNV(controllerDangNhap.taiKhoanLogin.getMaNV());
 
                     HoaDonDAO hoaDonDAO = new HoaDonDAOImpl();
-                    Integer tongTien = 0;
+                    long tongTien = 0;
                     CTHDDAO cthdDAO = new CTHDDAOImpl();
 
                     for (SanPham sanPham : listCart) {
@@ -95,11 +107,13 @@ public class ThemHoaDonController {
                         int checkb = cthdDAO.createCTHD(cthd);
 
                     }
-
+                    showPreviewHoaDon(listCart);
+                    jBAddHD.setEnabled(false);
+                    jBtnIn.setEnabled(true);
                     if (check != 0) {
-                        new BanHangJPanel().setVisible(true);
-                        JOptionPane.showMessageDialog(null, "Thêm hóa đơn thành công", "Hóa đơn", JOptionPane.INFORMATION_MESSAGE);
-                        root.dispose();
+                        
+                        JOptionPane.showMessageDialog(null, "Thanh toán và thêm hóa đơn thành công", "Hóa đơn", JOptionPane.INFORMATION_MESSAGE);
+                        root.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
                     } else {
                         JOptionPane.showMessageDialog(null, "Có lỗi xảy ra, vui lòng thử lại", "Hóa đơn", JOptionPane.ERROR_MESSAGE);
@@ -111,9 +125,9 @@ public class ThemHoaDonController {
             }
 
         });
-        jBtnAddKH.addMouseListener(new MouseAdapter() {
+        jBtnAddKH.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 try {
                     AddKhachHang a = new AddKhachHang(k, hoaDon, listCart);
                     a.setVisible(true);
@@ -125,6 +139,19 @@ public class ThemHoaDonController {
             }
 
         });
+        jBtnIn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    if (!jEditHoaDon.getText().equals("")) {
+                        jEditHoaDon.print();
+                        root.dispose();
+                    }
+                } catch (PrinterException ex) {
+            }
+        }
+        });
+
     }
 
     public void loadKHToComboBox() {
@@ -134,4 +161,76 @@ public class ThemHoaDonController {
             jCbMaKH.addItem(KH.getMaKhachHang() + "-" + KH.getHoTen());
         }
     }
+    public void showPreviewHoaDon(List<SanPham> listCart) {
+        jEditHoaDon.setContentType("text/html");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        DecimalFormat dcf = new DecimalFormat("###,### VND");
+        String[] container = (jCbMaKH.getSelectedItem().toString()).split("-");
+        String hd = "<style> "
+                + "table {"
+                + "border: 1px solid;"
+                + "border-bottom: none"
+                + "}"
+                + "tr {"
+                + "border-bottom: 1px solid;"
+                + "}"
+                + "td {"
+                + "padding: 8px;"
+                + "} "
+                + "th {"
+                + "font-size:16pt"
+                + "}"
+                + "</style>";
+        hd += "<h1 style='text-align:center;'>HOÁ ĐƠN THANH TOÁN</h1>";
+        hd += "Nhân viên: " + jTTenNV.getText() + "<br/>";
+        hd += "Ngày lập: " + dtf.format(now) + "<br/>";
+        hd += "Khách hàng: " + container[1].toString() + "<br/>";
+        hd += "<div style='text-align:center;'>==========================================</div><br/>";
+        hd += "<div style='text-align:center'>";
+        hd += "<table style='max-width:100%'>";
+        hd += "<tr>"
+                + "<th>Mã SP</th>"
+                + "<th>Tên SP</th>"
+                + "<th>Số lượng</th>"
+                + "<th>Đơn giá</th>"
+                + "<th>Thành tiền</th>"
+                + "</tr>";
+        long tongTien=0;
+        for (SanPham sanPham : listCart) {
+                        tongTien = tongTien + sanPham.getGia() * sanPham.getSoLuong();
+                    }
+        for (SanPham SP : listCart) {
+            hd += "<tr>";
+            hd += "<td style='text-align:center;'>" + SP.getMaSanPham() + "</td>";
+            hd += "<td style='text-align:left;'>" + SP.getTen() + "</td>";
+            hd += "<td style='text-align:center;'>" + SP.getSoLuong() + "</td>";
+            hd += "<td style='text-align:center;'>" + SP.getGia() + "</td>";
+            hd += "<td style='text-align:center;'>" + SP.getSoLuong()*SP.getGia() + "</td>";
+            hd += "</tr>";
+        }
+        hd += "<tr>";
+        hd += "<td style='text-align:center;'>" + "</td>";
+        hd += "<td style='text-align:left;'>" + "</td>";
+        hd += "<td style='text-align:center;'>" + "</td>";
+        hd += "<td style='text-align:center;font-weight:bold'>Tổng cộng</td>";
+        hd += "<td style='text-align:center;'>" + dcf.format(tongTien) + "</td>";
+        hd += "</tr>";
+
+        hd += "</tr>";
+        hd += "</table>";
+        hd += "</div>";
+        hd += "<div style='text-align:center;'>==========================================</div><br/>";
+        jEditHoaDon.setText(hd);
+    }
+    private void btnInHoaDonActionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+            if (!jEditHoaDon.getText().equals("")) {
+                jEditHoaDon.print();
+                root.dispose();
+            }
+        } catch (PrinterException ex) {
+        }
+    }
+    
 }

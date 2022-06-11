@@ -17,8 +17,19 @@ public class NhaCungCapJPanel extends javax.swing.JPanel {
      */
     public NhaCungCapJPanel() {
         initComponents();
-        QuanLyNhaCungCapController controller = new QuanLyNhaCungCapController(jPnView, jBtnAdd, jBtnUpdate,
-                jBtnDelete, jBtnReset, jTfMaNcc, jTfTen, jTfSDT, jTfDiaChi, jTfSeach);
+        QuanLyNhaCungCapController controller = new QuanLyNhaCungCapController(
+                jPnView, 
+                jBtnAdd, 
+                jBtnUpdate,
+                jBtnDelete, 
+                jBtnReset, 
+                jBtnXuatExcel,
+                jTfMaNcc, 
+                jTfTen, 
+                jTfSDT, 
+                jTfDiaChi, 
+                jTfSeach
+        );
         controller.setDataToTable();
         controller.setEvent();
     }
@@ -46,6 +57,7 @@ public class NhaCungCapJPanel extends javax.swing.JPanel {
         jBtnUpdate = new javax.swing.JButton();
         jBtnDelete = new javax.swing.JButton();
         jBtnReset = new javax.swing.JButton();
+        jBtnXuatExcel = new javax.swing.JButton();
         jPnView = new javax.swing.JPanel();
         jLbSearch = new javax.swing.JLabel();
         jTfSeach = new javax.swing.JTextField();
@@ -99,6 +111,14 @@ public class NhaCungCapJPanel extends javax.swing.JPanel {
             }
         });
 
+        jBtnXuatExcel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jBtnXuatExcel.setText("Xuất Excel");
+        jBtnXuatExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnXuatExcelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -122,7 +142,8 @@ public class NhaCungCapJPanel extends javax.swing.JPanel {
                                 .addGap(63, 63, 63)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTfDiaChi)
-                                    .addComponent(jTfSDT)))))
+                                    .addComponent(jTfSDT))))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(107, 107, 107)
                         .addComponent(jBtnAdd)
@@ -131,7 +152,9 @@ public class NhaCungCapJPanel extends javax.swing.JPanel {
                         .addGap(34, 34, 34)
                         .addComponent(jBtnDelete)
                         .addGap(31, 31, 31)
-                        .addComponent(jBtnReset)))
+                        .addComponent(jBtnReset)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBtnXuatExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -158,7 +181,8 @@ public class NhaCungCapJPanel extends javax.swing.JPanel {
                     .addComponent(jBtnAdd)
                     .addComponent(jBtnUpdate)
                     .addComponent(jBtnDelete)
-                    .addComponent(jBtnReset))
+                    .addComponent(jBtnReset)
+                    .addComponent(jBtnXuatExcel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
@@ -195,7 +219,7 @@ public class NhaCungCapJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTfSeach, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,12 +250,17 @@ public class NhaCungCapJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jBtnResetActionPerformed
 
+    private void jBtnXuatExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnXuatExcelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnXuatExcelActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnAdd;
     private javax.swing.JButton jBtnDelete;
     private javax.swing.JButton jBtnReset;
     private javax.swing.JButton jBtnUpdate;
+    private javax.swing.JButton jBtnXuatExcel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLbDiaChi;
     private javax.swing.JLabel jLbMaNcc;

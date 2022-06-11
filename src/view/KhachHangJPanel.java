@@ -17,8 +17,19 @@ public class KhachHangJPanel extends javax.swing.JPanel {
      */
     public KhachHangJPanel() {
         initComponents();
-        QuanLyKhachHangController controller = new QuanLyKhachHangController(jPnView, jTfSeach, jBtnAdd, jBtnUpdate, jBtnDelete, jBtnReset,
-                jTfMaKH, jTfHoTen, jTfSDT, jTaDiaChi);
+        QuanLyKhachHangController controller = new QuanLyKhachHangController(
+                jPnView, 
+                jTfSeach, 
+                jBtnAdd, 
+                jBtnUpdate, 
+                jBtnDelete, 
+                jBtnReset,
+                jBtnXuatExcel,
+                jTfMaKH, 
+                jTfHoTen, 
+                jTfSDT, 
+                jTaDiaChi
+        );
         controller.setDataToTable();
         controller.setEvent();
     }
@@ -49,6 +60,7 @@ public class KhachHangJPanel extends javax.swing.JPanel {
         jBtnReset = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTaDiaChi = new javax.swing.JTextArea();
+        jBtnXuatExcel = new javax.swing.JButton();
         jPnView = new javax.swing.JPanel();
 
         jLbSearch.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -107,6 +119,14 @@ public class KhachHangJPanel extends javax.swing.JPanel {
         jTaDiaChi.setRows(5);
         jScrollPane1.setViewportView(jTaDiaChi);
 
+        jBtnXuatExcel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jBtnXuatExcel.setText("Xuất Excel");
+        jBtnXuatExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnXuatExcelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -136,8 +156,10 @@ public class KhachHangJPanel extends javax.swing.JPanel {
                         .addGap(34, 34, 34)
                         .addComponent(jBtnDelete)
                         .addGap(31, 31, 31)
-                        .addComponent(jBtnReset)))
-                .addGap(114, 114, 114))
+                        .addComponent(jBtnReset)
+                        .addGap(34, 34, 34)
+                        .addComponent(jBtnXuatExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,7 +185,8 @@ public class KhachHangJPanel extends javax.swing.JPanel {
                     .addComponent(jBtnAdd)
                     .addComponent(jBtnUpdate)
                     .addComponent(jBtnDelete)
-                    .addComponent(jBtnReset))
+                    .addComponent(jBtnReset)
+                    .addComponent(jBtnXuatExcel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(23, 23, 23))
         );
 
@@ -231,12 +254,17 @@ public class KhachHangJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jBtnResetActionPerformed
 
+    private void jBtnXuatExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnXuatExcelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnXuatExcelActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnAdd;
     private javax.swing.JButton jBtnDelete;
     private javax.swing.JButton jBtnReset;
     private javax.swing.JButton jBtnUpdate;
+    private javax.swing.JButton jBtnXuatExcel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLbDiaChi;
     private javax.swing.JLabel jLbHoTen;
