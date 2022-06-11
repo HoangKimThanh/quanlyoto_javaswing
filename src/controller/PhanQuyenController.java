@@ -5,6 +5,8 @@ import model.Quyen;
 import MyCustom.MyDialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import java.util.ArrayList;
 import javax.swing.JButton;
@@ -16,8 +18,8 @@ public class PhanQuyenController {
     private JComboBox jCbChucVu;
     private JComboBox jCbQuyen;
 
-    private JCheckBox jCheckBoxCreate;
     private JCheckBox jCheckBoxRead;
+    private JCheckBox jCheckBoxCreate;
     private JCheckBox jCheckBoxUpdate;
     private JCheckBox jCheckBoxDelete;
 
@@ -35,16 +37,16 @@ public class PhanQuyenController {
     public PhanQuyenController(
             JComboBox jCbChucVu,
             JComboBox jCbQuyen,
-            JCheckBox jCheckBoxCreate,
             JCheckBox jCheckBoxRead,
+            JCheckBox jCheckBoxCreate,
             JCheckBox jCheckBoxUpdate,
             JCheckBox jCheckBoxDelete,
             JButton jBtnUpdateAll
     ) {
         this.jCbChucVu = jCbChucVu;
         this.jCbQuyen = jCbQuyen;
-        this.jCheckBoxCreate = jCheckBoxCreate;
         this.jCheckBoxRead = jCheckBoxRead;
+        this.jCheckBoxCreate = jCheckBoxCreate;
         this.jCheckBoxUpdate = jCheckBoxUpdate;
         this.jCheckBoxDelete = jCheckBoxDelete;
 
@@ -58,7 +60,7 @@ public class PhanQuyenController {
                 if (chucVu.equals("-- Chọn chức vụ --") == false) {
                     resetData();
                     jCbQuyen.setEnabled(true);
-                    
+
                     jCbChucVu.setSelectedItem(chucVu);
                 } else {
                     resetData();
@@ -71,39 +73,70 @@ public class PhanQuyenController {
                 quyen = jCbQuyen.getSelectedItem().toString();
 
                 if (quyen.equals("-- Chọn quyền --") == false) {
-                    jCheckBoxCreate.setEnabled(true);
                     jCheckBoxRead.setEnabled(true);
-                    jCheckBoxUpdate.setEnabled(true);
-                    jCheckBoxDelete.setEnabled(true);
-                    
+                    if (quyen.equals("Thống kê")) {
+                        jCheckBoxCreate.setVisible(false);
+                        jCheckBoxUpdate.setVisible(false);
+                        jCheckBoxDelete.setVisible(false);
+                    } else {
+                        jCheckBoxCreate.setVisible(true);
+                        jCheckBoxUpdate.setVisible(true);
+                        jCheckBoxDelete.setVisible(true);
+                    }
+
                     jBtnUpdateAll.setEnabled(true);
 
                     Quyen quyenDoiTuong = phanQuyenDAO.getQuyen(chucVu, quyen);
 
-                    if (quyenDoiTuong.getCreate() == 1) {
-                        jCheckBoxCreate.setSelected(true);
-                    } else {
-                        jCheckBoxCreate.setSelected(false);
-                    }
-
                     if (quyenDoiTuong.getRead() == 1) {
                         jCheckBoxRead.setSelected(true);
+
+                        jCheckBoxCreate.setEnabled(true);
+                        jCheckBoxUpdate.setEnabled(true);
+                        jCheckBoxDelete.setEnabled(true);
+
+                        if (quyenDoiTuong.getCreate() == 1) {
+                            jCheckBoxCreate.setSelected(true);
+                        } else {
+                            jCheckBoxCreate.setSelected(false);
+                        }
+
+                        if (quyenDoiTuong.getUpdate() == 1) {
+                            jCheckBoxUpdate.setSelected(true);
+                        } else {
+                            jCheckBoxUpdate.setSelected(false);
+                        }
+
+                        if (quyenDoiTuong.getDelete() == 1) {
+                            jCheckBoxDelete.setSelected(true);
+                        } else {
+                            jCheckBoxDelete.setSelected(false);
+                        }
                     } else {
                         jCheckBoxRead.setSelected(false);
+                        jCheckBoxCreate.setEnabled(false);
+                        jCheckBoxUpdate.setEnabled(false);
+                        jCheckBoxDelete.setEnabled(false);
                     }
+                }
+            }
+        });
 
-                    if (quyenDoiTuong.getUpdate() == 1) {
-                        jCheckBoxUpdate.setSelected(true);
-                    } else {
-                        jCheckBoxUpdate.setSelected(false);
-                    }
+        jCheckBoxRead.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == 1) {
+                    jCheckBoxCreate.setEnabled(true);
+                    jCheckBoxUpdate.setEnabled(true);
+                    jCheckBoxDelete.setEnabled(true);
+                } else {
+                    jCheckBoxCreate.setSelected(false);
+                    jCheckBoxUpdate.setSelected(false);
+                    jCheckBoxDelete.setSelected(false);
 
-                    if (quyenDoiTuong.getDelete() == 1) {
-                        jCheckBoxDelete.setSelected(true);
-                    } else {
-                        jCheckBoxDelete.setSelected(false);
-                    }
-
+                    jCheckBoxCreate.setEnabled(false);
+                    jCheckBoxUpdate.setEnabled(false);
+                    jCheckBoxDelete.setEnabled(false);
                 }
             }
         });
@@ -126,17 +159,17 @@ public class PhanQuyenController {
         jCheckBoxRead.setSelected(false);
         jCheckBoxUpdate.setSelected(false);
         jCheckBoxDelete.setSelected(false);
-        
+
         jCheckBoxCreate.setEnabled(false);
         jCheckBoxRead.setEnabled(false);
         jCheckBoxUpdate.setEnabled(false);
         jCheckBoxDelete.setEnabled(false);
-        
+
         jCbChucVu.setSelectedItem("-- Chọn chức vụ --");
-        
+
         jCbQuyen.setSelectedItem("-- Chọn quyền --");
         jCbQuyen.setEnabled(false);
-        
+
         jBtnUpdateAll.setEnabled(false);
     }
 

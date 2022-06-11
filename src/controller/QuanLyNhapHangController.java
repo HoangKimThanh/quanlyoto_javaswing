@@ -177,7 +177,6 @@ public class QuanLyNhapHangController {
         
         DangNhapController controllerDangNhap = new DangNhapController();
         
-        
         if (controllerDangNhap.taiKhoanLogin.getChucVu().equals("Quản trị")) {
             jBtnAdd.setVisible(true);
         } else {
@@ -278,6 +277,7 @@ public class QuanLyNhapHangController {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (jTableKhoHang.getSelectedRow() != -1) {
+                    jTableHangChoNhap.removeRowSelectionInterval(0,jTableHangChoNhap.getRowCount()-1);
                     int selectedRowIndex = jTableKhoHang.getSelectedRow();
                     SanPham sanPham = new SanPham();
                     sanPham.setMaSanPham((int) jTableKhoHang.getValueAt(selectedRowIndex, 0));
@@ -355,7 +355,7 @@ public class QuanLyNhapHangController {
                     phieuNhap.setMaNhaCungCap((int) jTableDSPhieuNhap.getValueAt(selectedRowIndex, 1));
                     phieuNhap.setMaNhanVien((int) jTableDSPhieuNhap.getValueAt(selectedRowIndex, 2));
                     phieuNhap.setNgayLap(jTableDSPhieuNhap.getValueAt(selectedRowIndex, 3).toString());
-                    phieuNhap.setTongTien((int) jTableDSPhieuNhap.getValueAt(selectedRowIndex, 4));
+                    phieuNhap.setTongTien((long) jTableDSPhieuNhap.getValueAt(selectedRowIndex, 4));
                     
                     NhaCungCapDAO nhaCungCapDAO = new NhaCungCapDAOImpl();
                     NhaCungCap nhaCungCap = nhaCungCapDAO.getByMaNCC(phieuNhap.getMaNhaCungCap());
@@ -436,11 +436,13 @@ public class QuanLyNhapHangController {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (jTableHangChoNhap.getSelectedRow() != -1) {
+                    jTableKhoHang.removeRowSelectionInterval(0,jTableKhoHang.getRowCount()-1);
                     int selectedRowIndex = jTableHangChoNhap.getSelectedRow();
                     SanPham sanPham = new SanPham();
                     sanPham.setMaSanPham((int) jTableHangChoNhap.getValueAt(selectedRowIndex, 0));
                     sanPham.setTen(jTableHangChoNhap.getValueAt(selectedRowIndex, 1).toString());
-                    sanPham.setSoLuong((int) jTableHangChoNhap.getValueAt(selectedRowIndex, 2));
+                    sanPham.setGia((long) jTableHangChoNhap.getValueAt(selectedRowIndex, 2));
+                    sanPham.setSoLuong((int) jTableHangChoNhap.getValueAt(selectedRowIndex, 3));
                     
                     jTfMaSP.setText((sanPham.getMaSanPham()) + "");
                     jTfTenSP.setText(sanPham.getTen());

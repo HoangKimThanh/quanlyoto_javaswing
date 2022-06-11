@@ -3,13 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package view;
+import controller.DangNhapController;
 import controller.QuanLyBanHangController;
 import controller.QuanLyHoaDonController;
+import dao.PhanQuyenDAO;
+import dao.PhanQuyenDAOImpl;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
+import model.Quyen;
 import model.SanPham;
 
 /**
@@ -23,15 +27,51 @@ public class BanHangJPanel extends javax.swing.JPanel {
      */
     public BanHangJPanel() {
         initComponents();
-        QuanLyBanHangController controller = new QuanLyBanHangController(showTable,showTableCart,jTMaSP,jTTenSP,jTGia,jSoLuong,jBAddToCart, jBDelete, jLbAnh,
-        jBtnXoaGioHang,jBTest,jBUpdate,this);
-        QuanLyHoaDonController controllerb= new QuanLyHoaDonController(showHoaDon,showCTHD, jTMaHD, jTMaKH, jTMaNV,jTNgay, jTTienHD, jTMaHDCT, 
-            jTMaSPCT, jTSoLuongCT, jTGiaCT, jTTienCT,jBDeleteb,jTab);
-        jBTest.setVisible(true);
-        jBTest.setEnabled(false);
-        jBAddToCart.setEnabled(false);
-        jBUpdate.setVisible(true);
-        jBDelete.setVisible(true);
+        DangNhapController controllerDangNhap = new DangNhapController();
+        
+        PhanQuyenDAO phanQuyenDAO = new PhanQuyenDAOImpl();
+        Quyen quyen = phanQuyenDAO.getQuyen(controllerDangNhap.taiKhoanLogin.getChucVu(), 
+                "Quản lý hóa đơn");
+        
+        if (quyen.getCreate() == 0) {
+            jBTest.setVisible(false);
+        }
+        
+        if (quyen.getDelete()== 0) {
+            jBDeleteb.setVisible(false);
+        }
+        
+        QuanLyBanHangController controller = new QuanLyBanHangController(
+                showTable,
+                showTableCart,
+                jTMaSP,
+                jTTenSP,
+                jTGia,
+                jSoLuong,
+                jBAddToCart, 
+                jBDelete, 
+                jLbAnh,
+                jBtnXoaGioHang,
+                jBTest,
+                jBUpdate,
+                this);
+        
+        QuanLyHoaDonController controllerb= new QuanLyHoaDonController(
+                showHoaDon,
+                showCTHD, 
+                jTMaHD, 
+                jTMaKH, 
+                jTMaNV,
+                jTNgay, 
+                jTTienHD, 
+                jTMaHDCT, 
+                jTMaSPCT, 
+                jTSoLuongCT, 
+                jTGiaCT, 
+                jTTienCT,
+                jBDeleteb,
+                jTab);
+        
         controller.setDataToTable();
         controller.setDataToCart();
         controller.setEvent(controller);
@@ -388,9 +428,11 @@ public class BanHangJPanel extends javax.swing.JPanel {
         jPanel27.add(jBDelete);
 
         jBtnXoaGioHang.setText("XÓA GIỎ HÀNG");
+        jBtnXoaGioHang.setEnabled(false);
         jPanel34.add(jBtnXoaGioHang);
 
         jBTest.setText("XUẤT HÓA ĐƠN");
+        jBTest.setEnabled(false);
         jPanel34.add(jBTest);
 
         jLbAnh.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

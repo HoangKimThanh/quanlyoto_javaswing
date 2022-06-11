@@ -7,6 +7,9 @@ package view;
 import controller.PhanQuyenController;
 import controller.QuanLyNhanVienController;
 import controller.DangNhapController;
+import dao.PhanQuyenDAO;
+import dao.PhanQuyenDAOImpl;
+import model.Quyen;
 
 /**
  *
@@ -19,6 +22,24 @@ public class NhanVienJPanel extends javax.swing.JPanel {
      */
     public NhanVienJPanel() {
         initComponents();
+        
+        DangNhapController controllerDangNhap = new DangNhapController();
+        
+        PhanQuyenDAO phanQuyenDAO = new PhanQuyenDAOImpl();
+        Quyen quyen = phanQuyenDAO.getQuyen(controllerDangNhap.taiKhoanLogin.getChucVu(), 
+                "Quản lý nhân viên");
+        
+        if (quyen.getCreate() == 0) {
+            jBtnAdd.setVisible(false);
+        }
+        
+        if (quyen.getUpdate()== 0) {
+            jBtnUpdate.setVisible(false);
+        }
+        
+        if (quyen.getDelete()== 0) {
+            jBtnDelete.setVisible(false);
+        }
         
         QuanLyNhanVienController controller = new QuanLyNhanVienController(
                 jPnView, 
@@ -37,8 +58,8 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         PhanQuyenController controllerPhanQuyen = new PhanQuyenController(
                 jCbChucVu,
                 jCbQuyen,
-                jCheckBoxCreate,
                 jCheckBoxRead,
+                jCheckBoxCreate,
                 jCheckBoxUpdate,
                 jCheckBoxDelete,
                 jBtnUpdateAll
@@ -46,8 +67,6 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         controller.setDataToTable();
         controller.setEvent();
         controllerPhanQuyen.setEvent();
-
-        DangNhapController controllerDangNhap = new DangNhapController();
         
         if (controllerDangNhap.taiKhoanLogin.getChucVu().equals("Quản trị")) {
             jTabbedPane1.setEnabled(true);
@@ -97,8 +116,8 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         jLabel17 = new javax.swing.JLabel();
         jCbQuyen = new javax.swing.JComboBox();
         jBtnUpdateAll = new javax.swing.JButton();
-        jCheckBoxCreate = new javax.swing.JCheckBox();
         jCheckBoxRead = new javax.swing.JCheckBox();
+        jCheckBoxCreate = new javax.swing.JCheckBox();
         jCheckBoxUpdate = new javax.swing.JCheckBox();
         jCheckBoxDelete = new javax.swing.JCheckBox();
 
@@ -330,7 +349,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel15.setText("Chức vụ:");
 
-        jCbChucVu.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-- Chọn chức vụ --", "Quản trị", "Quản lý", "Nhân viên" }));
+        jCbChucVu.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-- Chọn chức vụ --", "Quản lý", "Nhân viên" }));
         jCbChucVu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCbChucVuActionPerformed(evt);
@@ -340,7 +359,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel17.setText("Nhóm quyền:");
 
-        jCbQuyen.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-- Chọn quyền --", "Quản lý sản phẩm", "Quản lý hóa đơn", "Quản lý nhân viên", "Quản lý khách hàng", "Quản lý nhà cung cấp", "Thống kê" }));
+        jCbQuyen.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-- Chọn quyền --", "Quản lý sản phẩm", "Quản lý hóa đơn", "Quản lý nhân viên", "Quản lý khách hàng", "Quản lý nhập hàng", "Quản lý nhà cung cấp", "Thống kê" }));
         jCbQuyen.setEnabled(false);
         jCbQuyen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -351,16 +370,16 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         jBtnUpdateAll.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jBtnUpdateAll.setText("Cập nhật quyền");
 
-        jCheckBoxCreate.setText("Xem");
-        jCheckBoxCreate.setEnabled(false);
-        jCheckBoxCreate.addActionListener(new java.awt.event.ActionListener() {
+        jCheckBoxRead.setText("Xem");
+        jCheckBoxRead.setEnabled(false);
+        jCheckBoxRead.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxCreateActionPerformed(evt);
+                jCheckBoxReadActionPerformed(evt);
             }
         });
 
-        jCheckBoxRead.setText("Thêm");
-        jCheckBoxRead.setEnabled(false);
+        jCheckBoxCreate.setText("Thêm");
+        jCheckBoxCreate.setEnabled(false);
 
         jCheckBoxUpdate.setText("Sửa");
         jCheckBoxUpdate.setEnabled(false);
@@ -393,13 +412,13 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                         .addGroup(jPnPhanQuyenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPnPhanQuyenLayout.createSequentialGroup()
                                 .addGroup(jPnPhanQuyenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBoxCreate)
+                                    .addComponent(jCheckBoxRead)
                                     .addComponent(jCheckBoxDelete))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPnPhanQuyenLayout.createSequentialGroup()
                                 .addGroup(jPnPhanQuyenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jCheckBoxUpdate)
-                                    .addComponent(jCheckBoxRead))
+                                    .addComponent(jCheckBoxCreate))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 266, Short.MAX_VALUE)
                                 .addComponent(jBtnUpdateAll, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(170, 170, 170))))))
@@ -417,11 +436,11 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel17)
                     .addComponent(jCbQuyen, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jCheckBoxCreate)
+                .addComponent(jCheckBoxRead)
                 .addGap(20, 20, 20)
                 .addGroup(jPnPhanQuyenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPnPhanQuyenLayout.createSequentialGroup()
-                        .addComponent(jCheckBoxRead)
+                        .addComponent(jCheckBoxCreate)
                         .addGap(18, 18, 18)
                         .addComponent(jCheckBoxUpdate))
                     .addComponent(jBtnUpdateAll, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -489,9 +508,9 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCbQuyenActionPerformed
 
-    private void jCheckBoxCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxCreateActionPerformed
+    private void jCheckBoxReadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxReadActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBoxCreateActionPerformed
+    }//GEN-LAST:event_jCheckBoxReadActionPerformed
 
     private void jCbChucVu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCbChucVu1ActionPerformed
         // TODO add your handling code here:

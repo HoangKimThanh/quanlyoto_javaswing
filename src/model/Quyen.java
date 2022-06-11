@@ -2,7 +2,7 @@ package model;
 
 public class Quyen {
     private String chucVu;
-    private String tenloaiquanly;
+    private String tenLoaiQuanLy;
     private int create;
     private int read;
     private int update;
@@ -16,12 +16,12 @@ public class Quyen {
         this.chucVu = chucVu;
     }
 
-    public String getTenloaiquanly() {
-        return tenloaiquanly;
+    public String getTenLoaiQuanLy() {
+        return tenLoaiQuanLy;
     }
 
-    public void setTenloaiquanly(String tenloaiquanly) {
-        this.tenloaiquanly = tenloaiquanly;
+    public void setTenLoaiQuanLy(String tenLoaiQuanLy) {
+        this.tenLoaiQuanLy = tenLoaiQuanLy;
     }
 
     public int getCreate() {
@@ -60,9 +60,9 @@ public class Quyen {
     }
     
 
-    public Quyen(String chucVu, String tenloaiquanly, int create, int read, int update, int delete) {
+    public Quyen(String chucVu, String tenLoaiQuanLy, int create, int read, int update, int delete) {
         this.chucVu = chucVu;
-        this.tenloaiquanly = tenloaiquanly;
+        this.tenLoaiQuanLy = tenLoaiQuanLy;
         this.create = create;
         this.read = read;
         this.update = update;
@@ -71,7 +71,7 @@ public class Quyen {
 
     @Override
     public String toString() {
-        return "Quyen{" + "chucVu=" + chucVu + ", tenloaiquanly=" + tenloaiquanly + ", create=" + create + ", read=" + read + ", update=" + update + ", delete=" + delete + '}';
+        return "Quyen{" + "chucVu=" + chucVu + ", tenloaiquanly=" + tenLoaiQuanLy + ", create=" + create + ", read=" + read + ", update=" + update + ", delete=" + delete + '}';
     }
     
     

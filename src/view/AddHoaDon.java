@@ -21,9 +21,9 @@ public class AddHoaDon extends javax.swing.JFrame {
     /**
      * Creates new form AddHoaDon
      */
-    public AddHoaDon(HoaDon hoaDon, List<SanPham> listCart, String Hoten) {
+    public AddHoaDon(HoaDon hoaDon, List<SanPham> listCart, String Hoten, JPanel showTableCart) {
         initComponents();
-        ThemHoaDonController controller =new ThemHoaDonController(jTTenNV, jCbMaKH, jBAddHD, this, jBAddKH,jEditHoaDon,jBtnIn);
+        ThemHoaDonController controller =new ThemHoaDonController(jTTenNV, jCbMaKH, jBAddHD, this, jBAddKH,jEditHoaDon,jBtnIn,showTableCart);
         jTTenNV.setText(Hoten);
         controller.loadKHToComboBox();
         controller.setEvent(hoaDon, listCart, this);

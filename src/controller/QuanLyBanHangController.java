@@ -261,7 +261,7 @@ public class QuanLyBanHangController {
                 DangNhapController controllerDangNhap = new DangNhapController();
                 
                 AddHoaDon frameAddHoaDon;
-                frameAddHoaDon = new AddHoaDon(hoaDon, listCart,controllerDangNhap.taiKhoanLogin.getHoTen());
+                frameAddHoaDon = new AddHoaDon(hoaDon, listCart,controllerDangNhap.taiKhoanLogin.getHoTen(),showTableCart);
                 frameAddHoaDon.setVisible(true);
                 frameAddHoaDon.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
