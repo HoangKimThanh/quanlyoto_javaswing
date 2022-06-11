@@ -31,7 +31,7 @@ public class PhanQuyenDAOImpl implements PhanQuyenDAO {
             while (rs.next()) {
                 Quyen phanQuyen = new Quyen();
                 phanQuyen.setChucVu(rs.getString("chucvu"));
-                phanQuyen.setTenloaiquanly(rs.getString("tenloaiquanly"));
+                phanQuyen.setTenLoaiQuanLy(rs.getString("tenloaiquanly"));
                 phanQuyen.setCreate(rs.getInt("them"));
                 phanQuyen.setRead(rs.getInt("xem"));
 
@@ -52,17 +52,17 @@ public class PhanQuyenDAOImpl implements PhanQuyenDAO {
     }
 
     @Override
-    public Quyen getQuyen(String quyen, String tenloaiquanly) {
+    public Quyen getQuyen(String chucVu, String tenLoaiQuanLy) {
         try {
             Connection cons = DBConnection.getConnection();
-            String sql = "SELECT * FROM quyen where chucvu = '" + quyen + "' AND tenloaiquanly='" + tenloaiquanly + "'";
+            String sql = "SELECT * FROM quyen where chucvu = '" + chucVu + "' AND tenloaiquanly='" + tenLoaiQuanLy + "'";
             PreparedStatement ps = cons.prepareCall(sql);
             ResultSet rs = ps.executeQuery();
 
             Quyen phanQuyen = new Quyen();
             while (rs.next()) {
                 phanQuyen.setChucVu(rs.getString("chucvu"));
-                phanQuyen.setTenloaiquanly(rs.getString("tenloaiquanly"));
+                phanQuyen.setTenLoaiQuanLy(rs.getString("tenloaiquanly"));
                 phanQuyen.setCreate(rs.getInt("them"));
                 phanQuyen.setRead(rs.getInt("xem"));
                 phanQuyen.setUpdate(rs.getInt("sua"));
@@ -98,7 +98,7 @@ public class PhanQuyenDAOImpl implements PhanQuyenDAO {
             pre.setInt(3, phanQuyen.getUpdate());
             pre.setInt(4, phanQuyen.getDelete());
             pre.setString(5, phanQuyen.getChucVu());
-            pre.setString(6, phanQuyen.getTenloaiquanly());
+            pre.setString(6, phanQuyen.getTenLoaiQuanLy());
             return pre.executeUpdate() > 0;
         } catch (SQLException ex) {
             System.out.println(ex);

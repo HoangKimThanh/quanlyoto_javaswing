@@ -5,6 +5,11 @@
 package view;
 
 import controller.QuanLyKhachHangController;
+import controller.DangNhapController;
+import dao.PhanQuyenDAO;
+import dao.PhanQuyenDAOImpl;
+import javax.swing.JButton;
+import model.Quyen;
 
 /**
  *
@@ -17,6 +22,25 @@ public class KhachHangJPanel extends javax.swing.JPanel {
      */
     public KhachHangJPanel() {
         initComponents();
+        DangNhapController controllerDangNhap = new DangNhapController();
+        
+        PhanQuyenDAO phanQuyenDAO = new PhanQuyenDAOImpl();
+        Quyen quyen = phanQuyenDAO.getQuyen(controllerDangNhap.taiKhoanLogin.getChucVu(), 
+                "Quản lý khách hàng");
+        
+        if (quyen.getCreate() == 0) {
+            jBtnAdd.setVisible(false);
+        }
+        
+        if (quyen.getUpdate()== 0) {
+            jBtnUpdate.setVisible(false);
+        }
+        
+        if (quyen.getDelete()== 0) {
+            jBtnDelete.setVisible(false);
+        }
+        
+        
         QuanLyKhachHangController controller = new QuanLyKhachHangController(
                 jPnView, 
                 jTfSeach, 

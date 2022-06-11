@@ -6,6 +6,9 @@ package view;
 
 import controller.DangNhapController;
 import controller.QuanLyNhapHangController;
+import dao.PhanQuyenDAO;
+import dao.PhanQuyenDAOImpl;
+import model.Quyen;
 
 /**
  *
@@ -19,6 +22,21 @@ public class NhapHangJPanel extends javax.swing.JPanel {
     public NhapHangJPanel() {
         initComponents();
         DangNhapController controllerDangNhap = new DangNhapController();
+        
+        PhanQuyenDAO phanQuyenDAO = new PhanQuyenDAOImpl();
+        Quyen quyen = phanQuyenDAO.getQuyen(controllerDangNhap.taiKhoanLogin.getChucVu(), 
+                "Quản lý nhập hàng");
+        
+        if (quyen.getCreate() == 0) {
+            jBtnXacNhan.setVisible(false);
+        }
+        Quyen quyenNhapHang = phanQuyenDAO.getQuyen(controllerDangNhap.taiKhoanLogin.getChucVu(), 
+                "Quản lý nhà cung cấp");
+        
+        if (quyenNhapHang.getCreate() == 0) {
+            jBtnAdd.setVisible(false);
+        }
+        
         QuanLyNhapHangController controller = new QuanLyNhapHangController(jTabbedPane,
             jPnTabNhapHang, jPnTabPhieuNhap,
             jScrollPaneKhoHang, jScrollPaneHangChoNhap, jScrollPaneDSPhieuNhap, jScrollPaneChiTietPN,
