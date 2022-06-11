@@ -561,11 +561,13 @@
                         <Component class="javax.swing.JButton" name="jBtnXoaGioHang">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="X&#xd3;A GI&#x1ece; H&#xc0;NG"/>
+                            <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JButton" name="jBTest">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="XU&#x1ea4;T H&#xd3;A &#x110;&#x1a0;N"/>
+                            <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
                         </Component>
                       </SubComponents>

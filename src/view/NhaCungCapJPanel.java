@@ -4,7 +4,11 @@
  */
 package view;
 
+import controller.DangNhapController;
 import controller.QuanLyNhaCungCapController;
+import dao.PhanQuyenDAO;
+import dao.PhanQuyenDAOImpl;
+import model.Quyen;
 
 /**
  *
@@ -17,6 +21,25 @@ public class NhaCungCapJPanel extends javax.swing.JPanel {
      */
     public NhaCungCapJPanel() {
         initComponents();
+        
+        DangNhapController controllerDangNhap = new DangNhapController();
+        
+        PhanQuyenDAO phanQuyenDAO = new PhanQuyenDAOImpl();
+        Quyen quyen = phanQuyenDAO.getQuyen(controllerDangNhap.taiKhoanLogin.getChucVu(), 
+                "Quản lý nhà cung cấp");
+        
+        if (quyen.getCreate() == 0) {
+            jBtnAdd.setVisible(false);
+        }
+        
+        if (quyen.getUpdate()== 0) {
+            jBtnUpdate.setVisible(false);
+        }
+        
+        if (quyen.getDelete()== 0) {
+            jBtnDelete.setVisible(false);
+        }
+        
         QuanLyNhaCungCapController controller = new QuanLyNhaCungCapController(
                 jPnView, 
                 jBtnAdd, 

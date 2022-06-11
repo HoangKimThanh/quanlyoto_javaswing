@@ -425,7 +425,8 @@ public class QuanLyNhapHangController {
                     SanPham sanPham = new SanPham();
                     sanPham.setMaSanPham((int) jTableHangChoNhap.getValueAt(selectedRowIndex, 0));
                     sanPham.setTen(jTableHangChoNhap.getValueAt(selectedRowIndex, 1).toString());
-                    sanPham.setSoLuong((int) jTableHangChoNhap.getValueAt(selectedRowIndex, 2));
+                    sanPham.setGia((long) jTableHangChoNhap.getValueAt(selectedRowIndex, 2));
+                    sanPham.setSoLuong((int) jTableHangChoNhap.getValueAt(selectedRowIndex, 3));
                     
                     jTfMaSP.setText((sanPham.getMaSanPham()) + "");
                     jTfTenSP.setText(sanPham.getTen());

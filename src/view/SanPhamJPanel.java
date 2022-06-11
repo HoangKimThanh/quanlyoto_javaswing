@@ -6,6 +6,9 @@ package view;
 
 import controller.QuanLySanPhamController;
 import controller.DangNhapController;
+import dao.PhanQuyenDAO;
+import dao.PhanQuyenDAOImpl;
+import model.Quyen;
 
 /**
  *
@@ -18,6 +21,23 @@ public class SanPhamJPanel extends javax.swing.JPanel {
      */
     public SanPhamJPanel() {
         initComponents();
+        
+        DangNhapController controllerDangNhap = new DangNhapController();
+        PhanQuyenDAO phanQuyenDAO = new PhanQuyenDAOImpl();
+        Quyen quyen = phanQuyenDAO.getQuyen(controllerDangNhap.taiKhoanLogin.getChucVu(), 
+                "Quản lý sản phẩm");
+        
+        if (quyen.getCreate() == 0) {
+            jBtnAdd.setVisible(false);
+        }
+        
+        if (quyen.getUpdate()== 0) {
+            jBtnUpdate.setVisible(false);
+        }
+        
+        if (quyen.getDelete()== 0) {
+            jBtnDelete.setVisible(false);
+        }
         QuanLySanPhamController controller = new QuanLySanPhamController( 
                 jPnView,  
                 jBtnAdd,  
@@ -36,14 +56,6 @@ public class SanPhamJPanel extends javax.swing.JPanel {
                 jTfHanBaoHanh);
         controller.setDataToTable();
         controller.setEvent();
-        
-        DangNhapController controllerDangNhap = new DangNhapController();
-        if (controllerDangNhap.taiKhoanLogin.getChucVu().equals("Nhân viên")) {
-            jBtnAdd.setEnabled(false);
-            jBtnUpdate.setEnabled(false);
-            jBtnDelete.setEnabled(false);
-            jBtnReset.setEnabled(false);
-        }
     }
 
     /**

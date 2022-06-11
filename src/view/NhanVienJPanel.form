@@ -466,7 +466,7 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jCheckBoxCreate" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jCheckBoxRead" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="jCheckBoxDelete" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -474,7 +474,7 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="jCheckBoxUpdate" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jCheckBoxRead" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jCheckBoxCreate" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace pref="266" max="32767" attributes="0"/>
                                           <Component id="jBtnUpdateAll" min="-2" pref="147" max="-2" attributes="0"/>
@@ -501,11 +501,11 @@
                               <Component id="jCbQuyen" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jCheckBoxCreate" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCheckBoxRead" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="jCheckBoxRead" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxCreate" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jCheckBoxUpdate" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -538,11 +538,10 @@
                 <Component class="javax.swing.JComboBox" name="jCbChucVu">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="4">
+                      <StringArray count="3">
                         <StringItem index="0" value="-- Ch&#x1ecd;n ch&#x1ee9;c v&#x1ee5; --"/>
-                        <StringItem index="1" value="Qu&#x1ea3;n tr&#x1ecb;"/>
-                        <StringItem index="2" value="Qu&#x1ea3;n l&#xfd;"/>
-                        <StringItem index="3" value="Nh&#xe2;n vi&#xea;n"/>
+                        <StringItem index="1" value="Qu&#x1ea3;n l&#xfd;"/>
+                        <StringItem index="2" value="Nh&#xe2;n vi&#xea;n"/>
                       </StringArray>
                     </Property>
                   </Properties>
@@ -564,14 +563,15 @@
                 <Component class="javax.swing.JComboBox" name="jCbQuyen">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="7">
+                      <StringArray count="8">
                         <StringItem index="0" value="-- Ch&#x1ecd;n quy&#x1ec1;n --"/>
                         <StringItem index="1" value="Qu&#x1ea3;n l&#xfd; s&#x1ea3;n ph&#x1ea9;m"/>
                         <StringItem index="2" value="Qu&#x1ea3;n l&#xfd; h&#xf3;a &#x111;&#x1a1;n"/>
                         <StringItem index="3" value="Qu&#x1ea3;n l&#xfd; nh&#xe2;n vi&#xea;n"/>
                         <StringItem index="4" value="Qu&#x1ea3;n l&#xfd; kh&#xe1;ch h&#xe0;ng"/>
-                        <StringItem index="5" value="Qu&#x1ea3;n l&#xfd; nh&#xe0; cung c&#x1ea5;p"/>
-                        <StringItem index="6" value="Th&#x1ed1;ng k&#xea;"/>
+                        <StringItem index="5" value="Qu&#x1ea3;n l&#xfd; nh&#x1ead;p h&#xe0;ng"/>
+                        <StringItem index="6" value="Qu&#x1ea3;n l&#xfd; nh&#xe0; cung c&#x1ea5;p"/>
+                        <StringItem index="7" value="Th&#x1ed1;ng k&#xea;"/>
                       </StringArray>
                     </Property>
                     <Property name="enabled" type="boolean" value="false"/>
@@ -591,16 +591,16 @@
                     <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t quy&#x1ec1;n"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JCheckBox" name="jCheckBoxCreate">
+                <Component class="javax.swing.JCheckBox" name="jCheckBoxRead">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Xem"/>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxCreateActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxReadActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JCheckBox" name="jCheckBoxRead">
+                <Component class="javax.swing.JCheckBox" name="jCheckBoxCreate">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
                     <Property name="enabled" type="boolean" value="false"/>

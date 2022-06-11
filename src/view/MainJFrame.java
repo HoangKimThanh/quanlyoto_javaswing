@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.WindowConstants;
 import controller.DangNhapController;
+import dao.PhanQuyenDAO;
+import dao.PhanQuyenDAOImpl;
+import model.Quyen;
 
 /**
  *
@@ -38,35 +41,70 @@ public class MainJFrame extends javax.swing.JFrame {
 
         DangNhapController controllerDangNhap = new DangNhapController();
 
+        PhanQuyenDAO phanQuyenDAO = new PhanQuyenDAOImpl();
+
         List<DanhMucBean> listItem = new ArrayList<>();
 
         listItem.add(new DanhMucBean("SanPham", jPnSanPham, jLbSanPham));
         listItem.add(new DanhMucBean("BanHang", jPnBanHang, jLbBanHang));
+        listItem.add(new DanhMucBean("NhanVien", jPnNhanVien, jLbNhanVien));
         listItem.add(new DanhMucBean("KhachHang", jPnKhachHang, jLbKhachHang));
+        listItem.add(new DanhMucBean("NhapHang", jPnNhapHang, jLbNhapHang));
+        listItem.add(new DanhMucBean("NhaCungCap", jPnNhaCungCap, jLbNhaCungCap));
+        listItem.add(new DanhMucBean("ThongKe", jPnThongKe, jLbThongKe));
 
         String chucVu = controllerDangNhap.taiKhoanLogin.getChucVu();
 
-        switch (chucVu) {
-            case "Nhân viên":
-                jPnThongKe.setVisible(false);
-                jPnNhanVien.setVisible(false);
-                jPnNhapHang.setVisible(false);
-                jPnNhaCungCap.setVisible(false);
-                break;
-            case "Quản lý":
-                listItem.add(new DanhMucBean("ThongKe", jPnThongKe, jLbThongKe));
-                listItem.add(new DanhMucBean("NhanVien", jPnNhanVien, jLbNhanVien));
-                listItem.add(new DanhMucBean("NhapHang", jPnNhapHang, jLbNhapHang));
-                jPnNhaCungCap.setVisible(false);
-                break;
-            case "Quản trị":
-                listItem.add(new DanhMucBean("ThongKe", jPnThongKe, jLbThongKe));
-                listItem.add(new DanhMucBean("NhanVien", jPnNhanVien, jLbNhanVien));
-                listItem.add(new DanhMucBean("NhapHang", jPnNhapHang, jLbNhapHang));
-                listItem.add(new DanhMucBean("NhaCungCap", jPnNhaCungCap, jLbNhaCungCap));
-                break;
-            default:
-                throw new AssertionError();
+        String[] listQuanLy = {"Quản lý sản phẩm",
+            "Quản lý hóa đơn",
+            "Quản lý nhân viên",
+            "Quản lý khách hàng",
+            "Quản lý nhập hàng",
+            "Quản lý nhà cung cấp",
+            "Thống kê"};
+
+        for (String quanLy : listQuanLy) {
+            Quyen quyen = phanQuyenDAO.getQuyen(chucVu, quanLy);
+
+            switch (quanLy) {
+                case "Quản lý sản phẩm":
+                    if (quyen.getRead() != 1) {
+                        jPnSanPham.setVisible(false);
+                    }
+                    break;
+                case "Quản lý hóa đơn":
+                    if (quyen.getRead() != 1) {
+                        jPnBanHang.setVisible(false);
+                    }
+                    break;
+                case "Quản lý nhân viên":
+                    if (quyen.getRead() != 1) {
+                        jPnNhanVien.setVisible(false);
+                    }
+                    break;
+                case "Quản lý khách hàng":
+                    if (quyen.getRead() != 1) {
+                        jPnKhachHang.setVisible(false);
+                    }
+                    break;
+                case "Quản lý nhập hàng":
+                    if (quyen.getRead() != 1) {
+                        jPnNhapHang.setVisible(false);
+                    }
+                    break;
+                case "Quản lý nhà cung cấp":
+                    if (quyen.getRead() != 1) {
+                        jPnNhaCungCap.setVisible(false);
+                    }
+                    break;
+                case "Thống kê":
+                    if (quyen.getRead() != 1) {
+                        jPnThongKe.setVisible(false);
+                    }
+                    break;
+                default:
+                    throw new AssertionError();
+            }
         }
 
         chuyenManHinhController.setEvent(listItem);
