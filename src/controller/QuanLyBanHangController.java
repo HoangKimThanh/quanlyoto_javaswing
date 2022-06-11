@@ -62,7 +62,7 @@ public class QuanLyBanHangController {
     private JPanel showTableCart, root;
     private JTextField jTMaSP;
     private JTextField jTTenSP;
-    private JTextField jTGia;
+    private JTextField jTGia, jTfSearch;
     private JLabel jLbAnh;
     private JButton jBAddToCart, jBDelete, jBtnXoaGioHang, jBUpdate;
     private JSpinner jSoLuong;
@@ -73,10 +73,12 @@ public class QuanLyBanHangController {
     private List<SanPham> listCart = null;
     private String[] listColumn = {"STT", "Mã SP", "Tên SP", "GIÁ", "SỐ LƯỢNG"};
     private TableRowSorter<TableModel> rowSorter = null;
+    private TableRowSorter<TableModel> rowSorter1 = null;
+    private JTable table, tableCart;
     File fileAnhSP;
     Integer tongTien = 0;
 
-    public QuanLyBanHangController(JPanel showTable, JPanel showTableCart, JTextField jTMaSP, JTextField jTTenSP, JTextField jTGia, JSpinner jSoLuong, JButton jBAddToCart, JButton jBDelete, JLabel jLbAnh, JButton jBtnXoaGioHang, JButton jBTest, JButton jBUpdate, JPanel root) {
+    public QuanLyBanHangController(JPanel showTable, JPanel showTableCart, JTextField jTMaSP, JTextField jTTenSP, JTextField jTGia, JSpinner jSoLuong,JTextField jTfSearch, JButton jBAddToCart, JButton jBDelete, JLabel jLbAnh, JButton jBtnXoaGioHang, JButton jBTest, JButton jBUpdate, JPanel root) {
         this.showTable = showTable;
         this.showTableCart = showTableCart;
         this.jTMaSP = jTMaSP;
@@ -94,21 +96,22 @@ public class QuanLyBanHangController {
         this.jBTest = jBTest;
         this.jBUpdate = jBUpdate;
         this.root=root;
+        this.jTfSearch=jTfSearch;
     }
 
     public void setDataToTable() {
         List<SanPham> listItem = sanPhamDAO.getListCanBuy();
         DefaultTableModel model = new ClassTableModel().setTableBanHang(listItem, listColumn);
-        JTable table = new JTable(model);
-        jBDelete.setEnabled(true);
-        jBUpdate.setEnabled(true);
-        rowSorter = new TableRowSorter<>(table.getModel());
-        table.setRowSorter(rowSorter);
+        table = new JTable(model);
+        rowSorter1 = new TableRowSorter<>(table.getModel());
+        table.setRowSorter(rowSorter1);
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (table.getSelectedRow() != -1) {
                     int selectedRowIndex = table.getSelectedRow();
+                    if (tableCart.getRowCount()!=0)
+                        tableCart.removeRowSelectionInterval(0,tableCart.getRowCount()-1);
                     jTMaSP.setText(table.getValueAt(selectedRowIndex, 1).toString());
                     jTTenSP.setText(table.getValueAt(selectedRowIndex, 2).toString());
                     jTGia.setText(table.getValueAt(selectedRowIndex, 3).toString());
@@ -120,11 +123,13 @@ public class QuanLyBanHangController {
                         }
                     }
                     jBAddToCart.setEnabled(true);
-                    setDataToCart();
+                    jBDelete.setEnabled(false);
+                    jBUpdate.setEnabled(false);
+//                    setDataToCart();
                 }
             }
         });
-
+        
         table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
         table.getTableHeader().setPreferredSize(new Dimension(100, 50));
         table.setRowHeight(50);
@@ -140,12 +145,36 @@ public class QuanLyBanHangController {
         showTable.add(scrollPane);
         showTable.validate();
         showTable.repaint();
+        jTfSearch.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                String text = jTfSearch.getText();
+                if (text.trim().length() == 0) {
+                    rowSorter1.setRowFilter(null);
+                } else {
+                    System.out.println("alo");
+                    rowSorter1.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                String text = jTfSearch.getText();
+                if (text.trim().length() == 0) {
+                    rowSorter1.setRowFilter(null);
+                } else {
+                    rowSorter1.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            }
+        });
     }
 
     public void setDataToCart() {
         List<SanPham> listItemA = sanPhamDAO.getList();
-        jBUpdate.setEnabled(false);
-        jBDelete.setEnabled(false);
         
         if (listCart.size() != 0) {
             jBTest.setEnabled(true);
@@ -155,42 +184,46 @@ public class QuanLyBanHangController {
             jBtnXoaGioHang.setEnabled(false);
         }
         DefaultTableModel model = new ClassTableModel().setTableBanHang(listCart, listColumn);
-        JTable table = new JTable(model);
+        tableCart = new JTable(model);
 
-        rowSorter = new TableRowSorter<>(table.getModel());
+        rowSorter = new TableRowSorter<>(tableCart.getModel());
 
-        table.setRowSorter(rowSorter);
-        table.addMouseListener(new MouseAdapter() {
+        tableCart.setRowSorter(rowSorter);
+        tableCart.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (table.getSelectedRow() != -1) {
-                    int selectedRowIndex = table.getSelectedRow();
-
-                    jTMaSP.setText(table.getValueAt(selectedRowIndex, 1).toString());
-                    jTTenSP.setText(table.getValueAt(selectedRowIndex, 2).toString());
-                    jTGia.setText(table.getValueAt(selectedRowIndex, 3).toString());
-                    jSoLuong.setValue(table.getValueAt(selectedRowIndex, 4));
+                if (tableCart.getSelectedRow() != -1) {
+                    int selectedRowIndex = tableCart.getSelectedRow();
+                    table.removeRowSelectionInterval(0,table.getRowCount()-1);
+                    
+                    jTMaSP.setText(tableCart.getValueAt(selectedRowIndex, 1).toString());
+                    jTTenSP.setText(tableCart.getValueAt(selectedRowIndex, 2).toString());
+                    jTGia.setText(tableCart.getValueAt(selectedRowIndex, 3).toString());
+                    jSoLuong.setValue(tableCart.getValueAt(selectedRowIndex, 4));
                     
                     for (SanPham SP : listItemA) {
-                        if ((table.getValueAt(selectedRowIndex, 1)).equals(SP.getMaSanPham())) {
+                        if ((tableCart.getValueAt(selectedRowIndex, 1)).equals(SP.getMaSanPham())) {
+                            SpinnerNumberModel md = new SpinnerNumberModel(1, 1, SP.getSoLuong(), 1);
+                            jSoLuong.setModel(md);
                             loadAnh("src/images/SanPham/" + SP.getAnh());
                         }
                     }
-
+                    jBUpdate.setEnabled(true);
+                    jBDelete.setEnabled(true);
                     jBAddToCart.setEnabled(false);
-                    setDataToTable();
+//                    setDataToTable();
                 }
             }
         });
 
-        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
-        table.getTableHeader().setPreferredSize(new Dimension(100, 50));
-        table.setRowHeight(50);
-        table.validate();
-        table.repaint();
+        tableCart.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
+        tableCart.getTableHeader().setPreferredSize(new Dimension(100, 50));
+        tableCart.setRowHeight(50);
+        tableCart.validate();
+        tableCart.repaint();
   
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.getViewport().add(table);
+        scrollPane.getViewport().add(tableCart);
         scrollPane.setPreferredSize(new Dimension(1300, 400));
     
         showTableCart.removeAll();
@@ -228,7 +261,7 @@ public class QuanLyBanHangController {
                     setDataToCart();
                     
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.toString());
+                    JOptionPane.showMessageDialog(null, "Vui lòng chọn sản phẩm trước khi thêm", "Thông báo", JOptionPane.ERROR_MESSAGE);
                 }
             }
 
@@ -245,6 +278,8 @@ public class QuanLyBanHangController {
                     }
                 }
                 setDataToCart();
+                jBUpdate.setEnabled(false);
+                jBDelete.setEnabled(false);
                 jTMaSP.setText("");
                 jTTenSP.setText("");
                 jTGia.setText("");
@@ -272,7 +307,7 @@ public class QuanLyBanHangController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Integer MaSP = Integer.parseInt(jTMaSP.getText());
-
+                
                 for (SanPham SP : listCart) {
                     if (SP.getMaSanPham() == MaSP) {
                         SP.setSoLuong(Integer.parseInt(jSoLuong.getValue().toString()));
@@ -280,6 +315,8 @@ public class QuanLyBanHangController {
                     }
                 }
                 setDataToCart();
+                jBUpdate.setEnabled(false);
+                jBDelete.setEnabled(false);
                 jTMaSP.setText("");
                 jTTenSP.setText("");
                 jTGia.setText("");
@@ -294,6 +331,8 @@ public class QuanLyBanHangController {
                 try {
                     listCart = new ArrayList<>();
                     setDataToCart();
+                    jBUpdate.setEnabled(false);
+                    jBDelete.setEnabled(false);
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.toString());
                 }
