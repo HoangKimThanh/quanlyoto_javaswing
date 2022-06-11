@@ -34,7 +34,7 @@ public class PhieuNhapDAOImpl implements PhieuNhapDAO {
                 phieuNhap.setMaNhaCungCap(rs.getInt("mancc"));
                 phieuNhap.setMaNhanVien(rs.getInt("manv"));
                 phieuNhap.setNgayLap(rs.getString("ngaylap"));
-                phieuNhap.setTongTien(rs.getInt("tongtien"));
+                phieuNhap.setTongTien(rs.getLong("tongtien"));
                 list.add(phieuNhap);
             }
             rs.close();
@@ -64,7 +64,7 @@ public class PhieuNhapDAOImpl implements PhieuNhapDAO {
                 phieuNhap.setMaNhaCungCap(rs.getInt("mancc"));
                 phieuNhap.setMaNhanVien(rs.getInt("manv"));
                 phieuNhap.setNgayLap(rs.getString("ngaylap"));
-                phieuNhap.setTongTien(rs.getInt("tongtien"));
+                phieuNhap.setTongTien(rs.getLong("tongtien"));
                 list.add(phieuNhap);
             }
             rs.close();

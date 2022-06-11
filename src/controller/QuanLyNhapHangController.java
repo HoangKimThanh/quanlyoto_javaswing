@@ -17,18 +17,24 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Frame;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -96,6 +102,7 @@ public class QuanLyNhapHangController {
     private JButton jBtnThayDoiSoLuong;
     private JButton jBtnFilter;
     private JButton jBtnAdd;
+    private JButton jBtnPreviewPN;
 
     private JComboBox jComboBoxNhaCC;
     
@@ -111,7 +118,8 @@ public class QuanLyNhapHangController {
     
 //    private TableRowSorter<TableModel> rowSorter = null;
     
-    DecimalFormat dcf = new DecimalFormat("###,###");
+    DecimalFormat dcf = new DecimalFormat("###,### VND");
+
 
     public QuanLyNhapHangController(JTabbedPane jTabbedPane,
             JPanel jPnTabNhapHang, JPanel jPnTabPhieuNhap,
@@ -123,7 +131,8 @@ public class QuanLyNhapHangController {
             JTextField jTfPNMaPN, JTextField jTfPNMaNhaCC, JTextField jTfPNNhanVien,
             JTextField jTfPNNgayLap, JTextField jTfPNTongTien,
             JTextField jTfPriceFrom, JTextField jTfPriceTo,
-            JButton jBtnNhapHang, JButton jBtnXoaHang, JButton jBtnXacNhan, JButton jBtnThayDoiSoLuong, JButton jBtnFilter,JButton jBtnAdd,
+            JButton jBtnNhapHang, JButton jBtnXoaHang, JButton jBtnXacNhan, JButton jBtnThayDoiSoLuong, 
+            JButton jBtnFilter,JButton jBtnAdd, JButton jBtnPreviewPN,
             JComboBox jComboBoxNhaCC) {
         
         this.jTabbedPane = jTabbedPane;
@@ -163,9 +172,19 @@ public class QuanLyNhapHangController {
         this.jBtnXacNhan = jBtnXacNhan;
         this.jBtnThayDoiSoLuong = jBtnThayDoiSoLuong;
         this.jBtnFilter = jBtnFilter;
-        this.jBtnAdd=jBtnAdd;
+        this.jBtnAdd = jBtnAdd;
+        this.jBtnPreviewPN = jBtnPreviewPN;
         
         DangNhapController controllerDangNhap = new DangNhapController();
+        
+        if (controllerDangNhap.taiKhoanLogin.getChucVu().equals("Quản trị")) {
+            jBtnAdd.setVisible(true);
+        } else {
+            jBtnAdd.setVisible(false);
+        }
+        
+        this.jTfNhanVien.setText(DangNhapController.taiKhoanLogin.getMaNV() + "-" +
+                DangNhapController.taiKhoanLogin.getHoTen());
 
         this.jComboBoxNhaCC = jComboBoxNhaCC;
         
@@ -391,6 +410,7 @@ public class QuanLyNhapHangController {
             jBtnThayDoiSoLuong.setEnabled(true);
             jBtnXoaHang.setEnabled(true);
             jBtnXacNhan.setEnabled(true);
+            jBtnPreviewPN.setEnabled(true);
         }
         
         DefaultTableModel model = (DefaultTableModel)jTableHangChoNhap.getModel();
@@ -503,8 +523,8 @@ public class QuanLyNhapHangController {
         
     }
     
-    public int tinhTongHangChoNhap() {
-        int tong = 0;
+    public long tinhTongHangChoNhap() {
+        long tong = 0;
         for(int i = 0; i < danhSachSanPhamNhap.size(); i++) {
             tong += danhSachSanPhamNhap.get(i).getThanhTien();
         }
@@ -521,42 +541,9 @@ public class QuanLyNhapHangController {
         jBtnThayDoiSoLuong.setEnabled(false);
         jBtnXoaHang.setEnabled(false);
         jBtnXacNhan.setEnabled(false);
-        
+        jBtnPreviewPN.setEnabled(false);
     }
     
-    public void setDataToTable() {
-    }
-        
-//        jTfSearch.getDocument().addDocumentListener(new DocumentListener() {
-//            @Override
-//            public void insertUpdate(DocumentEvent e) {
-//                String text = jTfSearch.getText();
-//                if (text.trim().length() == 0) {
-//                    rowSorter.setRowFilter(null);
-//                } else {
-//                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
-//                }
-//            }
-//
-//            @Override
-//            public void removeUpdate(DocumentEvent e) {
-//                String text = jTfSearch.getText();
-//                if (text.trim().length() == 0) {
-//                    rowSorter.setRowFilter(null);
-//                } else {
-//                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
-//                }
-//            }
-//
-//            @Override
-//            public void changedUpdate(DocumentEvent e) {
-//            }
-//        });
-//        
-        
-
-//    }
-
     public void setEvent() {
         jBtnNhapHang.addActionListener(new ActionListener() {
             @Override
@@ -575,7 +562,7 @@ public class QuanLyNhapHangController {
                     int maSanPham = Integer.valueOf(jTfMaSP.getText());
                     String tenSanPham = jTfTenSP.getText();
                     
-                    int donGia = Integer.valueOf(jTfDonGia.getText());
+                    long donGia = Integer.valueOf(jTfDonGia.getText());
                     int soLuongNhap = Integer.valueOf(jTfSLNhap.getText());
                     
                     if (donGia <= 0 || soLuongNhap <= 0) {
@@ -639,11 +626,11 @@ public class QuanLyNhapHangController {
                     
                     String ngayLap = sdf.format(date);
                     
-                    int tongTien = tinhTongHangChoNhap();
-                    DangNhapController controllerDangNhap = new DangNhapController();
+                    long tongTien = tinhTongHangChoNhap();
+                    
                     PhieuNhap phieuNhap = new PhieuNhap();
                     phieuNhap.setMaNhaCungCap(nhaCC.getMancc());
-                    phieuNhap.setMaNhanVien(controllerDangNhap.taiKhoanLogin.getMaNV());
+                    phieuNhap.setMaNhanVien(DangNhapController.taiKhoanLogin.getMaNV());
                     phieuNhap.setNgayLap(ngayLap);
                     phieuNhap.setTongTien(tongTien);
                     
@@ -722,6 +709,88 @@ public class QuanLyNhapHangController {
                     
                     JOptionPane.showMessageDialog(null, "Bạn chưa chọn hàng để cập nhật!");
                     
+                }
+                catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.toString());
+                }
+            }
+        });
+        
+        jBtnPreviewPN.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                    LocalDateTime now = LocalDateTime.now();
+                    String nhanVien = DangNhapController.taiKhoanLogin.getMaNV() + 
+                            DangNhapController.taiKhoanLogin.getHoTen();
+                    NhaCungCap nhaCC = (NhaCungCap) jComboBoxNhaCC.getSelectedItem();
+                    String hd = "<style> "
+                            + "table {"
+                            + "border: 1px solid;"
+                            + "border-bottom: none"
+                            + "}"
+                            + "tr {"
+                            + "border-bottom: 1px solid;"
+                            + "}"
+                            + "td {"
+                            + "padding: 8px;"
+                            + "} "
+                            + "th {"
+                            + "font-size:16pt"
+                            + "}"
+                            + "</style>";
+                    hd += "<h1 style='text-align:center;'>PHIẾU NHẬP</h1>";
+                    hd += "<p style='text-align:center;'>Nhân viên: " + nhanVien + "</p>";
+                    hd += "<p style='text-align:center;'>Ngày lập: " + dtf.format(now) + "</p>";                    
+                    hd += "<p style='text-align:center;'>Nhà cung cấp: " +  nhaCC.toString() + "</p>";
+
+                    hd += "<div style='text-align:center;'>==========================================</div><br/>";
+                    hd += "<div style='text-align:center'>";
+                    hd += "<table style='max-width:100%'>";
+                    hd += "<tr>"
+                            + "<th>Mã SP</th>"
+                            + "<th>Tên SP</th>"
+                            + "<th>Số lượng</th>"
+                            + "<th>Đơn giá</th>"
+                            + "<th>Thành tiền</th>"
+                            + "</tr>";
+                    long tongTien = tinhTongHangChoNhap();
+                    for (ChiTietPhieuNhap ctPhieuNhap : danhSachSanPhamNhap) {
+                        hd += "<tr>";
+                        hd += "<td style='text-align:center;'>" + ctPhieuNhap.getMaSanPham()+ "</td>";
+                        hd += "<td style='text-align:left;'>" + ctPhieuNhap.getTenSanPham()+ "</td>";
+                        hd += "<td style='text-align:center;'>" + ctPhieuNhap.getSoLuong() + "</td>";
+                        hd += "<td style='text-align:center;'>" + ctPhieuNhap.getDonGia()+ "</td>";
+                        hd += "<td style='text-align:center;'>" + ctPhieuNhap.getThanhTien() + "</td>";
+                        hd += "</tr>";
+                    }
+                    hd += "<tr>";
+                    hd += "<td style='text-align:center;'>" + "</td>";
+                    hd += "<td style='text-align:left;'>" + "</td>";
+                    hd += "<td style='text-align:center;'>" + "</td>";
+                    hd += "<td style='text-align:center;font-weight:bold'>Tổng cộng</td>";
+                    hd += "<td style='text-align:center;'>" + dcf.format(tongTien) + "</td>";
+                    hd += "</tr>";
+
+                    hd += "</tr>";
+                    hd += "</table>";
+                    hd += "</div>";
+                    hd += "<div style='text-align:center;'>==========================================</div><br/>";
+                    JDialog dialog = new JDialog(new Frame(), "Thông tin phiếu nhập", true);
+                    dialog.setLocationRelativeTo(jPnTabPhieuNhap);
+                    JEditorPane editorPane = new JEditorPane();
+                    editorPane.setContentType("text/html");
+                    editorPane.setText(hd);
+                    dialog.add(editorPane);
+                    dialog.pack();
+                    Toolkit toolkit = Toolkit.getDefaultToolkit();
+                    Dimension screenSize = toolkit.getScreenSize();
+                    int x = (screenSize.width - dialog.getWidth()) / 2;
+                    int y = (screenSize.height - dialog.getHeight()) / 2;
+                    dialog.setLocation(x, y);
+                                        dialog.setVisible(true);
                 }
                 catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.toString());

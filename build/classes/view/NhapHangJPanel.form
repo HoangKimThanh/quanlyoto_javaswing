@@ -147,7 +147,9 @@
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" attributes="0">
                                   <Component id="jBtnXacNhan" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="140" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="jBtnPreviewPN" min="-2" pref="116" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -198,7 +200,10 @@
                               <Component id="jTfNhanVien" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                          <Component id="jBtnXacNhan" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jBtnXacNhan" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jBtnPreviewPN" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -258,6 +263,14 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnAddActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="jBtnPreviewPN">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Xem phi&#x1ebf;u nh&#x1ead;p"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnPreviewPNActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -568,8 +581,8 @@
         <Container class="javax.swing.JPanel" name="jPnTabPhieuNhap">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Xem phi&#x1ebf;u nh&#x1ead;p">
-                <Property name="tabTitle" type="java.lang.String" value="Xem phi&#x1ebf;u nh&#x1ead;p"/>
+              <JTabbedPaneConstraints tabName="Danh s&#xe1;ch phi&#x1ebf;u nh&#x1ead;p">
+                <Property name="tabTitle" type="java.lang.String" value="Danh s&#xe1;ch phi&#x1ebf;u nh&#x1ead;p"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>

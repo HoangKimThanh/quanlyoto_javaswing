@@ -44,7 +44,7 @@ public class NhapHangJPanel extends javax.swing.JPanel {
             jTfSeach, jTfMaSP, jTfTenSP, jTfDonGia, jTfSLNhap, jTfNhanVien,
             jTfPNMaPN, jTfPNMaNhaCC, jTfPNNhanVien, jTfPNNgayLap, jTfPNTongTien,
             jTfPriceFrom, jTfPriceTo,
-            jBtnNhapHang, jBtnXoaHang, jBtnXacNhan, jBtnThayDoiSoLuong, jBtnFilter,jBtnAdd,
+            jBtnNhapHang, jBtnXoaHang, jBtnXacNhan, jBtnThayDoiSoLuong, jBtnFilter,jBtnAdd, jBtnPreviewPN,
             jComboBoxNhaCC);
         String NV=controllerDangNhap.taiKhoanLogin.getHoTen();
         jTfNhanVien.setText(NV);
@@ -70,6 +70,7 @@ public class NhapHangJPanel extends javax.swing.JPanel {
         jBtnXacNhan = new javax.swing.JButton();
         jComboBoxNhaCC = new javax.swing.JComboBox();
         jBtnAdd = new javax.swing.JButton();
+        jBtnPreviewPN = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLbSearch = new javax.swing.JLabel();
         jTfSeach = new javax.swing.JTextField();
@@ -143,6 +144,13 @@ public class NhapHangJPanel extends javax.swing.JPanel {
             }
         });
 
+        jBtnPreviewPN.setText("Xem phiếu nhập");
+        jBtnPreviewPN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnPreviewPNActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPnThongTinSP1Layout = new javax.swing.GroupLayout(jPnThongTinSP1);
         jPnThongTinSP1.setLayout(jPnThongTinSP1Layout);
         jPnThongTinSP1Layout.setHorizontalGroup(
@@ -152,7 +160,9 @@ public class NhapHangJPanel extends javax.swing.JPanel {
                 .addGroup(jPnThongTinSP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPnThongTinSP1Layout.createSequentialGroup()
                         .addComponent(jBtnXacNhan)
-                        .addGap(140, 140, 140))
+                        .addGap(18, 18, 18)
+                        .addComponent(jBtnPreviewPN, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21))
                     .addGroup(jPnThongTinSP1Layout.createSequentialGroup()
                         .addGroup(jPnThongTinSP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPnThongTinSP1Layout.createSequentialGroup()
@@ -189,7 +199,9 @@ public class NhapHangJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel10)
                     .addComponent(jTfNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
-                .addComponent(jBtnXacNhan)
+                .addGroup(jPnThongTinSP1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnXacNhan)
+                    .addComponent(jBtnPreviewPN))
                 .addGap(41, 41, 41))
         );
 
@@ -596,7 +608,7 @@ public class NhapHangJPanel extends javax.swing.JPanel {
                 .addGap(41, 41, 41))
         );
 
-        jTabbedPane.addTab("Xem phiếu nhập", jPnTabPhieuNhap);
+        jTabbedPane.addTab("Danh sách phiếu nhập", jPnTabPhieuNhap);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -640,11 +652,16 @@ public class NhapHangJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jBtnAddActionPerformed
 
+    private void jBtnPreviewPNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPreviewPNActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnPreviewPNActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnAdd;
     private javax.swing.JButton jBtnFilter;
     private javax.swing.JButton jBtnNhapHang;
+    private javax.swing.JButton jBtnPreviewPN;
     private javax.swing.JButton jBtnThayDoiSoLuong;
     private javax.swing.JButton jBtnXacNhan;
     private javax.swing.JButton jBtnXoaHang;
