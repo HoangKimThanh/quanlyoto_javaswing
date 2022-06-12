@@ -4,6 +4,7 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <file>file:/C:/Users/Home/Documents/NetBeansProjects/quanlyoto_javaswing/src/controller/QuanLyNhapHangController.java</file>
             <file>file:/C:/Users/Home/Documents/NetBeansProjects/quanlyoto_javaswing/src/model/PhieuNhap.java</file>
             <file>file:/C:/Users/Home/Documents/NetBeansProjects/quanlyoto_javaswing/src/view/MainJFrame.java</file>
@@ -13,12 +14,15 @@
             <file>file:/C:/Users/Home/Documents/NetBeansProjects/quanlyoto_javaswing/src/dao/PhieuNhapDAO.java</file>
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> fbda76e (update BanHang, NhapHang)
             <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/controller/QuanLyBanHangController.java</file>
             <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/model/HoaDon.java</file>
             <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/utility/ClassTableModel.java</file>
             <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/view/BanHangJPanel.java</file>
             <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/controller/QuanLyHoaDonController.java</file>
             <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/view/NhapHangJPanel.java</file>
+            <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/dao/SanPhamDAOImpl.java</file>
             <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/controller/QuanLySanPhamController.java</file>
             <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/controller/QuanLyNhapHangController.java</file>
             <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/dao/HoaDonDAOImpl.java</file>
@@ -33,6 +37,7 @@
             <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/controller/ChuyenManHinhController.java</file>
             <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/model/SanPham.java</file>
             <file>file:/F:/DoanJAVA/quanlyoto_javaswing/src/controller/DangNhapController.java</file>
+<<<<<<< HEAD
 =======
             <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/view/SanPhamJPanel.java</file>
             <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/controller/QuanLyKhachHangController.java</file>
@@ -53,6 +58,8 @@
             <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/controller/QuanLyBanHangController.java</file>
 >>>>>>> main
 >>>>>>> 613522f4c7ccfa2d1d1f41adbe976e5428b5859f
+=======
+>>>>>>> fbda76e (update BanHang, NhapHang)
         </group>
     </open-files>
 </project-private>

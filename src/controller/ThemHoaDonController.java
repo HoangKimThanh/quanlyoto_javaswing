@@ -104,6 +104,7 @@ public class ThemHoaDonController {
                         for (SanPham a : listA) {
                             if (a.getMaSanPham() == sanPham.getMaSanPham()) {
                                 a.setSoLuong(a.getSoLuong() - sanPham.getSoLuong());
+                                System.out.println(a.getSoLuong() - sanPham.getSoLuong());
                             }
                             sanPhamDAO.updateSanPham(a);
                         }
@@ -119,23 +120,24 @@ public class ThemHoaDonController {
                     showPreviewHoaDon(listCart);
                     jBAddHD.setEnabled(false);
                     jBtnIn.setEnabled(true);
-                    if (check != 0) {
-                        String[] listColumn = {"STT", "Mã SP", "Tên SP", "GIÁ", "SỐ LƯỢNG"};
+                    if (check != 0) {  
+                        //set lại giỏ hàng
                         listCart.removeAll(listCart);
-                        DefaultTableModel model = new ClassTableModel().setTableBanHang(listCart, listColumn);
-                        JTable table=new JTable(model);
-                        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
-                        table.getTableHeader().setPreferredSize(new Dimension(100, 50));
-                        table.setRowHeight(50);
-                        table.validate();
-                        table.repaint();
-                        JScrollPane scrollPane = new JScrollPane();
-                        scrollPane.getViewport().add(table);
-                        scrollPane.setPreferredSize(new Dimension(1300, 400));
+                        String[] listColumn = {"STT", "Mã SP", "Tên SP", "GIÁ", "SỐ LƯỢNG"};
+                        DefaultTableModel modelCart = new ClassTableModel().setTableBanHang(listCart, listColumn);
+                        JTable tableCart=new JTable(modelCart);
+                        tableCart.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
+                        tableCart.getTableHeader().setPreferredSize(new Dimension(100, 50));
+                        tableCart.setRowHeight(50);
+                        tableCart.validate();
+                        tableCart.repaint();
+                        JScrollPane scrollPaneCart = new JScrollPane();
+                        scrollPaneCart.getViewport().add(tableCart);
+                        scrollPaneCart.setPreferredSize(new Dimension(1300, 400));
 
                         showTableCart.removeAll();
                         showTableCart.setLayout(new BorderLayout());
-                        showTableCart.add(scrollPane);
+                        showTableCart.add(scrollPaneCart);
                         showTableCart.validate();
                         showTableCart.repaint();
                         JOptionPane.showMessageDialog(null, "Thanh toán và thêm hóa đơn thành công", "Hóa đơn", JOptionPane.INFORMATION_MESSAGE);
