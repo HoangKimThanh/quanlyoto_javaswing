@@ -54,9 +54,11 @@ public class ThongKeController {
 
     private DefaultTableModel jTbTopSP;
     private JPanel jPnChart;
+    private JPanel jPnChart2;
 
     public ThongKeController(JLabel jLbTongOTo, JLabel jLbTongPhuTung, JLabel jLbTongKhachHang, JLabel jLbTongDoanhThu,
-            JComboBox jCbNam, JLabel jLbQuy1, JLabel jLbQuy2, JLabel jLbQuy3, JLabel jLbQuy4, JLabel jLbDoanhThuNam, JTable jTbTopSP, JPanel jPnChart) {
+            JComboBox jCbNam, JLabel jLbQuy1, JLabel jLbQuy2, JLabel jLbQuy3, JLabel jLbQuy4, JLabel jLbDoanhThuNam, 
+            JTable jTbTopSP, JPanel jPnChart, JPanel jPnChart2) {
         this.jLbTongOTo = jLbTongOTo;
         this.jLbTongPhuTung = jLbTongPhuTung;
         this.jLbTongKhachHang = jLbTongKhachHang;
@@ -72,6 +74,7 @@ public class ThongKeController {
 
         this.jTbTopSP = (DefaultTableModel) jTbTopSP.getModel();
         this.jPnChart = jPnChart;
+        this.jPnChart2 = jPnChart2;
     }
 
     public void setDataToView() {
@@ -91,8 +94,9 @@ public class ThongKeController {
         jLbTongDoanhThu.setText(tongDoanhThuString);
 
         // Thong ke theo nam, quy
+        int yearStart = getYearStart();
         int year = Calendar.getInstance().get(Calendar.YEAR);
-        for (int i = year; i >= 2021; i--) {
+        for (int i = year; i >= yearStart; i--) {
             jCbNam.addItem(i);
         }
 
@@ -114,6 +118,14 @@ public class ThongKeController {
         jPnChart.setOpaque(false);
         jPnChart.setBounds(0, 398, 1030, 441);
         jPnChart.add(chartPanel, BorderLayout.NORTH);
+        
+        ChartPanel chartPanel2 = new ChartPanel(createChart2());
+        
+        jPnChart2.setLayout(new BorderLayout());
+        jPnChart2.setOpaque(false);
+        jPnChart2.setBounds(0, 398, 1030, 441);
+        jPnChart2.add(chartPanel2, BorderLayout.NORTH);
+        
     }
 
     public void setEvent() {
@@ -160,6 +172,7 @@ public class ThongKeController {
                 doanhThu = rs.getLong(1);
             }
 
+            rs.close();
             ps.close();
             cons.close();
             return doanhThu;
@@ -182,6 +195,7 @@ public class ThongKeController {
                 doanhThu = rs.getLong(1);
             }
 
+            rs.close();
             ps.close();
             cons.close();
             return doanhThu;
@@ -190,6 +204,8 @@ public class ThongKeController {
         }
         return 0;
     }
+    
+    
 
     public List<SanPham> getListTopSP() {
         try {
@@ -207,6 +223,7 @@ public class ThongKeController {
                 listTopSP.add(sanPham);
             }
 
+            rs.close();
             ps.close();
             cons.close();
 
@@ -215,6 +232,61 @@ public class ThongKeController {
             ex.printStackTrace();
             return null;
         }
+    }
+    
+    public int getYearStart() {
+        try {
+            Connection cons = DBConnection.getConnection();
+            String sql = "SELECT min(YEAR(ngaylap)) "
+                    + "FROM phieunhap";
+            PreparedStatement ps = cons.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            int year = 0;
+            if (rs.next()) {
+                year = rs.getInt(1);
+            }
+
+            rs.close();
+            ps.close();
+            cons.close();
+            return year;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+    
+    public long getLoiNhuanTheoNam(int nam) {
+        try {
+            Connection cons = DBConnection.getConnection();
+            String sql = "SELECT sum(tongtien) "
+                    + "FROM hoadon WHERE YEAR(ngaylap) = '" + nam + "'";
+            PreparedStatement ps = cons.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            long doanhThu = 0;
+            if (rs.next()) {
+                doanhThu = rs.getLong(1);
+            }
+            
+            sql = "SELECT sum(tongtien) "
+                    + "FROM phieunhap WHERE YEAR(ngaylap) = '" + nam + "'";
+            ps = cons.prepareStatement(sql);
+            rs = ps.executeQuery();
+            long chiPhi = 0;
+            if (rs.next()) {
+                chiPhi = rs.getLong(1);
+            }
+            
+            long loiNhuan = doanhThu - chiPhi;
+            
+            rs.close();
+            ps.close();
+            cons.close();
+            return loiNhuan;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return 0;
     }
 
     public long getDoanhThuTheoThang(int thang, int nam) {
@@ -228,7 +300,8 @@ public class ThongKeController {
             if (rs.next()) {
                 doanhThu = rs.getLong(1);
             }
-
+            
+            rs.close();
             ps.close();
             cons.close();
             return doanhThu;
@@ -253,6 +326,25 @@ public class ThongKeController {
         for (int i = 1; i <= 12; i++) {
             long value = getDoanhThuTheoThang(i, year);
             dataset.setValue(value, "Doanh thu (vnđ)", i + "");
+        }
+        return dataset;
+    }
+    
+    public JFreeChart createChart2() {
+        JFreeChart barChart = ChartFactory.createBarChart(
+                "LỢI NHUẬN TỪNG NĂM",
+                "Năm", "Lợi nhuận (vnđ)",
+                createDataset2(), PlotOrientation.VERTICAL, false, false, false);
+        return barChart;
+    }
+
+    private CategoryDataset createDataset2() {
+        final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        int yearStart = getYearStart();
+        for (int i = yearStart; i <= year; i++) {
+            long value = getLoiNhuanTheoNam(i);
+            dataset.setValue(value, "Lợi nhuận (vnđ)", i + "");
         }
         return dataset;
     }

@@ -5,28 +5,22 @@
         <group>
             <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/controller/QuanLyKhachHangController.java</file>
             <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/view/SanPhamJPanel.java</file>
-            <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/dao/HoaDonDAOImpl.java</file>
             <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/view/BanHangJPanel.java</file>
+            <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/controller/ThongKeController.java</file>
             <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/view/ThongKeJPanel.java</file>
-            <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/model/PhieuNhap.java</file>
+            <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/</file>
             <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/view/NhapHangJPanel.java</file>
-            <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/controller/QuanLyHoaDonController.java</file>
-            <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/dao/PhanQuyenDAOImpl.java</file>
             <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/dao/DBConnection.java</file>
-            <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/dao/CTHDDAOImpl.java</file>
-            <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/model/NhanVien.java</file>
             <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/controller/QuanLyNhaCungCapController.java</file>
-            <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/model/Quyen.java</file>
+            <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/view/AddHoaDon.java</file>
             <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/controller/ChuyenManHinhController.java</file>
-            <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/controller/QuanLySanPhamController.java</file>
+            <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/dao/SanPhamDAOImpl.java</file>
             <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/dao/NhaCungCapDAOImpl.java</file>
-            <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/dao/DangNhapDAO.java</file>
+            <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/view/KhachHangJPanel.java</file>
             <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/dao/KhachHangDAOImpl.java</file>
-            <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/controller/DangNhapController.java</file>
             <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/view/NhanVienJPanel.java</file>
             <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/utility/ClassTableModel.java</file>
             <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/view/NhaCungCapJPanel.java</file>
-            <file>file:/C:/Users/ASUS/OneDrive/Documents/NetBeansProjects/QuanLyOTo/src/controller/QuanLyBanHangController.java</file>
         </group>
     </open-files>
 </project-private>
