@@ -63,26 +63,24 @@ public class AddNhaCungCap extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLbTen1)
-                                .addGap(35, 35, 35)
-                                .addComponent(jTfTen1, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLbDiaChi1)
-                                    .addComponent(jLbSDT1))
-                                .addGap(63, 63, 63)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTfDiaChi1)
-                                    .addComponent(jTfSDT1)))))
+                        .addComponent(jLbTen1)
+                        .addGap(35, 35, 35)
+                        .addComponent(jTfTen1, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(265, 265, 265)
-                        .addComponent(jBtnThemNCC)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLbDiaChi1)
+                            .addComponent(jLbSDT1))
+                        .addGap(63, 63, 63)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jBtnThemNCC)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jTfDiaChi1)
+                            .addComponent(jTfSDT1))))
+                .addGap(23, 23, 23))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,24 +132,13 @@ public class AddNhaCungCap extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBtnAdd;
     private javax.swing.JButton jBtnThemNCC;
-    private javax.swing.JButton jBtnUpdate;
-    private javax.swing.JLabel jLbDiaChi;
     private javax.swing.JLabel jLbDiaChi1;
-    private javax.swing.JLabel jLbMaNcc;
-    private javax.swing.JLabel jLbSDT;
     private javax.swing.JLabel jLbSDT1;
-    private javax.swing.JLabel jLbTen;
     private javax.swing.JLabel jLbTen1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTfDiaChi;
     private javax.swing.JTextField jTfDiaChi1;
-    private javax.swing.JTextField jTfMaNcc;
-    private javax.swing.JTextField jTfSDT;
     private javax.swing.JTextField jTfSDT1;
-    private javax.swing.JTextField jTfTen;
     private javax.swing.JTextField jTfTen1;
     // End of variables declaration//GEN-END:variables
 }
