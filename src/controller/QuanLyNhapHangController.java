@@ -39,6 +39,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -82,7 +83,7 @@ public class QuanLyNhapHangController {
     private JTextField jTfMaSP;
     private JTextField jTfTenSP;
     private JTextField jTfDonGia;
-    private JTextField jTfSLNhap;
+    private JSpinner jSpSoLuong;
     
     private JTextField jTfNhanVien;
     
@@ -103,6 +104,8 @@ public class QuanLyNhapHangController {
     private JButton jBtnFilter;
     private JButton jBtnAdd;
     private JButton jBtnPreviewPN;
+    
+    private JButton jBtnUpdate;
 
     private JComboBox jComboBoxNhaCC;
     
@@ -127,12 +130,12 @@ public class QuanLyNhapHangController {
             JScrollPane jScrollPaneDSPhieuNhap, JScrollPane jScrollPaneChiTietPN,
             JTable jTableKhoHang, JTable jTableHangChoNhap, JTable jTableDSPhieuNhap, JTable jTableChiTietPN,
             JTextField jTfSearch, JTextField jTfMaSP, JTextField jTfTenSP, JTextField jTfDonGia,
-            JTextField jTfSLNhap, JTextField jTfNhanVien,
+            JSpinner jSpSoLuong, JTextField jTfNhanVien,
             JTextField jTfPNMaPN, JTextField jTfPNMaNhaCC, JTextField jTfPNNhanVien,
             JTextField jTfPNNgayLap, JTextField jTfPNTongTien,
             JTextField jTfPriceFrom, JTextField jTfPriceTo,
             JButton jBtnNhapHang, JButton jBtnXoaHang, JButton jBtnXacNhan, JButton jBtnThayDoiSoLuong, 
-            JButton jBtnFilter,JButton jBtnAdd, JButton jBtnPreviewPN,
+            JButton jBtnFilter,JButton jBtnAdd, JButton jBtnPreviewPN, JButton jBtnUpdate,
             JComboBox jComboBoxNhaCC) {
         
         this.jTabbedPane = jTabbedPane;
@@ -155,7 +158,7 @@ public class QuanLyNhapHangController {
         this.jTfMaSP = jTfMaSP;
         this.jTfTenSP = jTfTenSP;
         this.jTfDonGia = jTfDonGia;
-        this.jTfSLNhap = jTfSLNhap;
+        this.jSpSoLuong = jSpSoLuong;
         this.jTfNhanVien = jTfNhanVien;
         
         this.jTfPNMaPN = jTfPNMaPN;
@@ -172,8 +175,11 @@ public class QuanLyNhapHangController {
         this.jBtnXacNhan = jBtnXacNhan;
         this.jBtnThayDoiSoLuong = jBtnThayDoiSoLuong;
         this.jBtnFilter = jBtnFilter;
+
         this.jBtnAdd = jBtnAdd;
         this.jBtnPreviewPN = jBtnPreviewPN;
+
+        this.jBtnUpdate=jBtnUpdate;
         
         DangNhapController controllerDangNhap = new DangNhapController();
         
@@ -277,7 +283,10 @@ public class QuanLyNhapHangController {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (jTableKhoHang.getSelectedRow() != -1) {
-                    jTableHangChoNhap.removeRowSelectionInterval(0,jTableHangChoNhap.getRowCount()-1);
+                    jBtnUpdate.setEnabled(false);
+                    jBtnNhapHang.setEnabled(true);
+                    if (jTableHangChoNhap.getRowCount()!=0)
+                        jTableHangChoNhap.removeRowSelectionInterval(0,jTableHangChoNhap.getRowCount()-1);
                     int selectedRowIndex = jTableKhoHang.getSelectedRow();
                     SanPham sanPham = new SanPham();
                     sanPham.setMaSanPham((int) jTableKhoHang.getValueAt(selectedRowIndex, 0));
@@ -436,6 +445,7 @@ public class QuanLyNhapHangController {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (jTableHangChoNhap.getSelectedRow() != -1) {
+                    jBtnUpdate.setEnabled(true);
                     jTableKhoHang.removeRowSelectionInterval(0,jTableKhoHang.getRowCount()-1);
                     int selectedRowIndex = jTableHangChoNhap.getSelectedRow();
                     SanPham sanPham = new SanPham();
@@ -446,8 +456,10 @@ public class QuanLyNhapHangController {
                     
                     jTfMaSP.setText((sanPham.getMaSanPham()) + "");
                     jTfTenSP.setText(sanPham.getTen());
+                    jTfDonGia.setText(jTableHangChoNhap.getValueAt(selectedRowIndex, 2).toString());
+                    jSpSoLuong.setValue(jTableHangChoNhap.getValueAt(selectedRowIndex, 3));
                     
-                    jBtnNhapHang.setEnabled(true);
+                    jBtnNhapHang.setEnabled(false);
                 }
             }
         });
@@ -535,7 +547,7 @@ public class QuanLyNhapHangController {
         jTfMaSP.setText("");
         jTfTenSP.setText("");
         jTfDonGia.setText("");
-        jTfSLNhap.setText("");
+        jSpSoLuong.setValue(0);
         
         jBtnNhapHang.setEnabled(false);
         jBtnThayDoiSoLuong.setEnabled(false);
@@ -550,23 +562,25 @@ public class QuanLyNhapHangController {
             public void actionPerformed(ActionEvent e) {
                 try {
                     if (jTfMaSP.getText().equals("")) {
-                        JOptionPane.showMessageDialog(null, "Vui lòng chọn sản phẩm để nhập!");
+                        JOptionPane.showMessageDialog(null, "Vui lòng chọn sản phẩm để nhập", "Thông báo", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
                     
-                    if (jTfDonGia.getText().equals("") || jTfSLNhap.getText().equals("")) {
-                        JOptionPane.showMessageDialog(null, "Đơn giá, số lượng không được để trống!!");
+                    if (jTfDonGia.getText().equals("")) {
+                        JOptionPane.showMessageDialog(null, "Đơn giá không được để trống", "Thông báo", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
                     
                     int maSanPham = Integer.valueOf(jTfMaSP.getText());
                     String tenSanPham = jTfTenSP.getText();
                     
-                    long donGia = Integer.valueOf(jTfDonGia.getText());
-                    int soLuongNhap = Integer.valueOf(jTfSLNhap.getText());
+
+
+                    int donGia = Integer.valueOf(jTfDonGia.getText());
+                    int soLuongNhap = Integer.parseInt(jSpSoLuong.getValue().toString());
                     
                     if (donGia <= 0 || soLuongNhap <= 0) {
-                        JOptionPane.showMessageDialog(null, "Đơn giá, số lượng phải là số nguyên dương!!");
+                        JOptionPane.showMessageDialog(null, "Đơn giá phải là số nguyên dương", "Thông báo", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
 
@@ -582,9 +596,59 @@ public class QuanLyNhapHangController {
                     
                 }
                 catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Vui lòng nhập đúng định dạng", "Lối", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        jBtnUpdate.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {                   
+                    if (jTfDonGia.getText().equals("")) {
+                        JOptionPane.showMessageDialog(null, "Đơn giá không được để trống!!");
+                        return;
+                    }
+                    
+                    int maSanPham = Integer.valueOf(jTfMaSP.getText());
+                    String tenSanPham = jTfTenSP.getText();
+                    
+                    int donGia = Integer.valueOf(jTfDonGia.getText());
+                    int soLuongNhap = Integer.parseInt(jSpSoLuong.getValue().toString());
+                    
+                    if (donGia <= 0 || soLuongNhap <= 0) {
+                        JOptionPane.showMessageDialog(null, "Đơn giá phải là số nguyên dương!!");
+                        return;
+                    }
+                    for (ChiTietPhieuNhap PN:danhSachSanPhamNhap){
+                        if (PN.getMaSanPham()==maSanPham){ 
+                            PN.setDonGia(donGia);
+                            PN.setSoLuong(soLuongNhap);
+                            PN.setThanhTien(donGia*soLuongNhap);
+                            break;
+                        }
+                    }
+
+                    showDanhSachSanPhamNhap();
+
+                    
+                }
+                catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.toString());
                 }
             }
+
+            @Override
+            public void mousePressed(MouseEvent e) {}
+
+            @Override
+            public void mouseReleased(MouseEvent e) {}
+
+            @Override
+            public void mouseEntered(MouseEvent e) {}
+
+            @Override
+            public void mouseExited(MouseEvent e) {}
+            
         });
         jBtnXoaHang.addActionListener(new ActionListener() {
             @Override
