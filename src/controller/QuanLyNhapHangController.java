@@ -580,7 +580,7 @@ public class QuanLyNhapHangController {
                     int soLuongNhap = Integer.parseInt(jSpSoLuong.getValue().toString());
                     
                     if (donGia <= 0 || soLuongNhap <= 0) {
-                        JOptionPane.showMessageDialog(null, "Đơn giá phải là số nguyên dương", "Thông báo", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Đơn giá và số lượng phải là số nguyên dương", "Thông báo", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
 
@@ -616,7 +616,7 @@ public class QuanLyNhapHangController {
                     int soLuongNhap = Integer.parseInt(jSpSoLuong.getValue().toString());
                     
                     if (donGia <= 0 || soLuongNhap <= 0) {
-                        JOptionPane.showMessageDialog(null, "Đơn giá phải là số nguyên dương!!");
+                        JOptionPane.showMessageDialog(null, "Đơn giá và số lượng phải là số nguyên dương!!");
                         return;
                     }
                     for (ChiTietPhieuNhap PN:danhSachSanPhamNhap){
