@@ -21,6 +21,7 @@ public class NhapHangJPanel extends javax.swing.JPanel {
      */
     public NhapHangJPanel() {
         initComponents();
+        jBtnThayDoiSoLuong.setVisible(false);
         DangNhapController controllerDangNhap = new DangNhapController();
         
         PhanQuyenDAO phanQuyenDAO = new PhanQuyenDAOImpl();
