@@ -41,6 +41,7 @@ public class ThemNCCController {
         this.jCb=jCb;
     }
     public void setEvent(){
+        root.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         jBtnThemNCC.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

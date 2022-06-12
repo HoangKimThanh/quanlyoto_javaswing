@@ -54,14 +54,14 @@ import view.BanHangJPanel;
 public class ThemHoaDonController {
     private DangNhapController controllerDangNhap;
     private JEditorPane jEditHoaDon;
-    private JTextField jTTenNV;
+    private JTextField jTTenNV, jTfTongTien;
     private JComboBox jCbMaKH;
-    private JButton jBAddHD, jBtnIn;
+    private JButton jBAddHD, jBtnIn,jBtnXuatHoaDon,jBtnXoaHoaDon;
     private JFrame root;
     private JButton jBtnAddKH;
-    private JPanel showTableCart;
+    private JPanel showTableCart,showTable;
 
-    public ThemHoaDonController(JTextField jTTenNV, JComboBox jCbMaKH, JButton jBAddHD, JFrame root, JButton jBtnAddKH, JEditorPane jEditHoaDon, JButton jBtnIn,JPanel showTableCart) {
+    public ThemHoaDonController(JTextField jTTenNV, JComboBox jCbMaKH,JTextField jTfTongTien, JButton jBAddHD, JFrame root, JButton jBtnAddKH, JEditorPane jEditHoaDon, JButton jBtnIn,JPanel showTableCart, JButton jBtnXuatHoaDon,JButton jBtnXoaHoaDon) {
         this.jTTenNV = jTTenNV;
         this.jCbMaKH = jCbMaKH;
         this.jBAddHD = jBAddHD;
@@ -70,9 +70,17 @@ public class ThemHoaDonController {
         this.jEditHoaDon=jEditHoaDon;
         this.jBtnIn=jBtnIn;
         this.showTableCart=showTableCart;
+        this.jTfTongTien=jTfTongTien;
+        this.jBtnXoaHoaDon=jBtnXoaHoaDon;
+        this.jBtnXuatHoaDon=jBtnXuatHoaDon;
     }
 
     public void setEvent(HoaDon hoaDon, List<SanPham> listCart, JFrame k) {
+        long tongTien = 0;
+        for (SanPham sanPham : listCart) {
+            tongTien = tongTien + sanPham.getGia() * sanPham.getSoLuong();
+        }
+        jTfTongTien.setText(tongTien + "");
         jBAddHD.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -119,11 +127,15 @@ public class ThemHoaDonController {
                     }
                     showPreviewHoaDon(listCart);
                     jBAddHD.setEnabled(false);
+                    jBtnAddKH.setEnabled(false);
+                    jCbMaKH.setEnabled(false);
                     jBtnIn.setEnabled(true);
-                    if (check != 0) {  
+                    jBtnXuatHoaDon.setEnabled(false);
+                    jBtnXoaHoaDon.setEnabled(false);
+                    if (check != 0) {
                         //set lại giỏ hàng
                         listCart.removeAll(listCart);
-                        String[] listColumn = {"STT", "Mã SP", "Tên SP", "GIÁ", "SỐ LƯỢNG"};
+                        String[] listColumn = {"STT", "Mã SP","Loại SP", "Tên SP", "GIÁ", "SỐ LƯỢNG"};
                         DefaultTableModel modelCart = new ClassTableModel().setTableBanHang(listCart, listColumn);
                         JTable tableCart=new JTable(modelCart);
                         tableCart.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
@@ -157,7 +169,7 @@ public class ThemHoaDonController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    AddKhachHang a = new AddKhachHang(k, hoaDon, listCart);
+                    AddKhachHang a = new AddKhachHang(k, hoaDon, listCart, jCbMaKH);
                     a.setVisible(true);
                     a.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
