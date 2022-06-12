@@ -105,6 +105,11 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JTabbedPane" name="jTab">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
+      </Properties>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
@@ -686,9 +691,6 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jTMaHD">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="jTextField4"/>
-                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -723,9 +725,6 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jTMaKH">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="jTextField4"/>
-                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -760,9 +759,6 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jTMaNV">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="jTextField4"/>
-                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -797,9 +793,6 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jTNgay">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="jTextField4"/>
-                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -834,9 +827,6 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jTTienHD">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="jTextField4"/>
-                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -950,9 +940,6 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jTMaHDCT">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="jTextField4"/>
-                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -987,9 +974,6 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jTMaSPCT">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="jTextField4"/>
-                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1024,9 +1008,6 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jTSoLuongCT">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="jTextField4"/>
-                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1061,9 +1042,6 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jTGiaCT">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="jTextField4"/>
-                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1098,9 +1076,6 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jTTienCT">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="jTextField4"/>
-                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>

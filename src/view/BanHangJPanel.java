@@ -209,6 +209,8 @@ public class BanHangJPanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(660, 624));
 
+        jTab.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
         jPanel1.setPreferredSize(new java.awt.Dimension(660, 624));
 
         jPanel6.setBackground(new java.awt.Color(240, 220, 240));
@@ -513,8 +515,6 @@ public class BanHangJPanel extends javax.swing.JPanel {
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel13.setText("MAHD");
 
-        jTMaHD.setText("jTextField4");
-
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
@@ -535,8 +535,6 @@ public class BanHangJPanel extends javax.swing.JPanel {
 
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel14.setText("MAKH");
-
-        jTMaKH.setText("jTextField4");
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -559,8 +557,6 @@ public class BanHangJPanel extends javax.swing.JPanel {
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel15.setText("MANV");
 
-        jTMaNV.setText("jTextField4");
-
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
@@ -582,8 +578,6 @@ public class BanHangJPanel extends javax.swing.JPanel {
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel16.setText("NGÀY LẬP");
 
-        jTNgay.setText("jTextField4");
-
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
@@ -604,8 +598,6 @@ public class BanHangJPanel extends javax.swing.JPanel {
 
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel17.setText("TỔNG TIỀN");
-
-        jTTienHD.setText("jTextField4");
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -683,8 +675,6 @@ public class BanHangJPanel extends javax.swing.JPanel {
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel20.setText("MAHD");
 
-        jTMaHDCT.setText("jTextField4");
-
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
@@ -705,8 +695,6 @@ public class BanHangJPanel extends javax.swing.JPanel {
 
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel21.setText("SẢN PHẨM");
-
-        jTMaSPCT.setText("jTextField4");
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
@@ -729,8 +717,6 @@ public class BanHangJPanel extends javax.swing.JPanel {
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel24.setText("SỐ LƯỢNG");
 
-        jTSoLuongCT.setText("jTextField4");
-
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
         jPanel22.setLayout(jPanel22Layout);
         jPanel22Layout.setHorizontalGroup(
@@ -752,8 +738,6 @@ public class BanHangJPanel extends javax.swing.JPanel {
         jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel25.setText("ĐƠN GIÁ");
 
-        jTGiaCT.setText("jTextField4");
-
         javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
         jPanel23.setLayout(jPanel23Layout);
         jPanel23Layout.setHorizontalGroup(
@@ -774,8 +758,6 @@ public class BanHangJPanel extends javax.swing.JPanel {
 
         jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel26.setText("THÀNH TIỀN");
-
-        jTTienCT.setText("jTextField4");
 
         javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
         jPanel24.setLayout(jPanel24Layout);

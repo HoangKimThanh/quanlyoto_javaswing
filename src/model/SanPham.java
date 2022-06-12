@@ -73,5 +73,10 @@ public class SanPham {
         this.hanBaoHanh = hanBaoHanh;
     }
 
+    @Override
+    public String toString() {
+        return "SanPham{" + "maSanPham=" + maSanPham + ", loai=" + loai + ", ten=" + ten + ", soLuong=" + soLuong + ", gia=" + gia + ", hanBaoHanh=" + hanBaoHanh + ", anh=" + anh + '}';
+    }
+
     
 }
