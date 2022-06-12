@@ -59,27 +59,27 @@ public class QuanLyNhanVienController {
 //    private final JTextField jTfChucVu;
     private NhanVien nhanVien = null;
     private NhanVienDAO nhanVienDAO = null;
-    
+
     private DangNhapController controllerDangNhap;
 
     private final String[] listColumn = {"STT", "Mã NV", "Tên NV", "Chức vụ", "Tài Khoản", "Mật khẩu"};
 
     private TableRowSorter<TableModel> rowSorter = null;
-    
+
     JTable table;
 
     public QuanLyNhanVienController(
-            JPanel jPnView, 
-            JButton jBtnAdd, 
-            JButton jBtnUpdate, 
-            JButton jBtnDelete, 
-            JButton jBtnReset, 
+            JPanel jPnView,
+            JButton jBtnAdd,
+            JButton jBtnUpdate,
+            JButton jBtnDelete,
+            JButton jBtnReset,
             JButton jBtnXuatExcel,
-            JTextField jTfMaNv, 
-            JTextField jTfHoTen, 
-            JComboBox jCbChucVu1, 
-            JTextField jTfTaiKhoan, 
-            JTextField jTfMatKhau, 
+            JTextField jTfMaNv,
+            JTextField jTfHoTen,
+            JComboBox jCbChucVu1,
+            JTextField jTfTaiKhoan,
+            JTextField jTfMatKhau,
             JTextField jTfSeach) {
         this.jPnView = jPnView;
         this.jBtnAdd = jBtnAdd;
@@ -97,7 +97,7 @@ public class QuanLyNhanVienController {
 
         this.nhanVienDAO = new NhanVienDAOImpl();
         this.nhanVien = new NhanVien();
-        
+
         controllerDangNhap = new DangNhapController();
     }
 
@@ -106,7 +106,7 @@ public class QuanLyNhanVienController {
         jTfMaNv.setText("");
         jTfHoTen.setText("");
         jCbChucVu1.setSelectedItem("Nhân viên");
-        
+
         if (controllerDangNhap.taiKhoanLogin.getChucVu().equals("Quản trị")) {
             jCbChucVu1.addItem("Quản lý");
             jCbChucVu1.addItem("Quản trị");
@@ -116,7 +116,7 @@ public class QuanLyNhanVienController {
         jBtnUpdate.setEnabled(false);
         jBtnDelete.setEnabled(false);
         jBtnReset.setEnabled(false);
-        
+
         String chucVu = controllerDangNhap.taiKhoanLogin.getChucVu();
 
         List<NhanVien> listItem = nhanVienDAO.getList(chucVu);
@@ -176,7 +176,9 @@ public class QuanLyNhanVienController {
 
                     jBtnAdd.setEnabled(false);
                     jBtnUpdate.setEnabled(true);
-                    jBtnDelete.setEnabled(true);
+                    if (nhanVien.getChucVu().equals("Quản trị") == false) {
+                        jBtnDelete.setEnabled(true);
+                    }
                     jBtnReset.setEnabled(true);
                 }
             }
@@ -188,7 +190,7 @@ public class QuanLyNhanVienController {
         table.setRowHeight(30);
         table.validate();
         table.repaint();
-        
+
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.getViewport().add(table);
         scrollPane.setPreferredSize(new Dimension(1300, 280));
@@ -312,7 +314,7 @@ public class QuanLyNhanVienController {
 
                         boolean result = nhanVienDAO.delete(nhanVien);
                         if (result) {
-                            JOptionPane.showMessageDialog(null, "Xóa dữ liệu thành công");
+                            JOptionPane.showMessageDialog(null, "Xóa nhân viên thành công");
                             setDataToTable();
                         } else {
                             JOptionPane.showMessageDialog(null, "Có lỗi xảy ra, vui lòng thử lại");
@@ -331,7 +333,7 @@ public class QuanLyNhanVienController {
                 setDataToTable();
             }
         });
-        
+
         jBtnXuatExcel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
