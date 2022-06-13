@@ -105,7 +105,7 @@ public class NhapHangJPanel extends javax.swing.JPanel {
         jTfPriceFrom = new javax.swing.JTextField();
         jTfPriceTo = new javax.swing.JTextField();
         jBtnFilter = new javax.swing.JButton();
-        jPnThongTinPN = new javax.swing.JPanel();
+        jPnThongTinSP2 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -514,7 +514,7 @@ public class NhapHangJPanel extends javax.swing.JPanel {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        jPnThongTinPN.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jPnThongTinSP2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel12.setText("Thông tin phiếu nhập");
@@ -549,60 +549,60 @@ public class NhapHangJPanel extends javax.swing.JPanel {
 
         jTfPNTongTien.setEditable(false);
 
-        javax.swing.GroupLayout jPnThongTinPNLayout = new javax.swing.GroupLayout(jPnThongTinPN);
-        jPnThongTinPN.setLayout(jPnThongTinPNLayout);
-        jPnThongTinPNLayout.setHorizontalGroup(
-            jPnThongTinPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPnThongTinPNLayout.createSequentialGroup()
+        javax.swing.GroupLayout jPnThongTinSP2Layout = new javax.swing.GroupLayout(jPnThongTinSP2);
+        jPnThongTinSP2.setLayout(jPnThongTinSP2Layout);
+        jPnThongTinSP2Layout.setHorizontalGroup(
+            jPnThongTinSP2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPnThongTinSP2Layout.createSequentialGroup()
                 .addGap(156, 156, 156)
                 .addComponent(jLabel12)
                 .addGap(0, 224, Short.MAX_VALUE))
-            .addGroup(jPnThongTinPNLayout.createSequentialGroup()
+            .addGroup(jPnThongTinSP2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPnThongTinPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPnThongTinPNLayout.createSequentialGroup()
-                        .addGroup(jPnThongTinPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPnThongTinSP2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPnThongTinSP2Layout.createSequentialGroup()
+                        .addGroup(jPnThongTinSP2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel15)
                             .addComponent(jLabel14))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPnThongTinPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPnThongTinSP2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTfPNNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
                             .addComponent(jTfPNMaPN)))
-                    .addGroup(jPnThongTinPNLayout.createSequentialGroup()
+                    .addGroup(jPnThongTinSP2Layout.createSequentialGroup()
                         .addComponent(jLabel17)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTfPNTongTien)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPnThongTinPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPnThongTinPNLayout.createSequentialGroup()
+                .addGroup(jPnThongTinSP2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPnThongTinSP2Layout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addGap(18, 18, 18)
                         .addComponent(jTfPNMaNhaCC))
-                    .addGroup(jPnThongTinPNLayout.createSequentialGroup()
+                    .addGroup(jPnThongTinSP2Layout.createSequentialGroup()
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTfPNNgayLap)))
                 .addGap(12, 12, 12))
         );
-        jPnThongTinPNLayout.setVerticalGroup(
-            jPnThongTinPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPnThongTinPNLayout.createSequentialGroup()
+        jPnThongTinSP2Layout.setVerticalGroup(
+            jPnThongTinSP2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPnThongTinSP2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel12)
                 .addGap(18, 18, 18)
-                .addGroup(jPnThongTinPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPnThongTinSP2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(jTfPNMaPN, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
                     .addComponent(jTfPNMaNhaCC, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPnThongTinPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPnThongTinSP2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTfPNNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14)
                     .addComponent(jTfPNNgayLap, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16))
                 .addGap(26, 26, 26)
-                .addGroup(jPnThongTinPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPnThongTinSP2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
                     .addComponent(jTfPNTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
@@ -629,7 +629,7 @@ public class NhapHangJPanel extends javax.swing.JPanel {
                             .addGroup(jPnTabPhieuNhapLayout.createSequentialGroup()
                                 .addComponent(jPnFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(27, 27, 27)
-                                .addComponent(jPnThongTinPN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jPnThongTinSP2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPnTabPhieuNhapLayout.createSequentialGroup()
                         .addGroup(jPnTabPhieuNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPaneDSPhieuNhap)
@@ -647,7 +647,7 @@ public class NhapHangJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel11)
                 .addGap(18, 18, 18)
                 .addGroup(jPnTabPhieuNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPnThongTinPN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPnThongTinSP2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPnFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(jPnTabPhieuNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -751,9 +751,9 @@ public class NhapHangJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPnFilter;
     private javax.swing.JPanel jPnTabNhapHang;
     private javax.swing.JPanel jPnTabPhieuNhap;
-    private javax.swing.JPanel jPnThongTinPN;
     private javax.swing.JPanel jPnThongTinSP;
     private javax.swing.JPanel jPnThongTinSP1;
+    private javax.swing.JPanel jPnThongTinSP2;
     private javax.swing.JScrollPane jScrollPaneChiTietPN;
     private javax.swing.JScrollPane jScrollPaneDSPhieuNhap;
     private javax.swing.JScrollPane jScrollPaneHangChoNhap;
