@@ -8,6 +8,7 @@ import controller.QuanLyKhachHangController;
 import controller.ThemKhachHangController;
 import java.util.List;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -24,9 +25,9 @@ public class AddKhachHang extends javax.swing.JFrame {
     /**
      * Creates new form AddKhachHang
      */
-    public AddKhachHang(JFrame k,HoaDon hoaDon, List<SanPham> listCart) {
+    public AddKhachHang(JFrame k,HoaDon hoaDon, List<SanPham> listCart, JComboBox jCbMaKH) {
         initComponents();
-        ThemKhachHangController controller=new ThemKhachHangController(jTfHoTen, jTfDienThoai, jTaDiaChi, jBtnAdd,this,k,hoaDon,listCart);
+        ThemKhachHangController controller=new ThemKhachHangController(jTfHoTen, jTfDienThoai, jTaDiaChi, jBtnAdd,this,k,hoaDon,listCart,jCbMaKH);
         controller.setEvent();
     }
 

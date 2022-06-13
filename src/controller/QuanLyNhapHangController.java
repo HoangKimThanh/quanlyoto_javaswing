@@ -576,11 +576,11 @@ public class QuanLyNhapHangController {
                     
 
 
-                    long donGia = Integer.valueOf(jTfDonGia.getText());
+                    long donGia = Long.valueOf(jTfDonGia.getText());
                     int soLuongNhap = Integer.parseInt(jSpSoLuong.getValue().toString());
                     
                     if (donGia <= 0 || soLuongNhap <= 0) {
-                        JOptionPane.showMessageDialog(null, "Đơn giá phải là số nguyên dương", "Thông báo", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Đơn giá và số lượng phải là số nguyên dương", "Thông báo", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
 
@@ -616,7 +616,7 @@ public class QuanLyNhapHangController {
                     int soLuongNhap = Integer.parseInt(jSpSoLuong.getValue().toString());
                     
                     if (donGia <= 0 || soLuongNhap <= 0) {
-                        JOptionPane.showMessageDialog(null, "Đơn giá phải là số nguyên dương!!");
+                        JOptionPane.showMessageDialog(null, "Đơn giá và số lượng phải là số nguyên dương!!");
                         return;
                     }
                     for (ChiTietPhieuNhap PN:danhSachSanPhamNhap){
@@ -885,8 +885,8 @@ public class QuanLyNhapHangController {
                         return;
                     }
                     isFiltering = true;
-                    int priceFrom = Integer.valueOf(jTfPriceFrom.getText());
-                    int priceTo = Integer.valueOf(jTfPriceTo.getText());
+                    long priceFrom = Long.valueOf(jTfPriceFrom.getText());
+                    long priceTo = Long.valueOf(jTfPriceTo.getText());
                   
                     PhieuNhapDAO phieuNhapDAO = new PhieuNhapDAOImpl();
                     danhSachPhieuNhap = phieuNhapDAO.getListFilterPrice(priceFrom, priceTo);

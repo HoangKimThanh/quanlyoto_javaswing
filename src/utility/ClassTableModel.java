@@ -104,7 +104,7 @@ public class ClassTableModel {
                 obj[2] = sanPham.getLoai();
                 obj[3] = sanPham.getTen();
                 obj[4] = sanPham.getSoLuong();
-                DecimalFormat formatter = new DecimalFormat("###,###,###");
+                DecimalFormat formatter = new DecimalFormat("###,###,###,###");
 
                 String gia = formatter.format(sanPham.getGia()) + " VNĐ";
                 obj[5] = gia;
@@ -198,9 +198,10 @@ public class ClassTableModel {
                 
                 obj[0] = (i + 1);
                 obj[1] = sanPham.getMaSanPham();
-                obj[2] = sanPham.getTen();
-                obj[3] = sanPham.getGia();
-                obj[4] = sanPham.getSoLuong();
+                obj[2] = sanPham.getLoai();
+                obj[3] = sanPham.getTen();
+                obj[4] = sanPham.getGia();
+                obj[5] = sanPham.getSoLuong();
                 
                 dtm.addRow(obj);
             }

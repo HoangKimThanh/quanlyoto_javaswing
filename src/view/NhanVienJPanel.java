@@ -230,11 +230,11 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                             .addComponent(jLbChucVu2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(60, 60, 60)
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTfMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTfMaNv)
                             .addComponent(jTfHoTen)
-                            .addComponent(jCbChucVu1, 0, 577, Short.MAX_VALUE)
-                            .addComponent(jTfTaiKhoan))))
+                            .addComponent(jCbChucVu1, 0, 576, Short.MAX_VALUE)
+                            .addComponent(jTfTaiKhoan)
+                            .addComponent(jTfMatKhau))))
                 .addGap(29, 29, 29))
         );
         jPanel11Layout.setVerticalGroup(
@@ -259,7 +259,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLbChucVu2)
-                    .addComponent(jTfMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTfMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnAdd)

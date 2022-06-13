@@ -34,7 +34,7 @@ public class BanHangJPanel extends javax.swing.JPanel {
                 "Quản lý hóa đơn");
         
         if (quyen.getCreate() == 0) {
-            jBTest.setVisible(false);
+            jBtnXuatHoaDon.setVisible(false);
         }
         
         if (quyen.getDelete()== 0) {
@@ -49,12 +49,14 @@ public class BanHangJPanel extends javax.swing.JPanel {
                 jTGia,
                 jSoLuong,
                 jTfSearch,
+                jTfLoaiSP,
                 jBAddToCart, 
                 jBDelete, 
                 jLbAnh,
                 jBtnXoaGioHang,
-                jBTest,
+                jBtnXuatHoaDon,
                 jBUpdate,
+                jBtnReLoad,
                 this);
         
         QuanLyHoaDonController controllerb= new QuanLyHoaDonController(
@@ -107,10 +109,10 @@ public class BanHangJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         showTableCart = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        jBtnReLoad = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jPanel26 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
         jLabel30 = new javax.swing.JLabel();
         jTMaSP = new javax.swing.JTextField();
         jLabel31 = new javax.swing.JLabel();
@@ -123,12 +125,13 @@ public class BanHangJPanel extends javax.swing.JPanel {
         jBDelete = new javax.swing.JButton();
         jPanel35 = new javax.swing.JPanel();
         jLbAnh = new javax.swing.JLabel();
-        jBTest = new javax.swing.JButton();
+        jBtnXuatHoaDon = new javax.swing.JButton();
         jBtnXoaGioHang = new javax.swing.JButton();
         jLabel32 = new javax.swing.JLabel();
         jTGia = new javax.swing.JTextField();
         jLabel33 = new javax.swing.JLabel();
         jSoLuong = new javax.swing.JSpinner();
+        jTfLoaiSP = new javax.swing.JTextField();
         jLabel28 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -209,6 +212,8 @@ public class BanHangJPanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(660, 624));
 
+        jTab.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
         jPanel1.setPreferredSize(new java.awt.Dimension(660, 624));
 
         jPanel6.setBackground(new java.awt.Color(240, 220, 240));
@@ -251,25 +256,37 @@ public class BanHangJPanel extends javax.swing.JPanel {
         showTableCartLayout.setVerticalGroup(
             showTableCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, showTableCartLayout.createSequentialGroup()
-                .addContainerGap(146, Short.MAX_VALUE)
+                .addContainerGap(127, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addGap(122, 122, 122))
         );
+
+        jBtnReLoad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/download-icon-refresh+24px-131987943331991857_512.png"))); // NOI18N
+        jBtnReLoad.setText("jButton1");
+        jBtnReLoad.setMaximumSize(new java.awt.Dimension(299, 233));
+        jBtnReLoad.setMinimumSize(new java.awt.Dimension(299, 233));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
             .addComponent(showTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(showTableCart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jBtnReLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnReLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(3, 3, 3)
                 .addComponent(showTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -280,8 +297,6 @@ public class BanHangJPanel extends javax.swing.JPanel {
         jLabel29.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel29.setText("LOẠI SP");
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0 - Chọn loại", "1 - Ô tô", "2 - Phụ tùng" }));
 
         jLabel30.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -372,9 +387,9 @@ public class BanHangJPanel extends javax.swing.JPanel {
                 .addGap(30, 30, 30))
         );
 
-        jBTest.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jBTest.setText("XUẤT HÓA ĐƠN");
-        jBTest.setEnabled(false);
+        jBtnXuatHoaDon.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jBtnXuatHoaDon.setText("XUẤT HÓA ĐƠN");
+        jBtnXuatHoaDon.setEnabled(false);
 
         jBtnXoaGioHang.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jBtnXoaGioHang.setText("XÓA GIỎ HÀNG");
@@ -389,6 +404,8 @@ public class BanHangJPanel extends javax.swing.JPanel {
         jLabel33.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel33.setText("SỐ LƯỢNG");
+
+        jTfLoaiSP.setEnabled(false);
 
         javax.swing.GroupLayout jPanel26Layout = new javax.swing.GroupLayout(jPanel26);
         jPanel26.setLayout(jPanel26Layout);
@@ -410,12 +427,12 @@ public class BanHangJPanel extends javax.swing.JPanel {
                                 .addGap(25, 25, 25)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jSoLuong, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jTGia, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jTTenSP)
                             .addComponent(jTfSearch)
-                            .addComponent(jTMaSP)))
+                            .addComponent(jTMaSP)
+                            .addComponent(jTfLoaiSP)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel26Layout.createSequentialGroup()
                         .addGap(0, 6, Short.MAX_VALUE)
                         .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -423,7 +440,7 @@ public class BanHangJPanel extends javax.swing.JPanel {
                             .addGroup(jPanel26Layout.createSequentialGroup()
                                 .addComponent(jBtnXoaGioHang)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBTest)))))
+                                .addComponent(jBtnXuatHoaDon)))))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel26Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -432,11 +449,12 @@ public class BanHangJPanel extends javax.swing.JPanel {
         jPanel26Layout.setVerticalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel26Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTfLoaiSP, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel26Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTMaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -463,8 +481,8 @@ public class BanHangJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnXoaGioHang)
-                    .addComponent(jBTest))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jBtnXuatHoaDon))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jLabel28.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -513,8 +531,6 @@ public class BanHangJPanel extends javax.swing.JPanel {
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel13.setText("MAHD");
 
-        jTMaHD.setText("jTextField4");
-
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
@@ -523,7 +539,7 @@ public class BanHangJPanel extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
-                .addComponent(jTMaHD, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                .addComponent(jTMaHD, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
                 .addGap(30, 30, 30))
         );
         jPanel11Layout.setVerticalGroup(
@@ -535,8 +551,6 @@ public class BanHangJPanel extends javax.swing.JPanel {
 
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel14.setText("MAKH");
-
-        jTMaKH.setText("jTextField4");
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -559,8 +573,6 @@ public class BanHangJPanel extends javax.swing.JPanel {
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel15.setText("MANV");
 
-        jTMaNV.setText("jTextField4");
-
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
@@ -582,8 +594,6 @@ public class BanHangJPanel extends javax.swing.JPanel {
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel16.setText("NGÀY LẬP");
 
-        jTNgay.setText("jTextField4");
-
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
@@ -592,7 +602,7 @@ public class BanHangJPanel extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTNgay, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                .addComponent(jTNgay, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
                 .addGap(30, 30, 30))
         );
         jPanel14Layout.setVerticalGroup(
@@ -604,8 +614,6 @@ public class BanHangJPanel extends javax.swing.JPanel {
 
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel17.setText("TỔNG TIỀN");
-
-        jTTienHD.setText("jTextField4");
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -683,8 +691,6 @@ public class BanHangJPanel extends javax.swing.JPanel {
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel20.setText("MAHD");
 
-        jTMaHDCT.setText("jTextField4");
-
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
@@ -693,7 +699,7 @@ public class BanHangJPanel extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65)
-                .addComponent(jTMaHDCT, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                .addComponent(jTMaHDCT, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
                 .addGap(30, 30, 30))
         );
         jPanel18Layout.setVerticalGroup(
@@ -706,8 +712,6 @@ public class BanHangJPanel extends javax.swing.JPanel {
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel21.setText("SẢN PHẨM");
 
-        jTMaSPCT.setText("jTextField4");
-
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
         jPanel19Layout.setHorizontalGroup(
@@ -716,7 +720,7 @@ public class BanHangJPanel extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65)
-                .addComponent(jTMaSPCT, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                .addComponent(jTMaSPCT, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
                 .addGap(30, 30, 30))
         );
         jPanel19Layout.setVerticalGroup(
@@ -729,8 +733,6 @@ public class BanHangJPanel extends javax.swing.JPanel {
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel24.setText("SỐ LƯỢNG");
 
-        jTSoLuongCT.setText("jTextField4");
-
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
         jPanel22.setLayout(jPanel22Layout);
         jPanel22Layout.setHorizontalGroup(
@@ -739,7 +741,7 @@ public class BanHangJPanel extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65)
-                .addComponent(jTSoLuongCT, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                .addComponent(jTSoLuongCT, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
                 .addGap(30, 30, 30))
         );
         jPanel22Layout.setVerticalGroup(
@@ -752,8 +754,6 @@ public class BanHangJPanel extends javax.swing.JPanel {
         jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel25.setText("ĐƠN GIÁ");
 
-        jTGiaCT.setText("jTextField4");
-
         javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
         jPanel23.setLayout(jPanel23Layout);
         jPanel23Layout.setHorizontalGroup(
@@ -762,7 +762,7 @@ public class BanHangJPanel extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65)
-                .addComponent(jTGiaCT, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                .addComponent(jTGiaCT, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
                 .addGap(30, 30, 30))
         );
         jPanel23Layout.setVerticalGroup(
@@ -775,8 +775,6 @@ public class BanHangJPanel extends javax.swing.JPanel {
         jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel26.setText("THÀNH TIỀN");
 
-        jTTienCT.setText("jTextField4");
-
         javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
         jPanel24.setLayout(jPanel24Layout);
         jPanel24Layout.setHorizontalGroup(
@@ -785,7 +783,7 @@ public class BanHangJPanel extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addComponent(jTTienCT, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                .addComponent(jTTienCT, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                 .addGap(30, 30, 30))
         );
         jPanel24Layout.setVerticalGroup(
@@ -847,7 +845,7 @@ public class BanHangJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTab, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE))
+                .addComponent(jTab, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -872,10 +870,10 @@ public class BanHangJPanel extends javax.swing.JPanel {
     private javax.swing.JButton jBAddToCart;
     private javax.swing.JButton jBDelete;
     private javax.swing.JButton jBDeleteb;
-    private javax.swing.JButton jBTest;
     private javax.swing.JButton jBUpdate;
+    private javax.swing.JButton jBtnReLoad;
     private javax.swing.JButton jBtnXoaGioHang;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JButton jBtnXuatHoaDon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -939,6 +937,7 @@ public class BanHangJPanel extends javax.swing.JPanel {
     private javax.swing.JTabbedPane jTab;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTextField jTfLoaiSP;
     private javax.swing.JTextField jTfSearch;
     private javax.swing.JPanel showCTHD;
     private javax.swing.JPanel showHoaDon;

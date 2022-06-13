@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
@@ -32,7 +33,8 @@ public class ThemKhachHangController {
     private JFrame AddHoaDon;
     private HoaDon hoaDon;
     private List<SanPham> listCart;
-    public ThemKhachHangController(JTextField jTfHoTen, JTextField jTfDienThoai, JTextArea jTaDiaChi, JButton jBtnAdd,JFrame root, JFrame AddHoaDon,HoaDon hoaDon,List<SanPham> listCart) {
+    private JComboBox jCbMaKH;
+    public ThemKhachHangController(JTextField jTfHoTen, JTextField jTfDienThoai, JTextArea jTaDiaChi, JButton jBtnAdd,JFrame root, JFrame AddHoaDon,HoaDon hoaDon,List<SanPham> listCart,JComboBox jCbMaKH) {
         this.jTfHoTen = jTfHoTen;
         this.jTfDienThoai = jTfDienThoai;
         this.jTaDiaChi = jTaDiaChi;
@@ -41,6 +43,7 @@ public class ThemKhachHangController {
         this.AddHoaDon=AddHoaDon;
         this.hoaDon=hoaDon;
         this.listCart=listCart;
+        this.jCbMaKH=jCbMaKH;
     }
     public void setEvent() {
         jBtnAdd.addActionListener(new ActionListener() {
@@ -60,11 +63,15 @@ public class ThemKhachHangController {
                     if (lastId != 0) {
                         JOptionPane.showMessageDialog(null, "Thêm khách hàng thành công");
                         root.dispose();
-                        AddHoaDon.dispose();
-                        DangNhapController controllerDangNhap = new DangNhapController();
-                        AddHoaDon addHoaDon =new AddHoaDon(hoaDon,listCart,controllerDangNhap.taiKhoanLogin.getHoTen(),null);
-                        addHoaDon.setVisible(true);
-                        addHoaDon.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        List<KhachHang> listKH = khachHangDAO.getList();
+                        for (KhachHang KH : listKH) {
+                            jCbMaKH.addItem(KH.getMaKhachHang() + "-" + KH.getHoTen());
+                        }
+//                        AddHoaDon.dispose();
+//                        DangNhapController controllerDangNhap = new DangNhapController();
+//                        AddHoaDon addHoaDon =new AddHoaDon(hoaDon,listCart,controllerDangNhap.taiKhoanLogin.getHoTen(),null);
+//                        addHoaDon.setVisible(true);
+//                        addHoaDon.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                         
                         
                     } else {

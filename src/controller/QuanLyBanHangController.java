@@ -26,7 +26,9 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -62,23 +64,23 @@ public class QuanLyBanHangController {
     private JPanel showTableCart, root;
     private JTextField jTMaSP;
     private JTextField jTTenSP;
-    private JTextField jTGia, jTfSearch;
+    private JTextField jTGia, jTfSearch, jTfLoaiSP;
     private JLabel jLbAnh;
-    private JButton jBAddToCart, jBDelete, jBtnXoaGioHang, jBUpdate;
+    private JButton jBAddToCart, jBDelete, jBtnXoaGioHang, jBUpdate, jBtnReLoad;
     private JSpinner jSoLuong;
-    private JButton jBTest;
+    private JButton jBtnXuatHoaDon;
     private SanPhamDAO sanPhamDAO = null;
     private HoaDonDAO hoaDonDAO = null;
     private CTHDDAO cthdDAO = null;
     private List<SanPham> listCart = null;
-    private String[] listColumn = {"STT", "Mã SP", "Tên SP", "GIÁ", "SỐ LƯỢNG"};
+    private String[] listColumn = {"STT", "Mã SP", "Loại SP", "Tên SP", "GIÁ", "SỐ LƯỢNG"};
     private TableRowSorter<TableModel> rowSorter = null;
     private TableRowSorter<TableModel> rowSorter1 = null;
     private JTable table, tableCart;
     File fileAnhSP;
     Integer tongTien = 0;
 
-    public QuanLyBanHangController(JPanel showTable, JPanel showTableCart, JTextField jTMaSP, JTextField jTTenSP, JTextField jTGia, JSpinner jSoLuong,JTextField jTfSearch, JButton jBAddToCart, JButton jBDelete, JLabel jLbAnh, JButton jBtnXoaGioHang, JButton jBTest, JButton jBUpdate, JPanel root) {
+    public QuanLyBanHangController(JPanel showTable, JPanel showTableCart, JTextField jTMaSP, JTextField jTTenSP, JTextField jTGia, JSpinner jSoLuong, JTextField jTfSearch, JTextField jTfLoaiSP, JButton jBAddToCart, JButton jBDelete, JLabel jLbAnh, JButton jBtnXoaGioHang, JButton jBtnXuatHoaDon, JButton jBUpdate,JButton jBtnReLoad, JPanel root) {
         this.showTable = showTable;
         this.showTableCart = showTableCart;
         this.jTMaSP = jTMaSP;
@@ -93,13 +95,22 @@ public class QuanLyBanHangController {
         this.listCart = new ArrayList<>();
         this.jBtnXoaGioHang = jBtnXoaGioHang;
         this.jBAddToCart = jBAddToCart;
-        this.jBTest = jBTest;
+        this.jBtnXuatHoaDon = jBtnXuatHoaDon;
         this.jBUpdate = jBUpdate;
-        this.root=root;
-        this.jTfSearch=jTfSearch;
+        this.jBtnReLoad=jBtnReLoad;
+        this.root = root;
+        this.jTfSearch = jTfSearch;
+        this.jTfLoaiSP = jTfLoaiSP;
     }
 
     public void setDataToTable() {
+        jBAddToCart.setEnabled(false);
+        jTfLoaiSP.setText("");
+        jTMaSP.setText("");
+        jTTenSP.setText("");
+        jTGia.setText("");
+        jSoLuong.setValue(0);
+        loadAnh("");
         List<SanPham> listItem = sanPhamDAO.getListCanBuy();
         DefaultTableModel model = new ClassTableModel().setTableBanHang(listItem, listColumn);
         table = new JTable(model);
@@ -110,13 +121,15 @@ public class QuanLyBanHangController {
             public void mouseClicked(MouseEvent e) {
                 if (table.getSelectedRow() != -1) {
                     int selectedRowIndex = table.getSelectedRow();
-                    if (tableCart.getRowCount()!=0)
-                        tableCart.removeRowSelectionInterval(0,tableCart.getRowCount()-1);
+                    if (tableCart.getRowCount() != 0) {
+                        tableCart.removeRowSelectionInterval(0, tableCart.getRowCount() - 1);
+                    }
                     jTMaSP.setText(table.getValueAt(selectedRowIndex, 1).toString());
-                    jTTenSP.setText(table.getValueAt(selectedRowIndex, 2).toString());
-                    jTGia.setText(table.getValueAt(selectedRowIndex, 3).toString());
-                    SpinnerNumberModel md = new SpinnerNumberModel(1, 1, Integer.parseInt(table.getValueAt(selectedRowIndex, 4).toString()), 1);
-                    jSoLuong.setModel(md);
+                    jTfLoaiSP.setText(table.getValueAt(selectedRowIndex, 2).toString());
+                    jTTenSP.setText(table.getValueAt(selectedRowIndex, 3).toString());
+                    jTGia.setText(table.getValueAt(selectedRowIndex, 4).toString());
+//                    SpinnerNumberModel md = new SpinnerNumberModel(1, 1, Integer.parseInt(table.getValueAt(selectedRowIndex, 5).toString()), 1);
+//                    jSoLuong.setModel(md);
                     for (SanPham SP : listItem) {
                         if ((table.getValueAt(selectedRowIndex, 1)).equals(SP.getMaSanPham())) {
                             loadAnh("src/images/SanPham/" + SP.getAnh());
@@ -125,21 +138,22 @@ public class QuanLyBanHangController {
                     jBAddToCart.setEnabled(true);
                     jBDelete.setEnabled(false);
                     jBUpdate.setEnabled(false);
+                    jSoLuong.setValue(1);
 //                    setDataToCart();
                 }
             }
         });
-        
+
         table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
         table.getTableHeader().setPreferredSize(new Dimension(100, 50));
         table.setRowHeight(50);
         table.validate();
         table.repaint();
-    
+
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.getViewport().add(table);
         scrollPane.setPreferredSize(new Dimension(1300, 400));
-        
+
         showTable.removeAll();
         showTable.setLayout(new BorderLayout());
         showTable.add(scrollPane);
@@ -175,12 +189,12 @@ public class QuanLyBanHangController {
 
     public void setDataToCart() {
         List<SanPham> listItemA = sanPhamDAO.getList();
-        
+
         if (listCart.size() != 0) {
-            jBTest.setEnabled(true);
+            jBtnXuatHoaDon.setEnabled(true);
             jBtnXoaGioHang.setEnabled(true);
         } else {
-            jBTest.setEnabled(false);
+            jBtnXuatHoaDon.setEnabled(false);
             jBtnXoaGioHang.setEnabled(false);
         }
         DefaultTableModel model = new ClassTableModel().setTableBanHang(listCart, listColumn);
@@ -194,17 +208,18 @@ public class QuanLyBanHangController {
             public void mouseClicked(MouseEvent e) {
                 if (tableCart.getSelectedRow() != -1) {
                     int selectedRowIndex = tableCart.getSelectedRow();
-                    table.removeRowSelectionInterval(0,table.getRowCount()-1);
-                    
+                    table.removeRowSelectionInterval(0, table.getRowCount() - 1);
+
                     jTMaSP.setText(tableCart.getValueAt(selectedRowIndex, 1).toString());
-                    jTTenSP.setText(tableCart.getValueAt(selectedRowIndex, 2).toString());
-                    jTGia.setText(tableCart.getValueAt(selectedRowIndex, 3).toString());
-                    jSoLuong.setValue(tableCart.getValueAt(selectedRowIndex, 4));
-                    
+                    jTfLoaiSP.setText(table.getValueAt(selectedRowIndex, 2).toString());
+                    jTTenSP.setText(tableCart.getValueAt(selectedRowIndex, 3).toString());
+                    jTGia.setText(tableCart.getValueAt(selectedRowIndex, 4).toString());
+                    jSoLuong.setValue(tableCart.getValueAt(selectedRowIndex, 5));
+
                     for (SanPham SP : listItemA) {
                         if ((tableCart.getValueAt(selectedRowIndex, 1)).equals(SP.getMaSanPham())) {
-                            SpinnerNumberModel md = new SpinnerNumberModel(1, 1, SP.getSoLuong(), 1);
-                            jSoLuong.setModel(md);
+//                            SpinnerNumberModel md = new SpinnerNumberModel(1, 1, SP.getSoLuong(), 1);
+//                            jSoLuong.setModel(md);
                             loadAnh("src/images/SanPham/" + SP.getAnh());
                         }
                     }
@@ -221,11 +236,11 @@ public class QuanLyBanHangController {
         tableCart.setRowHeight(50);
         tableCart.validate();
         tableCart.repaint();
-  
+
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.getViewport().add(tableCart);
         scrollPane.setPreferredSize(new Dimension(1300, 400));
-    
+
         showTableCart.removeAll();
         showTableCart.setLayout(new BorderLayout());
         showTableCart.add(scrollPane);
@@ -239,27 +254,54 @@ public class QuanLyBanHangController {
             public void actionPerformed(ActionEvent e) {
                 try {
                     Boolean isInCart = false;
+                    List<SanPham> SanPhamTrongKho = sanPhamDAO.getListCanBuy();
                     SanPham sanPham = new SanPham();
                     Integer MaSP = Integer.parseInt(jTMaSP.getText());
                     Integer soLuong = Integer.parseInt(jSoLuong.getValue().toString());
                     sanPham.setMaSanPham(Integer.parseInt(jTMaSP.getText()));
+                    sanPham.setLoai(jTfLoaiSP.getText());
                     sanPham.setTen(jTTenSP.getText());
                     sanPham.setGia(Integer.parseInt(jTGia.getText()));
                     sanPham.setSoLuong(soLuong);
-
+                    //Validate số lượng nhập vào
+                    if (soLuong<1) {
+                        JOptionPane.showMessageDialog(null, "Số lượng phải là số nguyên dương", "Thông báo", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    for (SanPham SPTrongKho:SanPhamTrongKho){
+                                if (SPTrongKho.getMaSanPham()== MaSP){
+                                    if (soLuong>SPTrongKho.getSoLuong())
+                                    {
+                                        JOptionPane.showMessageDialog(null, "Số lượng của mỗi sản phẩm không được lớn hơn trong kho", "Thông báo", JOptionPane.ERROR_MESSAGE);
+                                        return;
+                                    }
+                                    break;
+                                }
+                    }
                     for (SanPham SPham : listCart) {
                         if (SPham.getMaSanPham() == MaSP) {
-                            Integer a = SPham.getSoLuong() + soLuong;
-                            isInCart = true;
-                            SPham.setSoLuong(a);
-                            break;
+                            for (SanPham SPTrongKho1:SanPhamTrongKho){
+                                if (SPTrongKho1.getMaSanPham()== MaSP){
+                                    Integer soLuongMoi = SPham.getSoLuong() + soLuong;
+                                    isInCart = true;
+                                    if (soLuongMoi>SPTrongKho1.getSoLuong()) 
+                                        JOptionPane.showMessageDialog(null, "Số lượng của mỗi sản phẩm ở trong giỏ không được lớn hơn trong kho", "Thông báo", JOptionPane.ERROR_MESSAGE);
+                                    else SPham.setSoLuong(soLuongMoi);
+                                    break;
+                                }
+                            }
+                    //
+//                            Integer soLuongMoi = SPham.getSoLuong() + soLuong;
+//                            isInCart = true;
+//                            SPham.setSoLuong(soLuongMoi);
+//                            break;
                         }
                     }
                     if (!isInCart) {
                         listCart.add(sanPham);
                     }
                     setDataToCart();
-                    
+
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Vui lòng chọn sản phẩm trước khi thêm", "Thông báo", JOptionPane.ERROR_MESSAGE);
                 }
@@ -270,7 +312,7 @@ public class QuanLyBanHangController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Integer MaSP = Integer.parseInt(jTMaSP.getText());
-
+                
                 for (SanPham SP : listCart) {
                     if (SP.getMaSanPham() == MaSP) {
                         listCart.remove(SP);
@@ -280,23 +322,45 @@ public class QuanLyBanHangController {
                 setDataToCart();
                 jBUpdate.setEnabled(false);
                 jBDelete.setEnabled(false);
+                jTfLoaiSP.setText("");
                 jTMaSP.setText("");
                 jTTenSP.setText("");
                 jTGia.setText("");
                 jSoLuong.setValue(0);
+                loadAnh("");
             }
         });
-        jBTest.addActionListener(new ActionListener() {
+        jBtnReLoad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                setDataToTable();
+            }
+        });
+        jBtnXuatHoaDon.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tableCart.removeRowSelectionInterval(0, tableCart.getRowCount() - 1);
+                table.removeRowSelectionInterval(0, table.getRowCount() - 1);
+                jTfLoaiSP.setText("");
+                jTMaSP.setText("");
+                jTTenSP.setText("");
+                jTGia.setText("");
+                jSoLuong.setValue(0);
+                loadAnh("");
+                jBAddToCart.setEnabled(false);
+                jBUpdate.setEnabled(false);
+                jBDelete.setEnabled(false);
+                Date date = new Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+                String ngayLap = sdf.format(date);
                 HoaDon hoaDon = new HoaDon();
-                hoaDon.setNgayLap(java.time.LocalDate.now().toString());
+                hoaDon.setNgayLap(ngayLap);
                 hoaDon.setGhiChu("");
-                
+
                 DangNhapController controllerDangNhap = new DangNhapController();
                 
                 AddHoaDon frameAddHoaDon;
-                frameAddHoaDon = new AddHoaDon(hoaDon, listCart,controllerDangNhap.taiKhoanLogin.getHoTen(),showTableCart);
+                frameAddHoaDon = new AddHoaDon(hoaDon, listCart, controllerDangNhap.taiKhoanLogin.getHoTen(), showTableCart, jBtnXuatHoaDon, jBtnXoaGioHang);
                 frameAddHoaDon.setVisible(true);
                 frameAddHoaDon.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -307,11 +371,30 @@ public class QuanLyBanHangController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Integer MaSP = Integer.parseInt(jTMaSP.getText());
-                
+                List<SanPham> SanPhamTrongKho = sanPhamDAO.getListCanBuy();
+                Integer soLuong=Integer.parseInt(jSoLuong.getValue().toString());
+                if (soLuong<1){ 
+                    JOptionPane.showMessageDialog(null, "Số lượng phải là số nguyên dương", "Thông báo", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
                 for (SanPham SP : listCart) {
                     if (SP.getMaSanPham() == MaSP) {
-                        SP.setSoLuong(Integer.parseInt(jSoLuong.getValue().toString()));
-                        break;
+                        for (SanPham SPTrongKho:SanPhamTrongKho){
+                                if (SPTrongKho.getMaSanPham()== MaSP){
+                                    System.out.println(soLuong);
+                                    if (soLuong>SPTrongKho.getSoLuong()){
+                                        JOptionPane.showMessageDialog(null, "Số lượng của mỗi sản phẩm trong giỏ không được lớn hơn trong kho ", "Thông báo", JOptionPane.ERROR_MESSAGE);
+                                        return;
+                                    }
+                                    else {
+                                        SP.setSoLuong(soLuong);
+                                        break;
+                                    }
+                                    
+                                }
+                        
+                        
+                        }
                     }
                 }
                 setDataToCart();

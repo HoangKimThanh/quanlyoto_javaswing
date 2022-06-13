@@ -49,14 +49,14 @@ public class PhieuNhapDAOImpl implements PhieuNhapDAO {
     }
     
     @Override
-    public List<PhieuNhap> getListFilterPrice(int min, int max) {
+    public List<PhieuNhap> getListFilterPrice(long min, long max) {
         try {
             Connection cons = DBConnection.getConnection();
             String sql = "SELECT * FROM phieunhap where tongtien BETWEEN ? and ?";
             List<PhieuNhap> list = new ArrayList<>();
             PreparedStatement ps = cons.prepareCall(sql);
-            ps.setInt(1, min);
-            ps.setInt(2, max);
+            ps.setLong(1, min);
+            ps.setLong(2, max);
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
                 PhieuNhap phieuNhap = new PhieuNhap();
