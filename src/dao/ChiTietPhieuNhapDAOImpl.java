@@ -32,9 +32,9 @@ public class ChiTietPhieuNhapDAOImpl implements ChiTietPhieuNhapDAO {
                 ChiTietPhieuNhap ctPhieuNhap = new ChiTietPhieuNhap();
                 ctPhieuNhap.setMaPhieuNhap(rs.getInt("mapn"));
                 ctPhieuNhap.setMaSanPham(rs.getInt("masp"));                
-                ctPhieuNhap.setDonGia(rs.getInt("dongia"));                
+                ctPhieuNhap.setDonGia(rs.getLong("dongia"));                
                 ctPhieuNhap.setSoLuong(rs.getInt("soluong"));   
-                ctPhieuNhap.setThanhTien(rs.getInt("thanhtien"));      
+                ctPhieuNhap.setThanhTien(rs.getLong("thanhtien"));      
                 ctPhieuNhap.setTenSanPham(rs.getString("ten"));                
                 list.add(ctPhieuNhap);
             }

@@ -373,7 +373,7 @@ public class QuanLyNhapHangController {
                     jTfPNMaNhaCC.setText(nhaCungCap.toString());
                     jTfPNNhanVien.setText(phieuNhap.getMaNhanVien() + "");
                     jTfPNNgayLap.setText(phieuNhap.getNgayLap());
-                    jTfPNTongTien.setText(phieuNhap.getTongTien() + "");
+                    jTfPNTongTien.setText(dcf.format(phieuNhap.getTongTien()) + "");
                     
                     loadChiTietPhieuNhap(phieuNhap.getMaPhieuNhap());
                   
@@ -397,9 +397,9 @@ public class QuanLyNhapHangController {
             model.addRow(new Object[]{
                 listCTPhieuNhap.get(i).getMaSanPham(), 
                 listCTPhieuNhap.get(i).getTenSanPham(), 
-                listCTPhieuNhap.get(i).getDonGia(),                
+                dcf.format(listCTPhieuNhap.get(i).getDonGia()),                
                 listCTPhieuNhap.get(i).getSoLuong(),
-                listCTPhieuNhap.get(i).getThanhTien(),
+                dcf.format(listCTPhieuNhap.get(i).getThanhTien()),
 
             });
         }
@@ -576,7 +576,7 @@ public class QuanLyNhapHangController {
                     
 
 
-                    int donGia = Integer.valueOf(jTfDonGia.getText());
+                    long donGia = Long.valueOf(jTfDonGia.getText());
                     int soLuongNhap = Integer.parseInt(jSpSoLuong.getValue().toString());
                     
                     if (donGia <= 0 || soLuongNhap <= 0) {
@@ -612,7 +612,7 @@ public class QuanLyNhapHangController {
                     int maSanPham = Integer.valueOf(jTfMaSP.getText());
                     String tenSanPham = jTfTenSP.getText();
                     
-                    int donGia = Integer.valueOf(jTfDonGia.getText());
+                    long donGia = Integer.valueOf(jTfDonGia.getText());
                     int soLuongNhap = Integer.parseInt(jSpSoLuong.getValue().toString());
                     
                     if (donGia <= 0 || soLuongNhap <= 0) {
@@ -787,8 +787,7 @@ public class QuanLyNhapHangController {
                     
                     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
                     LocalDateTime now = LocalDateTime.now();
-                    String nhanVien = DangNhapController.taiKhoanLogin.getMaNV() + 
-                            DangNhapController.taiKhoanLogin.getHoTen();
+                    String nhanVien = DangNhapController.taiKhoanLogin.getHoTen();
                     NhaCungCap nhaCC = (NhaCungCap) jComboBoxNhaCC.getSelectedItem();
                     String hd = "<style> "
                             + "table {"
@@ -826,8 +825,8 @@ public class QuanLyNhapHangController {
                         hd += "<td style='text-align:center;'>" + ctPhieuNhap.getMaSanPham()+ "</td>";
                         hd += "<td style='text-align:left;'>" + ctPhieuNhap.getTenSanPham()+ "</td>";
                         hd += "<td style='text-align:center;'>" + ctPhieuNhap.getSoLuong() + "</td>";
-                        hd += "<td style='text-align:center;'>" + ctPhieuNhap.getDonGia()+ "</td>";
-                        hd += "<td style='text-align:center;'>" + ctPhieuNhap.getThanhTien() + "</td>";
+                        hd += "<td style='text-align:center;'>" + dcf.format(ctPhieuNhap.getDonGia())+ "</td>";
+                        hd += "<td style='text-align:center;'>" + dcf.format(ctPhieuNhap.getThanhTien()) + "</td>";
                         hd += "</tr>";
                     }
                     hd += "<tr>";
@@ -886,8 +885,8 @@ public class QuanLyNhapHangController {
                         return;
                     }
                     isFiltering = true;
-                    int priceFrom = Integer.valueOf(jTfPriceFrom.getText());
-                    int priceTo = Integer.valueOf(jTfPriceTo.getText());
+                    long priceFrom = Long.valueOf(jTfPriceFrom.getText());
+                    long priceTo = Long.valueOf(jTfPriceTo.getText());
                   
                     PhieuNhapDAO phieuNhapDAO = new PhieuNhapDAOImpl();
                     danhSachPhieuNhap = phieuNhapDAO.getListFilterPrice(priceFrom, priceTo);
