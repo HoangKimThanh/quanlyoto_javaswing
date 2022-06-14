@@ -100,7 +100,7 @@ public class SanPhamJPanel extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("QUẢN LÝ SẢN PHẨM");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin nhà cung cấp"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin sản phẩm"));
 
         jLbLoai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLbLoai.setText("Loại");

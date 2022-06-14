@@ -211,7 +211,7 @@ public class ThongKeController {
         try {
             Connection cons = DBConnection.getConnection();
             String sql = "SELECT sanpham.masp, sanpham.ten, sum(cthd.soluong) as total "
-                    + "FROM sanpham JOIN cthd ON sanpham.masp = cthd.masp GROUP BY sanpham.masp LIMIT 5";
+                    + "FROM sanpham JOIN cthd ON sanpham.masp = cthd.masp GROUP BY sanpham.masp order by total desc LIMIT 5";
             PreparedStatement ps = cons.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             List<SanPham> listTopSP = new ArrayList<>();
