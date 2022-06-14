@@ -4,7 +4,7 @@
  */
 package dao;
 
-import MyCustom.MyDialog;
+import utility.MyDialog;
 import java.util.ArrayList;
 import java.util.List;
 import model.Quyen;

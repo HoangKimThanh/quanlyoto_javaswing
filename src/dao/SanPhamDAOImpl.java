@@ -32,7 +32,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
                 sanPham.setLoai(rs.getString("loai"));
                 sanPham.setTen(rs.getString("ten"));
                 sanPham.setSoLuong(rs.getInt("soluong"));
-                sanPham.setGia(rs.getInt("gia"));
+                sanPham.setGia(rs.getLong("gia"));
                 sanPham.setHanBaoHanh(rs.getInt("hanbaohanh"));
                 sanPham.setAnh(rs.getString("anh"));
                 list.add(sanPham);

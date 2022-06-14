@@ -27,7 +27,7 @@ public class MainJFrame extends javax.swing.JFrame {
     public void showWindow() {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 //        this.setUndecorated(true);
-//        this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
 

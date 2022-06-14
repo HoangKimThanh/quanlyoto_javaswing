@@ -101,7 +101,7 @@
                                   <Component id="jLbHanBaoHanh" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel3" alignment="1" pref="352" max="32767" attributes="0"/>
+                                      <Component id="jLabel3" alignment="1" max="32767" attributes="0"/>
                                       <Component id="jTfHanBaoHanh" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -278,7 +278,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="(Gi&#xe1; d&#x1ea1;ng 1,000,000 ho&#x1eb7;c 1,000,000, t&#x1eeb; 100,000 &#x111;&#x1ebf;n 999,999,999,999)"/>
+            <Property name="text" type="java.lang.String" value="(Gi&#xe1; d&#x1ea1;ng 1,000,000 ho&#x1eb7;c 1000000, t&#x1eeb; 100,000 &#x111;&#x1ebf;n 999,999,999,999)"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">

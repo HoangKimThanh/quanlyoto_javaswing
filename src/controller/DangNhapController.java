@@ -4,7 +4,7 @@ import dao.DangNhapDAO;
 import controller.PhanQuyenController;
 import model.Quyen;
 import model.NhanVien;
-import MyCustom.MyDialog;
+import utility.MyDialog;
 
 import java.io.*;
 

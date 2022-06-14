@@ -120,12 +120,13 @@ public class NhanVienDAOImpl implements NhanVienDAO {
     public boolean update(NhanVien nhanVien) {
         try {
             Connection cons = DBConnection.getConnection();
-            String sql = "UPDATE nhanvien SET hoten = ?, chucvu = ? where manv = ?";
+            String sql = "UPDATE nhanvien SET hoten = ?, chucvu = ?, taikhoan = ?, matkhau = ? where manv = ?";
             PreparedStatement prep = cons.prepareCall(sql);
             prep.setString(1, nhanVien.getHoTen());
             prep.setString(2, nhanVien.getChucVu());
-            
-            prep.setInt(4, nhanVien.getMaNV());
+            prep.setString(3, nhanVien.getTaiKhoan());
+            prep.setString(4, nhanVien.getMatKhau());
+            prep.setInt(5, nhanVien.getMaNV());
             int result = prep.executeUpdate();  
             prep.close();
             cons.close();

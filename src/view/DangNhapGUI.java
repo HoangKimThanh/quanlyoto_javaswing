@@ -4,8 +4,8 @@ package view;
 
 import quanlyoto.QuanLyOTo;
 
-import MyCustom.ImagePanel;
-import MyCustom.MyDialog;
+import utility.ImagePanel;
+import utility.MyDialog;
 import controller.DangNhapController;
 import model.NhanVien;
 

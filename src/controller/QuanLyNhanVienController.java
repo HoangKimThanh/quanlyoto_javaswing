@@ -99,24 +99,15 @@ public class QuanLyNhanVienController {
         this.nhanVien = new NhanVien();
 
         controllerDangNhap = new DangNhapController();
-    }
-
-    public void setDataToTable() {
-
-        jTfMaNv.setText("");
-        jTfHoTen.setText("");
-        jCbChucVu1.setSelectedItem("Nhân viên");
 
         if (controllerDangNhap.taiKhoanLogin.getChucVu().equals("Quản trị")) {
             jCbChucVu1.addItem("Quản lý");
             jCbChucVu1.addItem("Quản trị");
         }
+    }
 
-        jBtnAdd.setEnabled(true);
-        jBtnUpdate.setEnabled(false);
-        jBtnDelete.setEnabled(false);
-        jBtnReset.setEnabled(false);
-
+    public void setDataToTable() {
+        resetData();
         String chucVu = controllerDangNhap.taiKhoanLogin.getChucVu();
 
         List<NhanVien> listItem = nhanVienDAO.getList(chucVu);
@@ -330,7 +321,7 @@ public class QuanLyNhanVienController {
         jBtnReset.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setDataToTable();
+                resetData();
             }
         });
 
@@ -340,5 +331,18 @@ public class QuanLyNhanVienController {
                 new XuatExcel(table);
             }
         });
+    }
+
+    public void resetData() {
+        jTfMaNv.setText("");
+        jTfHoTen.setText("");
+        jCbChucVu1.setSelectedItem("Nhân viên");
+        jTfTaiKhoan.setText("");
+        jTfMatKhau.setText("");
+
+        jBtnAdd.setEnabled(true);
+        jBtnUpdate.setEnabled(false);
+        jBtnDelete.setEnabled(false);
+        jBtnReset.setEnabled(false);
     }
 }

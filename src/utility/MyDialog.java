@@ -1,4 +1,4 @@
-package MyCustom;
+package utility;
 
 import quanlyoto.QuanLyOTo;
 

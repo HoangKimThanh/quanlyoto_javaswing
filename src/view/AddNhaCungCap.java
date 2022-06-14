@@ -18,6 +18,7 @@ public class AddNhaCungCap extends javax.swing.JFrame {
      */
     public AddNhaCungCap(JComboBox jCb) {
         initComponents();
+        this.setLocationRelativeTo(null);
         ThemNCCController controller=new ThemNCCController(jTfTen1, jTfDiaChi1, jTfSDT1, jBtnThemNCC, this, jCb);
         controller.setEvent();
     }

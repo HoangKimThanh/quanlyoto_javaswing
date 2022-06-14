@@ -122,7 +122,7 @@ public class SanPhamJPanel extends javax.swing.JPanel {
         jLbHanBaoHanh.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLbHanBaoHanh.setText("Hạn bảo hành");
 
-        jLabel2.setText("(Giá dạng 1,000,000 hoặc 1,000,000, từ 100,000 đến 999,999,999,999)");
+        jLabel2.setText("(Giá dạng 1,000,000 hoặc 1000000, từ 100,000 đến 999,999,999,999)");
 
         jLabel4.setText("(năm)");
 
@@ -222,7 +222,7 @@ public class SanPhamJPanel extends javax.swing.JPanel {
                                 .addComponent(jLbHanBaoHanh)
                                 .addGap(30, 30, 30)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jTfHanBaoHanh)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

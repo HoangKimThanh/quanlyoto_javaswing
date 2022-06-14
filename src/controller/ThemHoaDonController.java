@@ -5,7 +5,7 @@
 package controller;
 
 import controller.DangNhapController;
-import MyCustom.MyDialog;
+import utility.MyDialog;
 import dao.CTHDDAO;
 import dao.CTHDDAOImpl;
 import dao.HoaDonDAO;

@@ -178,7 +178,7 @@ public class QuanLySanPhamController {
                     sanPham.setLoai(table.getValueAt(selectedRowIndex, 2).toString());
                     sanPham.setTen(table.getValueAt(selectedRowIndex, 3).toString());
                     sanPham.setSoLuong((int) table.getValueAt(selectedRowIndex, 4));
-                    sanPham.setGia(Integer.parseInt((table.getValueAt(selectedRowIndex, 5) + "").replace(",", "").replace(" VNĐ", "")));
+                    sanPham.setGia(Long.parseLong((table.getValueAt(selectedRowIndex, 5) + "").replace(",", "").replace(" VNĐ", "")));
                     sanPham.setHanBaoHanh(Integer.parseInt((table.getValueAt(selectedRowIndex, 6) + "").replace(" năm", "")));
                     sanPham.setAnh(table.getValueAt(selectedRowIndex, 7).toString());
 
@@ -234,7 +234,7 @@ public class QuanLySanPhamController {
                     sanPham.setLoai(jCbLoai.getSelectedItem() + "");
                     sanPham.setTen(jTfTen.getText().trim());
                     sanPham.setSoLuong(0);
-                    sanPham.setGia(Integer.parseInt(jTfGia.getText().trim().replace(",", "").replace(" VNĐ", "")));
+                    sanPham.setGia(Long.parseLong(jTfGia.getText().trim().replace(",", "").replace(" VNĐ", "")));
                     sanPham.setHanBaoHanh(Integer.parseInt(jTfHanBaoHanh.getText().trim().replace(" năm", "")));
                     sanPham.setAnh(fileAnhSP.getName());
 

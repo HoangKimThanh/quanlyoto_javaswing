@@ -27,6 +27,7 @@ public class AddKhachHang extends javax.swing.JFrame {
      */
     public AddKhachHang(JFrame k,HoaDon hoaDon, List<SanPham> listCart, JComboBox jCbMaKH) {
         initComponents();
+        this.setLocationRelativeTo(null);
         ThemKhachHangController controller=new ThemKhachHangController(jTfHoTen, jTfDienThoai, jTaDiaChi, jBtnAdd,this,k,hoaDon,listCart,jCbMaKH);
         controller.setEvent();
     }

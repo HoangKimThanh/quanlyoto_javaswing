@@ -24,6 +24,7 @@ public class AddHoaDon extends javax.swing.JFrame {
      */
     public AddHoaDon(HoaDon hoaDon, List<SanPham> listCart, String Hoten, JPanel showTableCart, JButton jBtnXuatHoaDon, JButton jBtnXoaGioHang) {
         initComponents();
+        this.setLocationRelativeTo(null);
         ThemHoaDonController controller =new ThemHoaDonController(jTTenNV, jCbMaKH,jTfTongTien, jBAddHD, this, jBAddKH,jEditHoaDon,jBtnIn,showTableCart,jBtnXuatHoaDon,jBtnXoaGioHang);
         jTTenNV.setText(Hoten);
         controller.loadKHToComboBox();
@@ -68,7 +69,7 @@ public class AddHoaDon extends javax.swing.JFrame {
         jLabel3.setText("Tên nhân viên");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel4.setText("Mã khách hàng");
+        jLabel4.setText("Khách hàng");
 
         jCbMaKH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,7 +112,7 @@ public class AddHoaDon extends javax.swing.JFrame {
                         .addGap(9, 9, 9)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTfTongTien)
-                            .addComponent(jCbMaKH, 0, 350, Short.MAX_VALUE))))
+                            .addComponent(jCbMaKH, 0, 356, Short.MAX_VALUE))))
                 .addGap(20, 20, 20))
         );
         jPanel2Layout.setVerticalGroup(
